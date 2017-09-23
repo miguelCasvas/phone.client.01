@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('inicio');
+    return redirect()->route('getFormularioInicioSesion');
 });
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('getFormularioInicioSesion');

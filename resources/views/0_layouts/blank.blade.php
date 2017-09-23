@@ -70,5 +70,8 @@
 <script src="js/pages/dashboard2.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="js/demo.js"></script>
+
+@stack('scriptsPostLoad')
+
 </body>
 </html>

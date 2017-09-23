@@ -835,4 +835,8 @@
 
         @endsection
 
-    @endcomponent
+    @push('scriptsPostLoad')
+
+    @endpush
+
+@endcomponent
