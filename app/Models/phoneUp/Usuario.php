@@ -11,6 +11,8 @@ class Usuario implements Authenticatable
         TokenDeAcceso, getDatosAPI;
 
     public $token;
+    public $paramsToken;
+
     public $datos;
 
     /**
@@ -39,13 +41,13 @@ class Usuario implements Authenticatable
                 'scope' => '*'
         ];
 
-        $this->datos =
+        $this->paramsToken =
             $this->clienteApi()->peticionPOST('/oauth/token', $formulario)->formatoRespuesta();
 
         $autenticacionExitosa = $this->autenticacionExitosa();
 
         if ($autenticacionExitosa)
-            $this->obtenerInformacion($this->datos->access_token);
+            $this->obtenerInformacion($this->paramsToken->access_token);
 
 
         return $this;
@@ -59,18 +61,19 @@ class Usuario implements Authenticatable
     private function obtenerInformacion($token)
     {
         $this->token = $token;
+        $this->datos = new \stdClass();
         $cabecera = $this->generaToken($token);
+
 
         $datosTemp =
             $this->clienteApi()->peticionGET('miusuario', [], $cabecera);
 
         if ($datosTemp->hasError())
-            abort(500, 'Error en el cargue de la informacion, vuelva a intentarlo!');
+        abort(500, 'Error en el cargue de la informacion, vuelva a intentarlo!');
 
         foreach ($datosTemp->formatoRespuesta()->data as $colum => $vlr)
             $this->datos->{$colum} = $vlr;
 
-//        dd($this->datos);
     }
 
     /**

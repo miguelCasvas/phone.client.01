@@ -19,7 +19,6 @@ class UsuariosController extends Controller
     public function miUsuario()
     {
         $datosUsuario = Auth::user();
-
         $datosView = compact('datosUsuario');
 
         return view('2_usuarios.miUsuario', $datosView);
@@ -33,5 +32,15 @@ class UsuariosController extends Controller
 
         $response = $this->verificarErrorAPI($this->clienteApi->peticionPOST($url, $formulario));
 
+        \Auth::user()->datos->identificacion = $formulario['identificacion'];
+        \Auth::user()->datos->nombres = $formulario['nombres'];
+        \Auth::user()->datos->apellidos = $formulario['apellidos'];
+        \Auth::user()->datos->fecha_nacimiento = $formulario['fechaNacimiento'];
+        \Auth::user()->datos->direccion = $formulario['direccion'];
+        \Auth::user()->datos->telefono = $formulario['telefono'];
+        //\Auth::user()->datos->password = $formulario['password'];
+
+        \Alert::success('Actualización correcta!');
+        return back();
     }
 }

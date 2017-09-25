@@ -20,7 +20,7 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="{{route('postMiPerfil', [$datosUsuario->id_usuario])}}", target="_blank" method="post">
+                <form role="form" action="{{route('postMiPerfil', [$datosUsuario->id_usuario])}}"  method="post">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="box-body row">
