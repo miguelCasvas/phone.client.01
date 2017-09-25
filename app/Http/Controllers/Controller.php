@@ -34,4 +34,21 @@ class Controller extends BaseController
         $this->clienteApi = new PeticionesSeguras();
     }
 
+    /**
+     * Verificar si se genera error en la consulta al API y
+     * dar manejo a dicho error
+     *
+     * @param Cliente $response
+     * @return Cliente
+     */
+    protected function verificarErrorAPI(\App\Http\PeticionesAPI\Cliente $response)
+    {
+
+        if ($response->hasError()){
+            $salida = $response->error . $response->message;
+            abort($response->code, $salida);
+        }
+
+        return $response;
+    }
 }

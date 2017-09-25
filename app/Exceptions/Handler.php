@@ -44,6 +44,25 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+        # Se retorna en formato JSON si la peticion en asincrona
+        if ($request->expectsJson()) {
+            return response()->json(['error' => $exception->getMessage()], $exception->getCode());
+        }
+
+        # Visualizacion de errores en ambientes de produccion
+        if (config('app.env') == 'produccion'){
+
+            if ($exception->getCode() == 500)
+                return response()->view('0_errores.500', [], 500);
+            elseif ($exception->getCode() == 404)
+                return response()->view('0_errores.404', [], 404);
+
+            return response()->view('0_errores.500', [], 500);
+
+        }
+
+        # Visualizacion de errores por defecto
         return parent::render($request, $exception);
     }
 

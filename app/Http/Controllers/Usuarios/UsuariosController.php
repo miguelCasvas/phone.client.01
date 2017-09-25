@@ -6,6 +6,7 @@ use App\Http\Requests\Usuario\UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 
 class UsuariosController extends Controller
 {
@@ -30,7 +31,7 @@ class UsuariosController extends Controller
         $url = 'edicionmiusuario/' . $idUsuario;
         $formulario = $request->all();
 
-        $response = $this->clienteApi->peticionPOST($url, $formulario);
-        dd($response->formatoRespuesta());
+        $response = $this->verificarErrorAPI($this->clienteApi->peticionPOST($url, $formulario));
+
     }
 }
