@@ -39,19 +39,16 @@
                             <th>Nombre</th>
                             <th>Apellidos</th>
                             <th>Correo</th>
-                            <th>Acciones</th>
                         </tr>
+                        @php $contador = 0 @endphp
                         @foreach($usuarios->data as $usuario)
                             @if($usuario->id_usuario != \Auth::user()->id_usuario)
                                 <tr>
-                                    <td>{{$usuario->id_usuario}}</td>
+                                    <td><a href="{{route('getUsuario', [$usuario->id_usuario])}}">{{$contador++}} <i class="fa fa-eye" aria-hidden="true"></i></a></td>
                                     <td>{{$usuario->identificacion}}</td>
                                     <td>{{$usuario->nombres}}</td>
                                     <td>{{$usuario->apellidos}}</td>
                                     <td>{{$usuario->email}}</td>
-                                    <td align="center">
-                                        <a href="" class="btn btn-block btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                    </td>
                                 </tr>
                             @endif
                         @endforeach
@@ -63,8 +60,6 @@
             <!-- /.box -->
         </div>
     </div>
-
-
 @endsection
 
 @push('stylesheets')

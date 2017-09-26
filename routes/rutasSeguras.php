@@ -21,8 +21,10 @@ Route::put('miperfil/{idUsuario}', 'Usuarios\UsuariosController@actualizarInform
 /*
  * Rutas para procesos sobre usuarios
  */
+# Lista usuarios
 Route::get('usuarios', 'Usuarios\UsuariosController@listadoUsuarios')->name('getListadoUsuarios');
-
+# Info. Usuario
+Route::get('usuario/{idUsuario}','Usuarios\UsuariosController@usuario')->name('getUsuario');
 
 Route::get('inicioUsuario', function () {
     return view('inicio');

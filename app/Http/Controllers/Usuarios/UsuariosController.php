@@ -55,6 +55,11 @@ class UsuariosController extends Controller
         return back();
     }
 
+    /**
+     * Listado de usuarios
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function listadoUsuarios()
     {
         $url = 'usuarios';
@@ -64,5 +69,18 @@ class UsuariosController extends Controller
         $data = compact('usuarios');
 
         return view('2_usuarios.inicioUsuarios', $data);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     */
+    public function usuario(Request $request, $idUsuario)
+    {
+        $url = 'usuarios/' . $idUsuario;
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
+        $usuario = $request->formatoRespuesta();
+
+        dd($request, $usuario);
     }
 }
