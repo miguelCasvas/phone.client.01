@@ -16,6 +16,11 @@ class UsuariosController extends Controller
         $this->setClienteApiSegura();
     }
 
+    /**
+     * Visualizacion de blade mi usuario (info. gral)
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function miUsuario()
     {
         $datosUsuario = Auth::user();
@@ -24,7 +29,13 @@ class UsuariosController extends Controller
         return view('2_usuarios.miUsuario', $datosView);
     }
 
-
+    /**
+     * Actualización de la información Gral. de mi usuario
+     *
+     * @param UpdateRequest $request
+     * @param $idUsuario
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function actualizarInformacion(UpdateRequest $request, $idUsuario)
     {
         $url = 'edicionmiusuario/' . $idUsuario;
@@ -42,5 +53,16 @@ class UsuariosController extends Controller
 
         \Alert::success('Actualización correcta!');
         return back();
+    }
+
+    public function listadoUsuarios()
+    {
+        $url = 'usuarios';
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
+        $usuarios = $request->formatoRespuesta();
+
+        $data = compact('usuarios');
+
+        return view('2_usuarios.inicioUsuarios', $data);
     }
 }

@@ -6,8 +6,8 @@
             <small>Version 2.0</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li class="active">Mi Perfil</li>
         </ol>
     @endslot
 
@@ -76,7 +76,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-envelope-o"  aria-hidden="true"></i>
                                     </div>
-                                    <input class="form-control" name="correo" id="correo" type="text" value="{{$datosUsuario->email}}">
+                                    <input readonly class="form-control" name="correo" id="correo" type="text" value="{{$datosUsuario->email}}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -129,7 +129,7 @@
                                     </tr>
                                     @php
                                         $contador++;
-                                        if ($contador == 10) break;
+                                        //if ($contador == 10) break;
                                     @endphp
                                 @endforeach
 

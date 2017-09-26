@@ -64,4 +64,23 @@ class LoginController extends Controller
         ]);
     }
 
+
+    /**
+     * Get the failed login response instance.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $errors = [$this->username() => trans('auth.failed')];
+
+        if ($request->expectsJson()) {
+            return response()->json($errors, 422);
+        }
+
+        alert()->error(trans('auth.failed'), 'Ops!');
+        return redirect()->back()->withInput($request->only($this->username(), 'remember'));
+    }
+
 }

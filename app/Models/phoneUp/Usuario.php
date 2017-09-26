@@ -20,6 +20,7 @@ class Usuario implements Authenticatable
      *
      * @param $user
      * @param $pw
+     * @return $this
      */
     public function validaCredenciales($user, $pw)
     {
@@ -41,8 +42,8 @@ class Usuario implements Authenticatable
                 'scope' => '*'
         ];
 
-        $this->paramsToken =
-            $this->clienteApi()->peticionPOST('/oauth/token', $formulario)->formatoRespuesta();
+        $request =  $this->clienteApi()->peticionPOST('/oauth/token', $formulario);
+        $this->paramsToken = $request->formatoRespuesta();
 
         $autenticacionExitosa = $this->autenticacionExitosa();
 
@@ -64,12 +65,11 @@ class Usuario implements Authenticatable
         $this->datos = new \stdClass();
         $cabecera = $this->generaToken($token);
 
-
         $datosTemp =
             $this->clienteApi()->peticionGET('miusuario', [], $cabecera);
 
         if ($datosTemp->hasError())
-        abort(500, 'Error en el cargue de la informacion, vuelva a intentarlo!');
+          abort(500, 'Error en el cargue de la informacion, vuelva a intentarlo!');
 
         foreach ($datosTemp->formatoRespuesta()->data as $colum => $vlr)
             $this->datos->{$colum} = $vlr;
@@ -91,6 +91,6 @@ class Usuario implements Authenticatable
      */
     public function autenticacionExitosa()
     {
-        return isset($this->datos->error) == false;
+        return isset($this->paramsToken->error) == false;
     }
 }

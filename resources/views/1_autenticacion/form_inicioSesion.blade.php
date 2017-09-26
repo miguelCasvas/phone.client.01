@@ -2,6 +2,7 @@
 <html>
 <head>
     @include('0_includes.cabeceraPP', ['tituloPagina' => 'Inicio sesión .:: PHONE UP ::.'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" />
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -14,7 +15,7 @@
 
         <form action="{{route('postFormularioInicioSesion')}}" method="post">
             <div class="form-group has-feedback">
-                <input type="email" name="correo" class="form-control" placeholder="Email">
+                <input type="email" name="correo" class="form-control" value="{{old('correo')}}" placeholder="Email">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
@@ -54,5 +55,9 @@
         });
     });
 </script>
+<!-- SweetAlert -->
+<script src="js/sweetalert.min.js"></script>
+<!-- Include this after the sweet alert js file -->
+@include('sweet::alert')
 </body>
 </html>

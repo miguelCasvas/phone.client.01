@@ -18,6 +18,12 @@ Route::get('miperfil', 'Usuarios\UsuariosController@miUsuario')->name('getMiPerf
 Route::put('miperfil/{idUsuario}', 'Usuarios\UsuariosController@actualizarInformacion')->name('postMiPerfil');
 
 
+/*
+ * Rutas para procesos sobre usuarios
+ */
+Route::get('usuarios', 'Usuarios\UsuariosController@listadoUsuarios')->name('getListadoUsuarios');
+
+
 Route::get('inicioUsuario', function () {
     return view('inicio');
 })->name('inicioUsuario');
