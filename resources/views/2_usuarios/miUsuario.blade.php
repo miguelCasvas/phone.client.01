@@ -1,10 +1,7 @@
 @component('0_layouts.blank')
 
     @slot('menuPagina')
-        <h1>
-            MI PERFIL
-            <small>Version 2.0</small>
-        </h1>
+        <h1>PERFIL <small>{{$datosUsuario->nombres}}</small></h1>
         <ol class="breadcrumb">
             <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
             <li class="active">Mi Perfil</li>
@@ -56,12 +53,14 @@
                                 <input class="form-control" name="idConjunto" type="hidden" value="{{$datosUsuario->id_conjunto}}">
                             </div>
                             <div class="form-group">
-                                <label><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Dirección</label>
-                                <input class="form-control" name="direccion" id="direccion" placeholder="Nombres" type="text" value="{{$datosUsuario->direccion}}">
+                                <label><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Dirección Conjunto</label>
+                                <input class="form-control" name="direccion" id="direccion" type="text" value="{{$datosUsuario->direccion}}" disabled="disabled">
+                                <input class="form-control" type="hidden" value="{{$datosUsuario->direccion}}">
                             </div>
                             <div class="form-group">
-                                <label><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Teléfono</label>
-                                <input class="form-control" name="telefono" id="telefono" placeholder="Telefono" type="text" value="{{$datosUsuario->telefono}}">
+                                <label><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Teléfono Conjunto</label>
+                                <input class="form-control" id="telefono" placeholder="Telefono" type="text" value="{{$datosUsuario->telefono}}" disabled="disabled">
+                                <input name="telefono" type="hidden" value="{{$datosUsuario->telefono}}">
                             </div>
                         </div>
                     </div>

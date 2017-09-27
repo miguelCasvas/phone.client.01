@@ -79,8 +79,9 @@ class UsuariosController extends Controller
     {
         $url = 'usuarios/' . $idUsuario;
         $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
-        $usuario = $request->formatoRespuesta();
+        $datosUsuario = $request->formatoRespuesta()->data;
+        $data = compact('datosUsuario');
+        return view('2_usuarios.usuario', $data);
 
-        dd($request, $usuario);
     }
 }
