@@ -99,6 +99,27 @@ class Cliente
         return $this;
     }
 
+    public function peticionPUT($url, $form, $params = [], $cabecera = null)
+    {
+        $tpoForm = $this->tipoFormulario(@$params['tipoFormulario']);
+
+        try{
+
+            $this->respuesta =
+                $this->clienteConexion()
+                    ->request('PUT', $url, [
+                        'headers'       => $cabecera,
+                        'query'         => $params,
+                        $tpoForm        => $form
+                    ]);
+
+        }catch (ClientException $e){
+            $this->handlerError($e);
+        }
+
+        return $this;
+    }
+
     /**
      * Respuesta  JSON de la petición
      *

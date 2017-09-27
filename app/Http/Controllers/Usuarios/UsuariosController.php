@@ -41,7 +41,7 @@ class UsuariosController extends Controller
         $url = 'edicionmiusuario/' . $idUsuario;
         $formulario = $request->all();
 
-        $response = $this->verificarErrorAPI($this->clienteApi->peticionPOST($url, $formulario));
+        $response = $this->verificarErrorAPI($this->clienteApi->peticionPUT($url, $formulario));
 
         \Auth::user()->datos->identificacion = $formulario['identificacion'];
         \Auth::user()->datos->nombres = $formulario['nombres'];
@@ -73,7 +73,7 @@ class UsuariosController extends Controller
 
     /**
      * @param Request $request
-     * @param $id
+     * @param $idUsuario
      */
     public function usuario(Request $request, $idUsuario)
     {

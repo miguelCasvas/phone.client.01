@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\PeticionesAPI\Cliente;
 use App\Http\PeticionesAPI\PeticionesSeguras;
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -45,8 +46,9 @@ class Controller extends BaseController
     {
 
         if ($response->hasError()){
-            $salida = $response->error . $response->message;
-            abort($response->code, $salida);
+            $salida = $response->exception->error . $response->exception->message;
+
+            abort($response->exception->code, $salida);
         }
 
         return $response;
