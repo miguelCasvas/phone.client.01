@@ -29,17 +29,17 @@ class UsuariosController extends Controller
         return view('2_usuarios.miUsuario', $datosView);
     }
 
+
     /**
      * Actualización de la información Gral. de mi usuario
      *
-     * @param UpdateRequest $request
-     * @param $idUsuario
+     * @param       $url
+     * @param array $formulario
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function actualizarInformacion(UpdateRequest $request, $idUsuario)
+    private function actualizarInformacion($url, array $formulario)
     {
-        $url = 'edicionmiusuario/' . $idUsuario;
-        $formulario = $request->all();
 
         $response = $this->verificarErrorAPI($this->clienteApi->peticionPUT($url, $formulario));
 
@@ -49,12 +49,47 @@ class UsuariosController extends Controller
         \Auth::user()->datos->fecha_nacimiento = $formulario['fechaNacimiento'];
         \Auth::user()->datos->direccion = $formulario['direccion'];
         \Auth::user()->datos->telefono = $formulario['telefono'];
-        //\Auth::user()->datos->password = $formulario['password'];
+        \Auth::user()->datos->password = $formulario['password'];
 
         \Alert::success('Actualización correcta!');
         return back();
+
     }
 
+    /**
+     * Actualización de informacion por usuario loqueado
+     *
+     * @param UpdateRequest $request
+     * @param               $idUsuario
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function actualizarMiInformacion(UpdateRequest $request, $idUsuario)
+    {
+        $url = 'edicionmiusuario/' . $idUsuario;
+
+        return
+            $this->actualizarInformacion($url, $request->all());
+
+    }
+
+
+    /**
+     * Actualización de información usuarios por parte de superAdministrador
+     *
+     * @param UpdateRequest $request
+     * @param               $idUsuario
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function actualizarInformacionUsuario(UpdateRequest $request, $idUsuario)
+    {
+        $url = 'usuarios/' . $idUsuario;
+
+        return
+            $this->actualizarInformacion($url, $request->all());
+    }
+    
     /**
      * Listado de usuarios
      *

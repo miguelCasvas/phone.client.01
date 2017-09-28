@@ -10,7 +10,7 @@
 
     @section('contenidoPagina')
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-xs-12">
                 <div class="box box-primary">
                 <div class="box-header with-border">
                     <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">Información general</h3>
@@ -21,7 +21,7 @@
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="box-body row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-12 col-md-6">
                             <div class="form-group">
                                 <label id="identificacion"><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Identificación</label>
                                 <input class="form-control" name="identificacion" id="identificacion" placeholder="Nombres" type="text" value="{{$datosUsuario->identificacion}}">
@@ -46,7 +46,7 @@
                                 <!-- /.input group -->
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-12 col-md-6">
                             <div class="form-group">
                                 <label id="idConjunto">Conjunto Residencial</label>
                                 <input class="form-control" id="idConjunto" type="text" value="{{$datosUsuario->nombre_conjunto}}" disabled="disabled">
@@ -68,7 +68,7 @@
                         <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">Usuario</h3>
                     </div>
                     <div class="box-body row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-12 col-md-6">
                             <div class="form-group">
                                 <label id="correo"><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Correo</label>
                                 <div class="input-group">
@@ -84,7 +84,7 @@
                                 <input name="idRol" type="hidden" value="{{$datosUsuario->id_rol}}">
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-12 col-md-6">
                             <div class="form-group">
                                 <label><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Contraseña</label>
                                 <input class="form-control" name="contrasenia" type="password" value="" placeholder="*******">
@@ -103,7 +103,7 @@
             </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-xs-12 col-md-6">
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">Permisos</h3>

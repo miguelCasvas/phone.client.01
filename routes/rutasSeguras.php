@@ -15,7 +15,7 @@
  * Rutas para procesos a realizar sobre mi usuario
  */
 Route::get('miperfil', 'Usuarios\UsuariosController@miUsuario')->name('getMiPerfil');
-Route::put('miperfil/{idUsuario}', 'Usuarios\UsuariosController@actualizarInformacion')->name('postMiPerfil');
+Route::put('miperfil/{idUsuario}', 'Usuarios\UsuariosController@actualizarMiInformacion')->name('postMiPerfil');
 
 
 /*
@@ -25,6 +25,10 @@ Route::put('miperfil/{idUsuario}', 'Usuarios\UsuariosController@actualizarInform
 Route::get('usuarios', 'Usuarios\UsuariosController@listadoUsuarios')->name('getListadoUsuarios');
 # Info. Usuario
 Route::get('usuario/{idUsuario}','Usuarios\UsuariosController@usuario')->name('getUsuario');
+# Actualizacion info usuarios por Administrador
+Route::put('usuario/{idUsuario}', 'Usuarios\UsuariosController@actualizarInformacionUsuario')->name('putUsario');
+
+
 
 Route::get('inicioUsuario', function () {
     return view('inicio');

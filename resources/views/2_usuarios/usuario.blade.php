@@ -12,6 +12,7 @@
     @endslot
 
 @section('contenidoPagina')
+
     <div class="row">
         <div class="col-md-12">
             <div class="box box-primary">
@@ -20,23 +21,20 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="{{route('postMiPerfil', [$datosUsuario->id_usuario])}}"  method="post">
+                <form role="form" action="{{route('putUsario', [$datosUsuario->id_usuario])}}"  method="post">
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <div class="box-body row">
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <label id="identificacion"><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Identificación</label>
-                                <input class="form-control" name="identificacion" id="identificacion" placeholder="Nombres" type="text" value="{{$datosUsuario->identificacion}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="nombres"><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Nombres</label>
-                                <input class="form-control" name="nombres" id="nombres" placeholder="Nombres" type="text" value="{{$datosUsuario->nombres}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="apellidos"><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Apellidos</label>
-                                <input class="form-control" name="apellidos" id="apellidos" placeholder="Nombres" type="text" value="{{$datosUsuario->apellidos}}">
-                            </div>
+                        <div class="col-xs-12 col-md-6">
+                            {{-- identificacion --}}
+                            {{ Form::bsText('Identificacion','identificacion', $datosUsuario->identificacion, [], true) }}
+
+                            {{-- nombres --}}
+                            {{ Form::bsText('Nombres','nombres', $datosUsuario->nombres, [], true) }}
+
+                            {{-- apellidos --}}
+                            {{ Form::bsText('Apellidos','apellidos', $datosUsuario->nombres, [], true) }}
+
                             <div class="form-group">
                                 <label id="fechaNacimiento"><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Fecha de nacimiento</label>
 
@@ -49,7 +47,7 @@
                                 <!-- /.input group -->
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-12 col-md-6">
                             <div class="form-group">
                                 <label id="idConjunto">Conjunto Residencial</label>
                                 <input class="form-control" id="idConjunto" type="text" value="{{$datosUsuario->nombre_conjunto}}" disabled="disabled">
@@ -71,7 +69,7 @@
                         <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">Usuario</h3>
                     </div>
                     <div class="box-body row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-12 col-md-6">
                             <div class="form-group">
                                 <label id="correo"><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Correo</label>
                                 <div class="input-group">
@@ -87,7 +85,7 @@
                                 <input name="idRol" type="hidden" value="{{$datosUsuario->id_rol}}">
                             </div>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-12 col-md-6">
                             <div class="form-group">
                                 <label><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Contraseña</label>
                                 <input class="form-control" name="contrasenia" type="password" value="" placeholder="*******">

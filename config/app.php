@@ -182,6 +182,16 @@ return [
          */
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
 
+        /*
+         * Libreria para la esquematizacion de los campos
+         */
+        Collective\Html\HtmlServiceProvider::class,
+
+        /*
+         * Para uso de component Form
+         */
+        App\Providers\FormPrototypeProvider::class,
+
     ],
 
     /*
@@ -231,6 +241,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 
