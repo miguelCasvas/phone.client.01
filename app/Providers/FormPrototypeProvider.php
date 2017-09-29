@@ -40,10 +40,10 @@ class FormPrototypeProvider extends ServiceProvider
         // */
         //Form::component('bsCheckbox','0_components.form.checkbox',['nameLabel','nameCamp','value'=> null,'attributes' => []]);
         //
-        ///**
-        // * Campo tipo password
-        // */
-        //Form::component('bsPassword','0_components.form.password',['nameLabel','nameCamp','attributes' => []]);
+        /**
+        * Campo tipo password
+        */
+        Form::component('bsPassword','0_components.form.password',['titulo', 'nombCamp', 'value' => null, 'attributes' => [], 'obligatorio' => false]);
         //
         ///**
         // * Campo tipo textarea
@@ -90,6 +90,12 @@ class FormPrototypeProvider extends ServiceProvider
          *
          */
         Form::component('bsText', '0_components.form.text',  ['titulo', 'nombCamp', 'value' => null, 'attributes' => [], 'obligatorio' => false]);
+
+        /**
+         * Campo tipo text con icono lateral izq.
+         *
+         */
+        Form::component('bsTextIcon', '0_components.form.textIcon',  ['titulo', 'nombCamp', 'value' => null, 'attributes' => [],'icon' => 'fa-bug' , 'obligatorio' => false]);
 
         ///**
         // * Campo tipo select

@@ -35,34 +35,29 @@
                             {{-- apellidos --}}
                             {{ Form::bsText('Apellidos','apellidos', $datosUsuario->nombres, [], true) }}
 
-                            <div class="form-group">
-                                <label id="fechaNacimiento"><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Fecha de nacimiento</label>
+                            {{-- Fecha nacimiento --}}
+                            {{ Form::bsTextIcon(
+                                'Fecha de nacimiento',
+                                'fechaNacimiento',
+                                $datosUsuario->fecha_nacimiento,
+                                ['data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask' => ''],
+                                'fa-calendar', true) }}
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <input class="form-control" name="fechaNacimiento" data-inputmask="'alias': 'yyyy-mm-dd'" data-mask="" type="text" value="{{$datosUsuario->fecha_nacimiento}}">
-                                </div>
-                                <!-- /.input group -->
-                            </div>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <div class="form-group">
-                                <label id="idConjunto">Conjunto Residencial</label>
-                                <input class="form-control" id="idConjunto" type="text" value="{{$datosUsuario->nombre_conjunto}}" disabled="disabled">
-                                <input class="form-control" name="idConjunto" type="hidden" value="{{$datosUsuario->id_conjunto}}">
-                            </div>
-                            <div class="form-group">
-                                <label><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Dirección Conjunto</label>
-                                <input class="form-control" name="direccion" id="direccion" type="text" value="{{$datosUsuario->direccion}}" disabled="disabled">
-                                <input class="form-control" type="hidden" value="{{$datosUsuario->direccion}}">
-                            </div>
-                            <div class="form-group">
-                                <label><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Teléfono Conjunto</label>
-                                <input class="form-control" id="telefono" placeholder="Telefono" type="text" value="{{$datosUsuario->telefono}}" disabled="disabled">
-                                <input name="telefono" type="hidden" value="{{$datosUsuario->telefono}}">
-                            </div>
+
+                            {{-- conjunto residencial --}}
+                            {{ Form::bsText('Conjunto Residencial','idConjunto', $datosUsuario->nombre_conjunto, ['disabled'=> 'disabled'], false) }}
+                            <input class="form-control" name="idConjunto" type="hidden" value="{{$datosUsuario->id_conjunto}}">
+
+                            {{-- Dirección conjunto --}}
+                            {{ Form::bsText('Dirección conjunto','direccion', $datosUsuario->direccion, ['disabled'=> 'disabled'], false) }}
+                            <input class="form-control" type="hidden" value="{{$datosUsuario->direccion}}">
+
+                            {{-- Telefono conjunto --}}
+                            {{ Form::bsText('Teléfono conjunto','direccion', $datosUsuario->telefono, ['disabled'=> 'disabled'], false) }}
+                            <input class="form-control" type="hidden" value="{{$datosUsuario->telefono}}">
+
                         </div>
                     </div>
                     <div class="box-header with-border">
@@ -70,30 +65,26 @@
                     </div>
                     <div class="box-body row">
                         <div class="col-xs-12 col-md-6">
-                            <div class="form-group">
-                                <label id="correo"><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Correo</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-envelope-o"  aria-hidden="true"></i>
-                                    </div>
-                                    <input readonly class="form-control" name="correo" id="correo" type="text" value="{{$datosUsuario->email}}">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label id="correo">Rol</label>
-                                <input class="form-control" name="correo" id="correo" type="text" value="{{$datosUsuario->nombre_rol}}" disabled="disabled">
-                                <input name="idRol" type="hidden" value="{{$datosUsuario->id_rol}}">
-                            </div>
+
+                            {{-- Correo --}}
+                            {{ Form::bsTextIcon(
+                                'Correo',
+                                'correo',
+                                $datosUsuario->email,
+                                [],
+                                'fa-envelope-o', true) }}
+
+                            {{ Form::bsText('Rol', 'nombreRol', $datosUsuario->nombre_rol, ['disabled' => 'disabled'], false) }}
+                            <input name="idRol" type="hidden" value="{{$datosUsuario->id_rol}}">
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <div class="form-group">
-                                <label><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Contraseña</label>
-                                <input class="form-control" name="contrasenia" type="password" value="" placeholder="*******">
-                            </div>
-                            <div class="form-group">
-                                <label><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Confirmación de contraseña</label>
-                                <input class="form-control" name="contrasenia_confirmation" type="password" value="" placeholder="*******">
-                            </div>
+
+                            {{-- contraseña --}}
+                            {{ Form::bsPassword('Contraseña', 'contrasenia', null, ['placeholder' => '*******'], true) }}
+
+                            {{-- contraseña --}}
+                            {{ Form::bsPassword('Confirmación contraseña', 'contrasenia_confirmation', null, ['placeholder' => '*******'], true) }}
+
                         </div>
                     </div>
                     <div class="box-footer">
