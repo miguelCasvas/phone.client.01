@@ -15,7 +15,7 @@
  * Rutas para procesos a realizar sobre mi usuario
  */
 Route::get('miperfil', 'Usuarios\UsuariosController@miUsuario')->name('getMiPerfil');
-Route::put('miperfil/{idUsuario}', 'Usuarios\UsuariosController@actualizarMiInformacion')->name('postMiPerfil');
+Route::put('miperfil/{idUsuario}', 'Usuarios\UsuariosController@actualizarMiInformacion')->name('putMiPerfil');
 
 
 /*
@@ -26,7 +26,12 @@ Route::get('usuarios', 'Usuarios\UsuariosController@listadoUsuarios')->name('get
 # Info. Usuario
 Route::get('usuario/{idUsuario}','Usuarios\UsuariosController@usuario')->name('getUsuario');
 # Actualizacion info usuarios por Administrador
-Route::put('usuario/{idUsuario}', 'Usuarios\UsuariosController@actualizarInformacionUsuario')->name('putUsario');
+Route::put('usuario/{idUsuario}', 'Usuarios\UsuariosController@actualizarInformacionUsuario')->name('putUsuario');
+# Creación de usuarios por Administrador
+//Route::post('usuario', 'Usuarios\UsuariosController@crearUsuario')->name('postUsuario');
+Route::post('usuario', function(){
+    dd('PRUEBA ESTA');
+})->name('postUsuario');
 
 
 

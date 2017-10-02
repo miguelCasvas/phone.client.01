@@ -14,87 +14,20 @@
 @section('contenidoPagina')
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
             <div class="box box-primary">
-                <div class="box-header with-border">
-                    <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">Información general</h3>
-                </div>
-                <!-- /.box-header -->
-                <!-- form start -->
-                <form role="form" action="{{route('putUsario', [$datosUsuario->id_usuario])}}"  method="post">
-                    {{ csrf_field() }}
-                    {{ method_field('PUT') }}
-                    <div class="box-body row">
-                        <div class="col-xs-12 col-md-6">
-                            {{-- identificacion --}}
-                            {{ Form::bsText('Identificacion','identificacion', $datosUsuario->identificacion, [], true) }}
-
-                            {{-- nombres --}}
-                            {{ Form::bsText('Nombres','nombres', $datosUsuario->nombres, [], true) }}
-
-                            {{-- apellidos --}}
-                            {{ Form::bsText('Apellidos','apellidos', $datosUsuario->nombres, [], true) }}
-
-                            {{-- Fecha nacimiento --}}
-                            {{ Form::bsTextIcon(
-                                'Fecha de nacimiento',
-                                'fechaNacimiento',
-                                $datosUsuario->fecha_nacimiento,
-                                ['data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask' => ''],
-                                'fa-calendar', true) }}
-
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-
-                            {{-- conjunto residencial --}}
-                            {{ Form::bsText('Conjunto Residencial','idConjunto', $datosUsuario->nombre_conjunto, ['disabled'=> 'disabled'], false) }}
-                            <input class="form-control" name="idConjunto" type="hidden" value="{{$datosUsuario->id_conjunto}}">
-
-                            {{-- Dirección conjunto --}}
-                            {{ Form::bsText('Dirección conjunto','direccion', $datosUsuario->direccion, ['disabled'=> 'disabled'], false) }}
-                            <input class="form-control" type="hidden" value="{{$datosUsuario->direccion}}">
-
-                            {{-- Telefono conjunto --}}
-                            {{ Form::bsText('Teléfono conjunto','direccion', $datosUsuario->telefono, ['disabled'=> 'disabled'], false) }}
-                            <input class="form-control" type="hidden" value="{{$datosUsuario->telefono}}">
-
-                        </div>
-                    </div>
-                    <div class="box-header with-border">
-                        <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">Usuario</h3>
-                    </div>
-                    <div class="box-body row">
-                        <div class="col-xs-12 col-md-6">
-
-                            {{-- Correo --}}
-                            {{ Form::bsTextIcon(
-                                'Correo',
-                                'correo',
-                                $datosUsuario->email,
-                                [],
-                                'fa-envelope-o', true) }}
-
-                            {{ Form::bsText('Rol', 'nombreRol', $datosUsuario->nombre_rol, ['disabled' => 'disabled'], false) }}
-                            <input name="idRol" type="hidden" value="{{$datosUsuario->id_rol}}">
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-
-                            {{-- contraseña --}}
-                            {{ Form::bsPassword('Contraseña', 'contrasenia', null, ['placeholder' => '*******'], true) }}
-
-                            {{-- contraseña --}}
-                            {{ Form::bsPassword('Confirmación contraseña', 'contrasenia_confirmation', null, ['placeholder' => '*******'], true) }}
-
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <span class="text-muted"><small>(<i class="fa fa-asterisk" aria-hidden="true"></i>) Campo obligatorio!</small></span>
+                {{-- FORMULARIO --}}
+                @component ('0_partials.formularioUsuario')
+                    @slot('rutaFormulario', route('putUsuario', [$datosUsuario->id_usuario]))
+                    @slot('datosUsuario', $datosUsuario)
+                    @slot('metodo', method_field('PUT'))
+                    @slot('btnFormulario')
                         <button type="submit" class="btn btn-info pull-right">Actualizar</button>
-                    </div>
-                </form>
+                    @endslot
+                @endcomponent
             </div>
         </div>
-
+        <!--/.box (FORMULARIO EDICION USUARIO) -->
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">

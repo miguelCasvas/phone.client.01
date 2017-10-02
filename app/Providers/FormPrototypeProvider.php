@@ -43,7 +43,7 @@ class FormPrototypeProvider extends ServiceProvider
         /**
         * Campo tipo password
         */
-        Form::component('bsPassword','0_components.form.password',['titulo', 'nombCamp', 'value' => null, 'attributes' => [], 'obligatorio' => false]);
+        Form::component('bsPassword','0_components.form.password',['titulo', 'nombCamp', 'attributes' => [], 'obligatorio' => false]);
         //
         ///**
         // * Campo tipo textarea
