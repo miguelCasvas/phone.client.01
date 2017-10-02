@@ -1,5 +1,6 @@
-<!-- form start -->
-<form role="form" action="{{$rutaFormulario}}"  method="post">
+{{dump($errors)}}
+<!-- form usuario -->
+<form role="form" action="{{$rutaFormulario}}"  method="post" name="{{$nombreForm or 'Form_' . rand(1, 100)}}">
     {{ csrf_field() }}
     {{ $metodo or ''}}
     <div class="box-body row">
@@ -27,10 +28,14 @@
         </div>
         <div class="col-xs-12 col-md-6">
 
-            {{-- NOMBRE CONJUNTO --}}
-            {{ Form::bsText('Conjunto Residencial', 'nombreConjunto', $datosUsuario->nombre_conjunto, ['disabled' => 'disabled'], false) }}
-            <input type="hidden" value="{{$datosUsuario->id_conjunto}}" name="idConjunto">
 
+            @if($campos->conjunto->select)
+                {{Form::bsSelect('Conjunto Residencial', 'idConjunto', $campos->conjunto->opc, $datosUsuario->id_conjunto, [], true)}}
+            @else
+                {{-- NOMBRE CONJUNTO --}}
+                {{ Form::bsText('Conjunto Residencial', 'nombreConjunto', $datosUsuario->nombre_conjunto, ['disabled' => 'disabled'], false) }}
+                <input type="hidden" value="{{$datosUsuario->id_conjunto}}" name="idConjunto">
+            @endif
             {{-- DIRECCION CONJUNTO --}}
             {{ Form::bsText('Dirección Conjunto', 'direccion', $datosUsuario->direccion, ['disabled' => 'disabled'], false) }}
 
@@ -50,15 +55,19 @@
                     'Correo',
                     'correo',
                     $datosUsuario->email,
-                    ['readonly' => 'readonly'],
+                    ['readonly' => $campos->correo->readOnly],
                     'fa-envelope-o',
                     false
                 )
              }}
 
             {{-- ROL --}}
-            {{ Form::bsText('Rol', 'rol', $datosUsuario->nombre_rol, ['disabled' => 'disabled'], false) }}
-            <input name="idRol" type="hidden" value="{{$datosUsuario->id_rol}}">
+            @if($campos->rol->select)
+                {{Form::bsSelect('Rol', 'idRol', $campos->rol->opc, $datosUsuario->id_rol, [], true)}}
+            @else
+                {{ Form::bsText('Rol', 'rol', $datosUsuario->nombre_rol, ['disabled' => 'disabled'], false) }}
+                <input name="idRol" type="hidden" value="{{$datosUsuario->id_rol}}">
+            @endif
 
         </div>
         <div class="col-xs-12 col-md-6">

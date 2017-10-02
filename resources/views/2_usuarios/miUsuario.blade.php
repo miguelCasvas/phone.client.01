@@ -89,12 +89,46 @@
         <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
         <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
         <script>
+
+            var FormUsuarios = function(){};
+
+            /*
+             * Define los vlrs para los campos Direccion y Telefono
+             * Una vez se ha seleccionado un conjunto
+             */
+            FormUsuarios.prototype.selectConjunto = function(idConjunto){
+
+                if(idConjunto === '0'){
+                    $('input[name="direccion"]').val('');
+                    $('input[name="telefono"]').val('');
+                    return null;
+                }
+
+                $.get('{{route('getConjunto', [null])}}/' + idConjunto, function(response){
+                    $('input[name="direccion"]').val(response.data.direccion);
+                    $('input[name="telefono"]').val(response.data.telefono);
+                }).
+                fail(function(){
+                    swal ( "Oops" ,  "Por favor, vuelva a intentarlo!" ,  "error" )
+                });
+            };
+
             $(function () {
 
-                //Money Euro
-                $('[data-mask]').inputmask()
-            })
+                var objFormUsuario = new FormUsuarios();
+                selectConjunto = $('select[name="idConjunto"]');
 
+                $(selectConjunto).change(function(){
+                    objFormUsuario.selectConjunto($(this).val());
+                });
+
+                // Inicializar vlrs si viene por defecto el conjunto
+                objFormUsuario.selectConjunto($(selectConjunto).val());
+
+                //Money Euro
+                $('[data-mask]').inputmask();
+
+            });
         </script>
     @endpush
 @endcomponent

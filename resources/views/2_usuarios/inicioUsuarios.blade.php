@@ -19,13 +19,13 @@
             <div class="nav-tabs-custom" style="cursor: move;">
                 <!-- Tabs within a box -->
                 <ul class="nav nav-tabs pull-right ui-sortable-handle">
-                    <li class="active"><a href="#crearUsuario" data-toggle="tab"><i class="fa fa-user-plus" aria-hidden="true"></i> Crear</a></li>
-                    <li class=""><a href="#listadoUsuarios" data-toggle="tab"><i class="fa fa-list" aria-hidden="true"></i> Listado</a></li>
+                    <li class=""><a href="#crearUsuario" data-toggle="tab"><i class="fa fa-user-plus" aria-hidden="true"></i> Crear</a></li>
+                    <li class="active"><a href="#listadoUsuarios" data-toggle="tab"><i class="fa fa-list" aria-hidden="true"></i> Listado</a></li>
                     <li class="pull-left header"><i class="fa fa-user-o" aria-hidden="true"></i></li>
                 </ul>
                 <div class="tab-content no-padding">
 
-                    <div class="chart tab-pane box" id="listadoUsuarios" >
+                    <div class="chart tab-pane box active" id="listadoUsuarios" >
                             <div class="box-header">
                                 <h3 class="box-title">Listado</h3>
 
@@ -73,7 +73,7 @@
                             <!-- /.box-body -->
                     </div>
                     <!--/.chart (LISTADO USUARIOS) -->
-                    <div class="chart tab-pane box active" id="crearUsuario">
+                    <div class="chart tab-pane box" id="crearUsuario">
                         <div class="box-header">
                             <h3 class="box-title">Formulario de Creación</h3>
                         </div>
@@ -94,11 +94,6 @@
                 </div>
             </div>
         </section>
-
-
-        <div class="col-xs-12">
-
-        </div>
     </div>
 @endsection
 
@@ -108,16 +103,50 @@
 
 @push('scriptsPostLoad')
     <!-- InputMask -->
-    <script src="plugins/input-mask/jquery.inputmask.js"></script>
-    <script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-    <script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <script src="{{asset('plugins/input-mask/jquery.inputmask.js')}}"></script>
+    <script src="{{asset('plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
+    <script src="{{asset('plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
     <script>
+
+        var FormUsuarios = function(){};
+
+        /*
+         * Define los vlrs para los campos Direccion y Telefono
+         * Una vez se ha seleccionado un conjunto
+         */
+        FormUsuarios.prototype.selectConjunto = function(idConjunto){
+
+            if(idConjunto === '0'){
+                $('input[name="direccion"]').val('');
+                $('input[name="telefono"]').val('');
+                return null;
+            }
+
+            $.get('{{route('getConjunto', [null])}}/' + idConjunto, function(response){
+                $('input[name="direccion"]').val(response.data.direccion);
+                $('input[name="telefono"]').val(response.data.telefono);
+            }).
+            fail(function(){
+                swal ( "Oops" ,  "Por favor, vuelva a intentarlo!" ,  "error" )
+            });
+        };
+
         $(function () {
 
-            //Money Euro
-            $('[data-mask]').inputmask()
-        })
+            var objFormUsuario = new FormUsuarios();
+            selectConjunto = $('select[name="idConjunto"]');
 
+            $(selectConjunto).change(function(){
+                objFormUsuario.selectConjunto($(this).val());
+            });
+
+            // Inicializar vlrs si viene por defecto el conjunto
+            objFormUsuario.selectConjunto($(selectConjunto).val());
+
+            //Money Euro
+            $('[data-mask]').inputmask();
+
+        });
     </script>
 @endpush
 

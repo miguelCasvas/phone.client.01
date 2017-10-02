@@ -5,8 +5,18 @@ namespace App\Http\Requests\Usuario;
 use App\Http\Requests\FormRequestToAPI\FormRequestToAPI;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequestToAPI
+class StoreRequest extends FormRequest
 {
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -20,11 +30,10 @@ class StoreRequest extends FormRequestToAPI
             'identificacion' => ['required', 'min:7'],
             'nombres' => ['required'],
             'apellidos' => ['required'],
-            'userName' => ['required'],
             'correo' => ['required', 'email'],
             'contrasenia' => ['required', 'confirmed'],
-            'idRol' => ['required', 'numeric', 'exists:roles,id_rol'],
-            'idConjunto' => ['required', 'numeric','exists:conjuntos,id_conjunto'],
+            'idRol' => ['required', 'numeric'],
+            'idConjunto' => ['required', 'numeric'],
         ];
     }
 

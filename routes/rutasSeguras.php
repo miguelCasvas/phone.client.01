@@ -10,13 +10,11 @@
  * --------------------------------------------------------------------------------------------------------------------
  */
 
-
 /*
  * Rutas para procesos a realizar sobre mi usuario
  */
 Route::get('miperfil', 'Usuarios\UsuariosController@miUsuario')->name('getMiPerfil');
 Route::put('miperfil/{idUsuario}', 'Usuarios\UsuariosController@actualizarMiInformacion')->name('putMiPerfil');
-
 
 /*
  * Rutas para procesos sobre usuarios
@@ -28,11 +26,11 @@ Route::get('usuario/{idUsuario}','Usuarios\UsuariosController@usuario')->name('g
 # Actualizacion info usuarios por Administrador
 Route::put('usuario/{idUsuario}', 'Usuarios\UsuariosController@actualizarInformacionUsuario')->name('putUsuario');
 # Creación de usuarios por Administrador
-//Route::post('usuario', 'Usuarios\UsuariosController@crearUsuario')->name('postUsuario');
-Route::post('usuario', function(){
-    dd('PRUEBA ESTA');
-})->name('postUsuario');
+Route::post('usuario', 'Usuarios\UsuariosController@crearUsuario')->name('postUsuario');
 
+# Rutas Conjuntos
+Route::get('conjuntos', 'Conjuntos\ConjuntosController@listadoConjuntos')->name('listadoConjuntos');
+Route::get('conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@busquedaConjunto')->name('getConjunto');
 
 
 Route::get('inicioUsuario', function () {

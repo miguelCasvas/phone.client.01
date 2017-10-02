@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Usuarios;
 
+use App\Http\Requests\Usuario\StoreRequest;
 use App\Http\Requests\Usuario\UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,11 +30,14 @@ class UsuariosController extends Controller
         return view('2_usuarios.miUsuario', $datosView);
     }
 
-
-    public function crearUsuario(Request $request)
+    public function crearUsuario(StoreRequest $request)
     {
-        echo "HOLA LA";
-        dd();
+        $formulario = $request->all();
+        $_request = $this->clienteApi->peticionPOST('usuarios', $formulario);
+        $response = $this->verificarErrorAPI($_request);
+
+        \Alert::success('Usuario creado con exito!');
+        return back();
     }
 
     /**
@@ -107,6 +111,7 @@ class UsuariosController extends Controller
 
         /* OBJETO VACIO PARA CARGUE CORRECTO DE VISTA */
         $datosUsuario = new \stdClass();
+        $datosUsuario->id_user = null;
         $datosUsuario->id_usuario = null;
         $datosUsuario->identificacion = null;
         $datosUsuario->nombres = null;

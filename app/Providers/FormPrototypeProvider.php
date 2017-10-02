@@ -97,10 +97,10 @@ class FormPrototypeProvider extends ServiceProvider
          */
         Form::component('bsTextIcon', '0_components.form.textIcon',  ['titulo', 'nombCamp', 'value' => null, 'attributes' => [],'icon' => 'fa-bug' , 'obligatorio' => false]);
 
-        ///**
-        // * Campo tipo select
-        // */
-        //Form::component('bsSelect'  ,'0_components.form.select',  ['nameLabel','nameCamp','value' => [],'selected','attributes' => [], 'transArgs' => []]);
+        /**
+         * Campo tipo select
+         */
+        Form::component('bsSelect'  ,'0_components.form.select',  ['titulo','nombCamp','value' => [],'selected','attributes' => [], 'obligatorio' => false]);
         //
         ///**
         // * Campo Data List

@@ -192,6 +192,11 @@ return [
          */
         App\Providers\FormPrototypeProvider::class,
 
+        /*
+         * Para data precargada en las vistas
+         */
+        App\Providers\ComposerBlades::class,
+
     ],
 
     /*
