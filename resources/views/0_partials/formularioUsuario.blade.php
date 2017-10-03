@@ -1,4 +1,3 @@
-{{dump($errors)}}
 <!-- form usuario -->
 <form role="form" action="{{$rutaFormulario}}"  method="post" name="{{$nombreForm or 'Form_' . rand(1, 100)}}">
     {{ csrf_field() }}

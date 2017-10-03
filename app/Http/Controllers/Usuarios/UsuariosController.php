@@ -7,7 +7,7 @@ use App\Http\Requests\Usuario\UpdateRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
@@ -50,8 +50,8 @@ class UsuariosController extends Controller
      */
     private function actualizarInformacion($url, array $formulario)
     {
-
-        $response = $this->verificarErrorAPI($this->clienteApi->peticionPUT($url, $formulario));
+        $request = $this->clienteApi->peticionPUT($url, $formulario);
+        $response = $this->verificarErrorAPI($request);
 
         \Alert::success('Actualización correcta!');
         return back();
@@ -70,7 +70,7 @@ class UsuariosController extends Controller
     {
         $url = 'edicionmiusuario/' . $idUsuario;
 
-        $formulario = $request->all();
+        $formulario = $this->filtrarCampos($request->all());
 
         \Auth::user()->datos->identificacion = $formulario['identificacion'];
         \Auth::user()->datos->nombres = $formulario['nombres'];
@@ -92,12 +92,38 @@ class UsuariosController extends Controller
      */
     public function actualizarInformacionUsuario(UpdateRequest $request, $idUsuario)
     {
+        $formulario = $this->filtrarCampos($request->all());
+
         $url = 'usuarios/' . $idUsuario;
 
         return
-            $this->actualizarInformacion($url, $request->all());
+            $this->actualizarInformacion($url, $formulario);
     }
-    
+
+    /**
+     * Realiza filtrado de campos no necesarios en la consulta
+     *
+     * @param $campos
+     * @return mixed
+     */
+    public function filtrarCampos($campos)
+    {
+
+        # Valida si la contraseña viene definida si es asi la serealiza para su envio
+        if (empty($campos['contrasenia']) == false){
+            $campos['password'] = Hash::make($campos['contrasenia']);
+            $campos['password_confirmation'] = $campos['password'];
+        }
+
+        # Eliminacion de campos no necesarios
+        unset($campos['_token']);
+        unset($campos['_method']);
+        unset($campos['contrasenia']);
+        unset($campos['contrasenia_confirmation']);
+
+        return $campos;
+    }
+
     /**
      * Listado de usuarios
      *

@@ -46,9 +46,15 @@ class Controller extends BaseController
     {
 
         if ($response->hasError()){
-            $salida = $response->exception->error . $response->exception->message;
 
-            abort($response->exception->code, $salida);
+            if ($response->exception->code == 500){
+                $salida = $response->exception->error . $response->exception->message;
+                abort($response->exception->code, $salida);
+            }
+            elseif ($response->exception->code == 400){
+
+                dd($response, 'HOLA LA');
+            }
         }
 
         return $response;
