@@ -59,4 +59,18 @@ class ConjuntosController extends Controller
         return $arregloConjuntos;
     }
 
+    /**
+     * Busqueda de extensiones activas por conjunto
+     *
+     * @param $idConjunto
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function listadoExtensionesPorConjunto($idConjunto)
+    {
+        $url = 'extensiones/conjunto/' . $idConjunto;
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
+        $extensiones = $request->formatoRespuesta();
+
+        return response()->json($extensiones);
+    }
 }

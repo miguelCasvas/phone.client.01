@@ -104,9 +104,47 @@
                     return null;
                 }
 
+                /*
+                 * Consulta de info conjunto por id
+                 */
                 $.get('{{route('getConjunto', [null])}}/' + idConjunto, function(response){
-                    $('input[name="direccion"]').val(response.data.direccion);
-                    $('input[name="telefono"]').val(response.data.telefono);
+
+                    var response_1 = response;
+
+                    /*
+                     * Consulta de extensiones del conjunto seleccionado
+                     */
+                    $.get('{{route('getExtensionesConjunto', [null])}}/' + response.data.id_conjunto, function(response){
+
+                        var selectExtensiones = $('select[name="idExtension"]');
+                        $(selectExtensiones).empty();
+
+
+                        optionTag = $('<option>', {value: '', text: 'Selección'});
+                        $(selectExtensiones).append(optionTag);
+
+                        $(response.data).each(function(index, element){
+
+                            statusDisabled = false;
+                            textOption = element.extension;
+
+                            if(element.usuarioAsignado !== null){
+                                statusDisabled = true;
+                                textOption += ' (Asignada)';
+                            }
+
+                            optionTag = $('<option>', {value: element.id_extension, text: textOption, disabled:statusDisabled});
+                            $(selectExtensiones).append(optionTag);
+                        });
+
+                        $('input[name="direccion"]').val(response_1.data.direccion);
+                        $('input[name="telefono"]').val(response_1.data.telefono);
+                    }).
+                    fail(function(){
+                        swal ( "Oops" ,  "Por favor, vuelva a intentarlo!" ,  "error" );
+                        return null;
+                    });
+
                 }).
                 fail(function(){
                     swal ( "Oops" ,  "Por favor, vuelva a intentarlo!" ,  "error" )

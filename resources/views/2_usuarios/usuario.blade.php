@@ -14,6 +14,7 @@
 @section('contenidoPagina')
 
     <div class="row">
+        {{-- DATOS GENERALES --}}
         <div class="col-xs-12">
             <div class="box box-primary">
                 {{-- FORMULARIO --}}
@@ -28,6 +29,44 @@
                 @endcomponent
             </div>
         </div>
+
+        <div class="col-xs-12">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">Relación Extension<span class="text-muted">(es)</span></h3>
+                </div>
+                <div class="box-body row">
+                    @foreach($datosUsuario->extensiones as $extension)
+                        <div class="col-lg-4">
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Extensión <span class="text-primary">{{$extension->extension}}</span></h3>
+
+                                    <div class="box-tools">
+                                        <button type="button" class="btn btn-box-tool" title="Eliminar Extensión {{$extension->extension}}"><i class="fa fa-trash-o text-danger"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="box-body no-padding" style="">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Conjunto: <strong>{{ $extension->nombre_conjunto }}</strong></a></li>
+                                        <li>Dirección: {{$extension->direccion}}</li>
+                                        <li>Telefóno: {{$extension->telefono}}</li>
+                                    </ul>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+{{--                            {{dump($extension)}}--}}
+                        </div>
+                    @endforeach
+                </div>
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-default pull-right">Agregar extensión</button>
+                </div>
+            </div>
+
+        </div>
+
         <!--/.box (FORMULARIO EDICION USUARIO) -->
         <div class="col-md-6">
             <div class="box">
@@ -101,9 +140,47 @@
                 return null;
             }
 
+            /*
+             * Consulta de info conjunto por id
+             */
             $.get('{{route('getConjunto', [null])}}/' + idConjunto, function(response){
-                $('input[name="direccion"]').val(response.data.direccion);
-                $('input[name="telefono"]').val(response.data.telefono);
+
+                var response_1 = response;
+
+                /*
+                 * Consulta de extensiones del conjunto seleccionado
+                 */
+                $.get('{{route('getExtensionesConjunto', [null])}}/' + response.data.id_conjunto, function(response){
+
+                    var selectExtensiones = $('select[name="idExtension"]');
+                    $(selectExtensiones).empty();
+
+
+                    optionTag = $('<option>', {value: '', text: 'Selección'});
+                    $(selectExtensiones).append(optionTag);
+
+                    $(response.data).each(function(index, element){
+
+                        statusDisabled = false;
+                        textOption = element.extension;
+
+                        if(element.usuarioAsignado !== null){
+                            statusDisabled = true;
+                            textOption += ' (Asignada)';
+                        }
+
+                        optionTag = $('<option>', {value: element.id_extension, text: textOption, disabled:statusDisabled});
+                        $(selectExtensiones).append(optionTag);
+                    });
+
+                    $('input[name="direccion"]').val(response_1.data.direccion);
+                    $('input[name="telefono"]').val(response_1.data.telefono);
+                }).
+                fail(function(){
+                    swal ( "Oops" ,  "Por favor, vuelva a intentarlo!" ,  "error" );
+                    return null;
+                });
+
             }).
             fail(function(){
                 swal ( "Oops" ,  "Por favor, vuelva a intentarlo!" ,  "error" )

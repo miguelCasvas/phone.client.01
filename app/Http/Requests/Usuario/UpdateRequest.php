@@ -31,9 +31,8 @@ class UpdateRequest extends FormRequest
             'nombres' => ['required'],
             'apellidos' => ['required'],
             'correo' => ['required', 'email'],
-            'idRol' => ['required', 'numeric'],
-            'idConjunto' => ['required', 'numeric'],
             'contrasenia' => ['confirmed'],
+            'idRol' => ['required', 'numeric'],
         ];
     }
 }

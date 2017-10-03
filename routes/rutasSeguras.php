@@ -31,6 +31,7 @@ Route::post('usuario', 'Usuarios\UsuariosController@crearUsuario')->name('postUs
 # Rutas Conjuntos
 Route::get('conjuntos', 'Conjuntos\ConjuntosController@listadoConjuntos')->name('listadoConjuntos');
 Route::get('conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@busquedaConjunto')->name('getConjunto');
+Route::get('extensiones/conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@listadoExtensionesPorConjunto')->name('getExtensionesConjunto');
 
 
 Route::get('inicioUsuario', function () {

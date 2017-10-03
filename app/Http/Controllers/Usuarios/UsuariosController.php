@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 
 class UsuariosController extends Controller
 {
+    private $idUsuario;
 
     public function __construct()
     {
@@ -53,6 +55,14 @@ class UsuariosController extends Controller
         $request = $this->clienteApi->peticionPUT($url, $formulario);
         $response = $this->verificarErrorAPI($request);
 
+        if (empty($formulario['idExtension']) == false){
+            $relacion = $this->relacionUsuarioExtension($formulario['idExtension']);
+
+            if ($relacion == false)
+                return back();
+
+        }
+
         \Alert::success('Actualización correcta!');
         return back();
 
@@ -68,9 +78,9 @@ class UsuariosController extends Controller
      */
     public function actualizarMiInformacion(UpdateRequest $request, $idUsuario)
     {
-        $url = 'edicionmiusuario/' . $idUsuario;
-
+        $this->idUsuario = $idUsuario;
         $formulario = $this->filtrarCampos($request->all());
+        $url = 'edicionmiusuario/' . $idUsuario;
 
         \Auth::user()->datos->identificacion = $formulario['identificacion'];
         \Auth::user()->datos->nombres = $formulario['nombres'];
@@ -92,8 +102,8 @@ class UsuariosController extends Controller
      */
     public function actualizarInformacionUsuario(UpdateRequest $request, $idUsuario)
     {
+        $this->idUsuario = $idUsuario;
         $formulario = $this->filtrarCampos($request->all());
-
         $url = 'usuarios/' . $idUsuario;
 
         return
@@ -168,5 +178,27 @@ class UsuariosController extends Controller
         $data = compact('datosUsuario');
         return view('2_usuarios.usuario', $data);
 
+    }
+
+    /**
+     * Insercion o actualizacion de extension para usuario
+     */
+    private function relacionUsuarioExtension($idExtension)
+    {
+        $url = 'usuarioextension/' . $idExtension;
+        $request = $this->clienteApi->peticionGET($url);
+        $response = $this->verificarErrorAPI($request);
+
+        if(empty($response->formatoRespuesta()->data) == false){
+            \Alert::error('Esta Extensión ya se encuentra asignada!');
+            return false;
+        }
+
+        $formulario['idExtension'] = $idExtension;
+        $formulario['idUsuario'] = $this->idUsuario;
+
+        $request = $this->clienteApi->peticionPOST($url, $formulario);
+
+        return true;
     }
 }
