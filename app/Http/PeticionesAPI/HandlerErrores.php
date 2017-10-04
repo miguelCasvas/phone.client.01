@@ -32,7 +32,8 @@ class HandlerErrores
                     break;
 
                 default :
-                        throw new \Exception(' ERROR NO ENCONTRADO');
+                        $salida = json_encode($cliente->exception);
+                        throw new \Exception($salida);
                     break;
             }
 

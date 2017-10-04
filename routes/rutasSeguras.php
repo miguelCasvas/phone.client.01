@@ -28,11 +28,20 @@ Route::put('usuario/{idUsuario}', 'Usuarios\UsuariosController@actualizarInforma
 # Creación de usuarios por Administrador
 Route::post('usuario', 'Usuarios\UsuariosController@crearUsuario')->name('postUsuario');
 
+/*
+ * Rutas para procesos sobre conjuntos
+ */
 # Rutas Conjuntos
 Route::get('conjuntos', 'Conjuntos\ConjuntosController@listadoConjuntos')->name('listadoConjuntos');
 Route::get('conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@busquedaConjunto')->name('getConjunto');
 Route::get('extensiones/conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@listadoExtensionesPorConjunto')->name('getExtensionesConjunto');
 
+
+/*
+ * Rutas para procesos sobre canales de comunicación
+ */
+Route::get('canalesComunicacion', 'CanalesComunicaciones\CanalesComunicacionesController@index')->name('getModuloCC');
+Route::get('canalesComunicacion/eliminacion', 'CanalesComunicaciones\CanalesComunicacionesController@eliminarCanales')->name('getEliminacionCC');
 
 Route::get('inicioUsuario', function () {
     return view('inicio');

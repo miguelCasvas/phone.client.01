@@ -33,6 +33,13 @@
                     <span class="pull-right-container"></span>
                 </a>
             </li>
+            <!-- CANALES DE COMUNICACIÓN -->
+            <li class="{{$activeCC or ''}} ">
+                <a href="{{route('getModuloCC')}}">
+                    <i class="fa fa-commenting"></i> <span>Canales Comunicación</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
         </ul>
     </section>
     <!-- /.sidebar -->
