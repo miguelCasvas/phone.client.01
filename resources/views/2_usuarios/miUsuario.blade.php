@@ -14,10 +14,6 @@
 
             <div class="col-xs-12">
                 <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">Información general</h3>
-                    </div>
-                    <!-- /.box-header -->
 
                     {{-- FORMULARIO --}}
                     @component ('0_partials.formularioUsuario')
@@ -30,6 +26,43 @@
                     @endcomponent
 
                 </div>
+            </div>
+
+            <div class="col-xs-12">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">Relación Extension<span class="text-muted">(es)</span></h3>
+                    </div>
+                    <div class="box-body row">
+                        @foreach($datosUsuario->extensiones as $extension)
+                            <div class="col-lg-4">
+                                <div class="box box-solid">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Extensión <span class="text-primary">{{$extension->extension}}</span></h3>
+
+                                        <div class="box-tools">
+                                            <button type="button" class="btn btn-box-tool" title="Eliminar Extensión {{$extension->extension}}"><i class="fa fa-trash-o text-danger"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body no-padding" style="">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Conjunto: <strong>{{ $extension->nombre_conjunto }}</strong></a></li>
+                                            <li>Dirección: {{$extension->direccion}}</li>
+                                            <li>Telefóno: {{$extension->telefono}}</li>
+                                        </ul>
+                                    </div>
+                                    <!-- /.box-body -->
+                                </div>
+                                {{--                            {{dump($extension)}}--}}
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-default pull-right">Crear extensión</button>
+                    </div>
+                </div>
+
             </div>
 
             <div class="col-xs-12 col-md-6">

@@ -3,6 +3,7 @@
 use App\Http\PeticionesAPI\Cliente;
 use App\Http\PeticionesAPI\TokenDeAcceso;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 
 class Usuario implements Authenticatable
@@ -43,6 +44,8 @@ class Usuario implements Authenticatable
         ];
 
         $request =  $this->clienteApi()->peticionPOST('/oauth/token', $formulario);
+
+        //dd($request, Hash::make('12345678'));
         $this->paramsToken = $request->formatoRespuesta();
 
         $autenticacionExitosa = $this->autenticacionExitosa();

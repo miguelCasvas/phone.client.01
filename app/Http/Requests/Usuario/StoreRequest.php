@@ -33,7 +33,6 @@ class StoreRequest extends FormRequest
             'correo' => ['required', 'email'],
             'contrasenia' => ['required', 'confirmed'],
             'idRol' => ['required', 'numeric'],
-            'idConjunto' => ['required', 'numeric'],
         ];
     }
 

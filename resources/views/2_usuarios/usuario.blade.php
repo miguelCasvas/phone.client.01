@@ -61,7 +61,7 @@
                     @endforeach
                 </div>
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default pull-right">Agregar extensión</button>
+                    <button type="submit" class="btn btn-default pull-right">Crear extensión</button>
                 </div>
             </div>
 

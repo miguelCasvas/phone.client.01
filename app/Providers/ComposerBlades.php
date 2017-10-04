@@ -58,6 +58,13 @@ class ComposerBlades extends ServiceProvider
 
             $view->with('campos', $campos);
         });
+
+        #
+        view()->composer('2_usuarios.inicioUsuarios', function($view){
+          dump('HOLA LA');
+
+
+        });
     }
 
 }
