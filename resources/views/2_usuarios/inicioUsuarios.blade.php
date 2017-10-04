@@ -19,13 +19,13 @@
             <div class="nav-tabs-custom" style="cursor: move;">
                 <!-- Tabs within a box -->
                 <ul class="nav nav-tabs pull-right ui-sortable-handle">
-                    <li class=""><a href="#crearUsuario" data-toggle="tab"><i class="fa fa-user-plus" aria-hidden="true"></i> Crear</a></li>
-                    <li class="active"><a href="#listadoUsuarios" data-toggle="tab"><i class="fa fa-list" aria-hidden="true"></i> Listado</a></li>
+                    <li class="{{$pestaniaForm}}"><a href="#crearUsuario" data-toggle="tab"><i class="fa fa-user-plus" aria-hidden="true"></i> Crear</a></li>
+                    <li class="{{$pestaniaLista}}"><a href="#listadoUsuarios" data-toggle="tab"><i class="fa fa-list" aria-hidden="true"></i> Listado</a></li>
                     <li class="pull-left header"><i class="fa fa-user-o" aria-hidden="true"></i></li>
                 </ul>
                 <div class="tab-content no-padding">
 
-                    <div class="chart tab-pane box active" id="listadoUsuarios" >
+                    <div class="chart tab-pane box {{$divLista}}" id="listadoUsuarios" >
                             <div class="box-header">
                                 <h3 class="box-title">Listado</h3>
 
@@ -73,7 +73,7 @@
                             <!-- /.box-body -->
                     </div>
                     <!--/.chart (LISTADO USUARIOS) -->
-                    <div class="chart tab-pane box" id="crearUsuario">
+                    <div class="chart tab-pane box {{$divFormCreacion}}" id="crearUsuario">
                         <div class="box-header">
                             <h3 class="box-title">Formulario de Creación</h3>
                         </div>

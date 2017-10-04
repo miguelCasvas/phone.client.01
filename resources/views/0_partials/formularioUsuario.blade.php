@@ -58,7 +58,6 @@
         </div>
     </div>
     <div class="box-footer">
-        {{dump($errors)}}
         <span class="text-muted"><small>(<i class="fa fa-asterisk" aria-hidden="true"></i>) Campo obligatorio!</small></span>
         {{$btnFormulario}}
     </div>

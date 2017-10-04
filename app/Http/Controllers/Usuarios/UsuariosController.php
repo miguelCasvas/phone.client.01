@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Usuarios;
 
 use App\Http\Requests\Usuario\StoreRequest;
 use App\Http\Requests\Usuario\UpdateRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Session\Store;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
@@ -36,7 +38,11 @@ class UsuariosController extends Controller
     {
         $formulario = $request->all();
         $_request = $this->clienteApi->peticionPOST('usuarios', $formulario);
+
         $response = $this->verificarErrorAPI($_request);
+
+        if ($response instanceof RedirectResponse)
+            return $response->with('formActivo', true);
 
         \Alert::success('Usuario creado con exito!');
         return back();
@@ -54,6 +60,9 @@ class UsuariosController extends Controller
     {
         $request = $this->clienteApi->peticionPUT($url, $formulario);
         $response = $this->verificarErrorAPI($request);
+
+        if ($response instanceof RedirectResponse)
+            return $response->with('formActivo', true);
 
         if (empty($formulario['idExtension']) == false){
             $relacion = $this->relacionUsuarioExtension($formulario['idExtension']);
@@ -82,10 +91,10 @@ class UsuariosController extends Controller
         $formulario = $this->filtrarCampos($request->all());
         $url = 'edicionmiusuario/' . $idUsuario;
 
-        \Auth::user()->datos->identificacion = $formulario['identificacion'];
-        \Auth::user()->datos->nombres = $formulario['nombres'];
-        \Auth::user()->datos->apellidos = $formulario['apellidos'];
-        \Auth::user()->datos->fecha_nacimiento = $formulario['fechaNacimiento'];
+        \Auth::user()->datos->identificacion    = $formulario['identificacion'] ?: \Auth::user()->datos->identificacion;
+        \Auth::user()->datos->nombres           = $formulario['nombres']        ?: \Auth::user()->datos->nombres;
+        \Auth::user()->datos->apellidos         = $formulario['apellidos']      ?: \Auth::user()->datos->apellidos;
+        \Auth::user()->datos->fecha_nacimiento  = $formulario['fechaNacimiento'] ?: \Auth::user()->datos->apellidos;
 
         return
             $this->actualizarInformacion($url, $formulario);

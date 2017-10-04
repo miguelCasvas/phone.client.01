@@ -61,8 +61,28 @@ class ComposerBlades extends ServiceProvider
 
         #
         view()->composer('2_usuarios.inicioUsuarios', function($view){
-          dump('HOLA LA');
 
+            # Variables que definen que pestaña se encuentra activa
+            $pestaniaLista = 'active'; # TABLA
+            $divLista = 'active'; # TABLA
+            $pestaniaForm = ''; # FORMULARIO CREACION
+            $divFormCreacion = ''; # FORMULARIO CREACION
+
+            # La variable formActive toma el vlr de TRUE cuando existe un error
+            # en el formulario
+            if(! empty(session('formActivo'))){
+                $pestaniaLista = '';
+                $divLista = '';
+
+                $pestaniaForm = 'active';
+                $divFormCreacion = 'active';
+            }
+
+            $view
+                ->with('pestaniaLista', $pestaniaLista)
+                ->with('pestaniaForm', $pestaniaForm)
+                ->with('divLista', $divLista)
+                ->with('divFormCreacion', $divFormCreacion);
 
         });
     }

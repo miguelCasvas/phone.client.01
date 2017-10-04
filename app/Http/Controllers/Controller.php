@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\PeticionesAPI\Cliente;
+use App\Http\PeticionesAPI\HandlerErrores;
 use App\Http\PeticionesAPI\PeticionesSeguras;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\MessageBag;
+use Illuminate\Support\ViewErrorBag;
 
 class Controller extends BaseController
 {
@@ -42,7 +45,7 @@ class Controller extends BaseController
      * @param Cliente $response
      * @return Cliente
      */
-    protected function verificarErrorAPI(\App\Http\PeticionesAPI\Cliente $response)
+    protected function verificarErrorAPI(\App\Http\PeticionesAPI\Cliente $response, $tpoError = null)
     {
 
         if ($response->hasError()){
@@ -51,10 +54,9 @@ class Controller extends BaseController
                 $salida = $response->exception->error . $response->exception->message;
                 abort($response->exception->code, $salida);
             }
-            elseif ($response->exception->code == 400){
 
-                dd($response, 'HOLA LA');
-            }
+            return HandlerErrores::controlDeErrores($response, null);
+
         }
 
         return $response;
