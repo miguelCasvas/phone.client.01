@@ -19,8 +19,8 @@
                         <img src="{{asset('img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
 
                         <p>
-                            {{\Auth::user()->nombres}} - Administrador
-                            <small>Member since Ene. 2016</small>
+                            {{\Auth::user()->nombres}} - {{trans('menus.superior.administrador')}}
+                            <small>{{trans('menus.superior.miembrodesde')}}</small>
                         </p>
                     </li>
                     <!-- Menu Body -->
@@ -41,10 +41,10 @@
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-left">
-                            <a href="{{route('getMiPerfil')}}" class="btn btn-default btn-flat">Profile</a>
+                            <a href="{{route('getMiPerfil')}}" class="btn btn-default btn-flat">{{trans('menus.superior.perfil')}}</a>
                         </div>
                         <div class="pull-right">
-                            <a href="{{route('cerrarSesion')}}" class="btn btn-default btn-flat">Sign out</a>
+                            <a href="{{route('cerrarSesion')}}" class="btn btn-default btn-flat">{{trans('menus.superior.cerrarsesion')}}</a>
                         </div>
                     </li>
                 </ul>

@@ -2,12 +2,12 @@
 
     @slot('menuPagina')
         <h1>
-            PERFIL <small>{{$datosUsuario->nombres}}</small>
+            {{trans('usuario.transversales.perfil')}} <small>{{$datosUsuario->nombres}}</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li><a href="{{route('getListadoUsuarios')}}"><i class="fa fa-dashboard"></i> usuarios</a></li>
-            <li class="active">Perfil usuario</li>
+            <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> {{trans('generales.inicio')}}</a></li>
+            <li><a href="{{route('getListadoUsuarios')}}"><i class="fa fa-dashboard"></i> {{trans('usuario.usuario.usuarios')}}</a></li>
+            <li class="active">{{trans('usuario.usuario.perfilusuario')}}</li>
         </ol>
     @endslot
 
@@ -24,7 +24,7 @@
                     @slot('nombreForm', 'formEdicionUsuario')
                     @slot('metodo', method_field('PUT'))
                     @slot('btnFormulario')
-                        <button type="submit" class="btn btn-info pull-right">Actualizar</button>
+                        <button type="submit" class="btn btn-info pull-right">{{trans('usuario.transversales.btnactualizar')}}</button>
                     @endslot
                 @endcomponent
             </div>
@@ -33,7 +33,7 @@
         <div class="col-xs-12">
             <div class="box box-warning">
                 <div class="box-header with-border">
-                    <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">Relación Extension<span class="text-muted">(es)</span></h3>
+                    <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">{{trans('usuario.transversales.relacionextension')}}<span class="text-muted">(es)</span></h3>
                 </div>
                 <div class="box-body row">
                     @foreach($datosUsuario->extensiones as $extension)
@@ -61,7 +61,7 @@
                     @endforeach
                 </div>
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default pull-right">Crear extensión</button>
+                    <button type="submit" class="btn btn-default pull-right">{{trans('usuario.transversales.btncrearextension')}}</button>
                 </div>
             </div>
 
@@ -71,15 +71,15 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Permisos</h3>
+                    <h3 class="box-title">{{trans('usuario.transversales.permisos')}}</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table class="table table-bordered">
                         <tbody>
                         <tr>
-                            <th>Permiso</th>
-                            <th>Modulo</th>
+                            <th>{{trans('usuario.transversales.permiso')}}</th>
+                            <th>{{trans('usuario.transversales.modulo')}}</th>
                             <th style="width: 10px">#</th>
                         </tr>
                         @php
@@ -177,13 +177,13 @@
                     $('input[name="telefono"]').val(response_1.data.telefono);
                 }).
                 fail(function(){
-                    swal ( "Oops" ,  "Por favor, vuelva a intentarlo!" ,  "error" );
+                    swal ( "{{trans('generales.sweet_alert.error.titulo')}}" ,  "{{trans('generales.sweet_alert.error.texto')}}" ,  "error" );
                     return null;
                 });
 
             }).
             fail(function(){
-                swal ( "Oops" ,  "Por favor, vuelva a intentarlo!" ,  "error" )
+                swal ( "{{trans('generales.sweet_alert.error.titulo')}}", "{{trans('generales.sweet_alert.error.texto')}}",  "error" )
             });
         };
 

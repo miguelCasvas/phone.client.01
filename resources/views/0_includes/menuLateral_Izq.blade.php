@@ -9,7 +9,7 @@
             </div>
             <div class="pull-left info">
                 <p>{{\Auth::user()->nombres}}</p>
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href="#"><i class="fa fa-circle text-success"></i>{{trans('menus.izquierdo.enlinea')}}</a>
             </div>
         </div>
         <!-- search form -->
@@ -26,25 +26,25 @@
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul id="menu_Pp_Izq" class="sidebar-menu" data-widget="tree">
-            <li class="header text-center">NAVEGACIÓN PRINCIPAL</li>
+            <li class="header text-center">{{trans('menus.izquierdo.navprincipal')}}</li>
             <li class="{{$activeUsuarios or ''}} ">
                 <a href="{{route('getListadoUsuarios')}}">
-                    <i class="fa fa-user-circle-o"></i> <span>Usuarios</span>
+                    <i class="fa fa-user-circle-o"></i> <span>{{trans('menus.izquierdo.usuarios')}}</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
-            <li class="header text-center">Gestión de conjuntos</li>
+            <li class="header text-center">{{trans('menus.izquierdo.gestionconjuntos')}}</li>
             <!-- CANALES DE COMUNICACIÓN -->
             <li class="{{$activeCC or ''}} ">
                 <a href="{{route('getModuloCC')}}">
-                    <i class="fa fa-commenting"></i> <span>Canales Comunicación</span>
+                    <i class="fa fa-commenting"></i> <span>{{trans('menus.izquierdo.cc')}}</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
             <!-- CATALOGO -->
             <li class="treeview {{$activeCatalogo or ''}}">
                 <a href="#">
-                    <i class="fa fa-table"></i> <span>Catalogos</span>
+                    <i class="fa fa-table"></i> <span>{{trans('menus.izquierdo.catalogo')}}</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
                     </span>
