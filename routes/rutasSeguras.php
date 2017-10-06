@@ -50,6 +50,15 @@ Route::post('canalesComunicacion/{idCanal}', 'CanalesComunicaciones\CanalesComun
  * Rutas para procesos sobre catalogos
  */
 Route::get('catalogos', 'Catalogos\CatalogosController@index')->name('getModuloCatalogos');
+Route::post('catalogos/eliminacion', 'Catalogos\CatalogosController@eliminarCatalogo')->name('postEliminacionCatalogo');
+Route::post('catalogo', 'Catalogos\CatalogosController@crearCatalogo')->name('postCrearCatalogo');
+Route::post('catalogo/{idCatalogo}', 'Catalogos\CatalogosController@editarCatalogo')->name('postEditarCatalogo');
+
+/*
+ * Rutas parar procesos sobre Ubicacion catalogos
+ */
+Route::get('ubicacioncatalogo', 'Catalogos\UbicacionCatalogoController@index')->name('getUbicacionCatalogo');
+Route::get('ubicacioncatalogofiltros', 'Catalogos\UbicacionCatalogoController@ubicacionCatalogoFiltrado')->name('getUbicacionCatalogoFiltrado');
 
 
 Route::get('inicioUsuario', function () {

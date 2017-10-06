@@ -126,8 +126,8 @@ class ComposerBlades extends ServiceProvider
             $scriptModal = '';
 
             # Activar modal para creacion si el formulario presenta errores
-            if (session('modalCCActivo') == true)
-                $scriptModal = "$('#modalCrearCanal').modal()";
+            if (session('modalCatalogoActivo') == true)
+                $scriptModal = "$('#modalCatalogo').modal()";
 
             # Items del campo Conjunto formulario de creación
             $conjuntos = (new ConjuntosController())->listadoConjuntosSelect();
