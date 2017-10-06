@@ -121,6 +121,32 @@ class Cliente
     }
 
     /**
+     * Estructura basica para generar peticiones DELETE
+     *
+     * @param $url
+     * @param array $params
+     * @param null $cabecera
+     * @return $this
+     */
+    public function peticionDELETE($url, $params = [], $cabecera = null)
+    {
+        try{
+
+            $this->respuesta =
+                $this->clienteConexion()
+                    ->request('DELETE', $url, [
+                        'headers'   => $cabecera,
+                        'query'     => $params
+                    ]);
+
+        }catch (ClientException $e){
+            $this->handlerError($e);
+        }
+
+        return $this;
+    }
+
+    /**
      * Respuesta  JSON de la petición
      *
      * @return mixed

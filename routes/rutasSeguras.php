@@ -41,7 +41,16 @@ Route::get('extensiones/conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@l
  * Rutas para procesos sobre canales de comunicación
  */
 Route::get('canalesComunicacion', 'CanalesComunicaciones\CanalesComunicacionesController@index')->name('getModuloCC');
-Route::get('canalesComunicacion/eliminacion', 'CanalesComunicaciones\CanalesComunicacionesController@eliminarCanales')->name('getEliminacionCC');
+Route::post('canalesComunicacion/eliminacion', 'CanalesComunicaciones\CanalesComunicacionesController@eliminarCanales')->name('getEliminacionCC');
+Route::post('canalesComunicacion', 'CanalesComunicaciones\CanalesComunicacionesController@crearCanal')->name('postCrearCC');
+Route::post('canalesComunicacion/{idCanal}', 'CanalesComunicaciones\CanalesComunicacionesController@editarCanal')->name('postEditarCC');
+
+
+/*
+ * Rutas para procesos sobre catalogos
+ */
+Route::get('catalogos', 'Catalogos\CatalogosController@index')->name('getModuloCatalogos');
+
 
 Route::get('inicioUsuario', function () {
     return view('inicio');

@@ -16,6 +16,10 @@ class ComposerBlades extends ServiceProvider
     public function boot()
     {
         $this->composerUsuario();
+
+        $this->composerCC();
+
+        $this->composerCatalogo();
     }
 
     /**
@@ -83,6 +87,54 @@ class ComposerBlades extends ServiceProvider
                 ->with('pestaniaForm', $pestaniaForm)
                 ->with('divLista', $divLista)
                 ->with('divFormCreacion', $divFormCreacion);
+
+        });
+    }
+
+    /**
+     * Vlrs pre-cargadar para el modulo de canales de comunicación
+     *
+     */
+    private function composerCC()
+    {
+        view()->composer('3_canalesComunicaciones.inicioCC', function($view){
+
+            $scriptModal = '';
+
+            # Activar modal para creacion si el formulario presenta errores
+            if (session('modalCCActivo') == true)
+                $scriptModal = "$('#modalCrearCanal').modal()";
+
+            # Items del campo Conjunto formulario de creación
+            $conjuntos = (new ConjuntosController())->listadoConjuntosSelect();
+
+            $view
+                ->with('conjuntos', $conjuntos)
+                ->with('scriptModal', $scriptModal);
+
+        });
+    }
+
+    /**
+     * Vlrs pre-cargadar para el modulo de Catalogos
+     *
+     */
+    private function composerCatalogo()
+    {
+        view()->composer('4_catalogo.inicioCatalogo', function($view){
+
+            $scriptModal = '';
+
+            # Activar modal para creacion si el formulario presenta errores
+            if (session('modalCCActivo') == true)
+                $scriptModal = "$('#modalCrearCanal').modal()";
+
+            # Items del campo Conjunto formulario de creación
+            $conjuntos = (new ConjuntosController())->listadoConjuntosSelect();
+
+            $view
+                ->with('conjuntos', $conjuntos)
+                ->with('scriptModal', $scriptModal);
 
         });
     }

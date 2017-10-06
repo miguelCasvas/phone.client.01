@@ -26,10 +26,14 @@ class HandlerErrores
             $url = $url ?: redirect()->back();
             switch ($cliente->exception->error){
 
+                # Campos invalidos de formulario
                 case 'Invalid form':
                         return
                             $objHandler->erroresFormularios($erroresPeticion, $url);
                     break;
+
+                # Registro no encontrado
+                case 'Id Not Found':
 
                 default :
                         $salida = json_encode($cliente->exception);
@@ -62,6 +66,9 @@ class HandlerErrores
             ->withErrors($message, 'default');
 
     }
-    
-    
+
+    public function errorRegistroNoEncontrado()
+    {
+
+    }
 }

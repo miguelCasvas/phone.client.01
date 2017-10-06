@@ -33,10 +33,18 @@
                     <span class="pull-right-container"></span>
                 </a>
             </li>
+            <li class="header text-center">Gestión de conjuntos</li>
             <!-- CANALES DE COMUNICACIÓN -->
             <li class="{{$activeCC or ''}} ">
                 <a href="{{route('getModuloCC')}}">
                     <i class="fa fa-commenting"></i> <span>Canales Comunicación</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
+            <!-- CATALOGO -->
+            <li class="{{$activeCatalogo or ''}} ">
+                <a href="{{route('getModuloCatalogos')}}">
+                    <i class="fa fa-building-o"></i> <span>Catalogo</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
