@@ -16,9 +16,21 @@ return [
         'bienvenido' => 'Bienvenido'
     ],
 
+    'izquierdo' => [
+        'enlinea' => 'En línea',
+        'navprincipal' => 'NAVEGACIÓN PRINCIPAL',
+        'usuarios' => 'Usuarios',
+        'gestionconjuntos' => 'Gestión de conjuntos residenciales',
+        'cc' => 'Canales Comunicación',
+        'catalogo' => 'Catálogo',
+    ],
 
     'superior' => [
-        'informacion' => 'Información de usuario'
+        'informacion' => 'Información de usuario',
+        'administrador' => 'Administrador',
+        'miembrodesde' => 'Miembro desde Ene. 2016',
+        'perfil' => 'Perfil',
+        'cerrarsesion' => 'Cerrar Sesión',
     ],
 
 

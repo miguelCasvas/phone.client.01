@@ -7,8 +7,8 @@
             <small>.</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li class="active">Usuarios</li>
+            <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i>{{trans('generales.inicio')}}</a></li>
+            <li class="active">{{trans('usuario.usuario.usuarios')}}</li>
         </ol>
     @endslot
 
@@ -19,15 +19,15 @@
             <div class="nav-tabs-custom" style="cursor: move;">
                 <!-- Tabs within a box -->
                 <ul class="nav nav-tabs pull-right ui-sortable-handle">
-                    <li class="{{$pestaniaForm}}"><a href="#crearUsuario" data-toggle="tab"><i class="fa fa-user-plus" aria-hidden="true"></i> Crear</a></li>
-                    <li class="{{$pestaniaLista}}"><a href="#listadoUsuarios" data-toggle="tab"><i class="fa fa-list" aria-hidden="true"></i> Listado</a></li>
+                    <li class="{{$pestaniaForm}}"><a href="#crearUsuario" data-toggle="tab"><i class="fa fa-user-plus" aria-hidden="true"></i> {{trans('usuario.gestionusuarios.crear')}}</a></li>
+                    <li class="{{$pestaniaLista}}"><a href="#listadoUsuarios" data-toggle="tab"><i class="fa fa-list" aria-hidden="true"></i>   {{trans('usuario.gestionusuarios.listado')}}</a></li>
                     <li class="pull-left header"><i class="fa fa-user-o" aria-hidden="true"></i></li>
                 </ul>
                 <div class="tab-content no-padding">
 
                     <div class="chart tab-pane box {{$divLista}}" id="listadoUsuarios" >
                             <div class="box-header">
-                                <h3 class="box-title">Listado</h3>
+                                <h3 class="box-title">{{trans('usuario.gestionusuarios.listado')}}</h3>
 
                                 <div class="box-tools">
 
@@ -45,13 +45,13 @@
                                 <table class="table table-hover">
                                     <tbody>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Identificación</th>
-                                        <th>Nombre</th>
-                                        <th>Apellidos</th>
-                                        <th>Correo</th>
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
+                                        <th>{{trans('usuario.gestionusuarios.id')}}</th>
+                                        <th>{{trans('usuario.transversales.identificacion')}}</th>
+                                        <th>{{trans('usuario.transversales.nombres')}}</th>
+                                        <th>{{trans('usuario.transversales.apellidos')}}</th>
+                                        <th>{{trans('usuario.transversales.correo')}}</th>
+                                        <th>{{trans('usuario.gestionusuarios.editar')}}</th>
+                                        <th>{{trans('usuario.gestionusuarios.eliminar')}}</th>
                                     </tr>
                                     @php $contador = 0 @endphp
                                     @foreach($usuarios->data as $usuario)
@@ -84,7 +84,7 @@
                                 @slot('rutaFormulario', route('postUsuario'))
                                 @slot('datosUsuario', $datosUsuario)
                                 @slot('btnFormulario')
-                                    <button type="submit" class="btn btn-success pull-right">Confirmar Creación</button>
+                                    <button type="submit" class="btn btn-success pull-right">{{trans('usuario.gestionusuarios.btnconfirmarcreacion')}}</button>
                                 @endslot
                             @endcomponent
 
