@@ -23,6 +23,8 @@ return [
         'gestionconjuntos' => 'Residential set management',
         'cc' => 'Communication Channels',
         'catalogo' => 'Catalog',
+        'gestionarcatalogos' => 'Manage Catalogs',
+        'ubicacioncatalogos' => 'Location Catalogs',
     ],
 
     'superior' => [

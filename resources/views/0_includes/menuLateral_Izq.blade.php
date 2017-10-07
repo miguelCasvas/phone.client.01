@@ -50,8 +50,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{$activeAdminCatalogo or ''}}"><a href="{{route('getModuloCatalogos')}}"><i class="fa fa-circle-o"></i> Gestionar Catalogos</a></li>
-                    <li class="{{$activeAdminUbicacion or ''}}"><a href="{{route('getUbicacionCatalogo')}}"><i class="fa fa-circle-o"></i> Ubicación Catalogos</a></li>
+                    <li class="{{$activeAdminCatalogo or ''}}"><a href="{{route('getModuloCatalogos')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionarcatalogos')}}</a></li>
+                    <li class="{{$activeAdminUbicacion or ''}}"><a href="{{route('getUbicacionCatalogo')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.ubicacioncatalogos')}}</a></li>
                 </ul>
             </li>
             <!-- CONFIGURACIONES BASICAS -->
