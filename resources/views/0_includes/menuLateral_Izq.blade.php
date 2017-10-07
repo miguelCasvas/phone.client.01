@@ -54,7 +54,8 @@
                     <li class="{{$activeAdminUbicacion or ''}}"><a href="{{route('getUbicacionCatalogo')}}"><i class="fa fa-circle-o"></i> Ubicación Catalogos</a></li>
                 </ul>
             </li>
-
+            <!-- CONFIGURACIONES BASICAS -->
+            <li class="bg-orange"><a href="{{route('getConfiguraciones')}}"><i class="fa fa-cog" style="color: rgb(255, 255, 255);"></i><span style="color: rgb(255, 255, 255);"> Configuraciones Básicas</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->

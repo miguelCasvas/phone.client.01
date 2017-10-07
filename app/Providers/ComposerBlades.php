@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Http\Controllers\Conjuntos\ConjuntosController;
 use App\Http\Controllers\Roles\RolesController;
+use App\Http\Controllers\Varios\GeograficosController;
 use Illuminate\Support\ServiceProvider;
 
 class ComposerBlades extends ServiceProvider
@@ -20,6 +21,8 @@ class ComposerBlades extends ServiceProvider
         $this->composerCC();
 
         $this->composerCatalogo();
+
+        $this->composerGeograficos();
     }
 
     /**
@@ -135,6 +138,20 @@ class ComposerBlades extends ServiceProvider
             $view
                 ->with('conjuntos', $conjuntos)
                 ->with('scriptModal', $scriptModal);
+
+        });
+    }
+
+    /**
+     * Vlrs pre-cargar para el modulo Geografico
+     */
+    private function composerGeograficos()
+    {
+        view()->composer('20_varios.geograficos', function($view){
+
+            $paises = (new GeograficosController())->listaPaisParaSelect();
+            $view
+                ->with('paises', $paises);
 
         });
     }

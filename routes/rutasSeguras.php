@@ -61,6 +61,13 @@ Route::get('ubicacioncatalogo', 'Catalogos\UbicacionCatalogoController@index')->
 Route::get('ubicacioncatalogofiltros', 'Catalogos\UbicacionCatalogoController@ubicacionCatalogoFiltrado')->name('getUbicacionCatalogoFiltrado');
 
 
+/*
+ * Rutas configuraciones del sistema
+ */
+Route::get('configuraciones', function(){
+    return view('20_varios.inicioVarios');
+})->name('getConfiguraciones');
+
 Route::get('inicioUsuario', function () {
     return view('inicio');
 })->name('inicioUsuario');

@@ -13,7 +13,7 @@
 
 @endphp
 <div class="form-group {{$classGroup}}">
-    <label id="{{$nombCamp}}">
+    <label id="{{$nombCamp}}" class="">
         @if($obligatorio) <small>{!! $iconLabel !!}</small> @endif {{$titulo}}
     </label>
 

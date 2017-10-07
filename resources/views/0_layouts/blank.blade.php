@@ -67,7 +67,7 @@
 <!-- ChartJS -->
 <script src="{{asset('bower_components/Chart.js/Chart.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="/js/demo.js"></script>
+<script src="{{asset('js/demo.js')}}"></script>
 <!-- SweetAlert -->
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
 <!-- Include this after the sweet alert js file -->
