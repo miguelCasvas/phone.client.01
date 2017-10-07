@@ -23,6 +23,9 @@ return [
         'gestionconjuntos' => 'Gestión de conjuntos residenciales',
         'cc' => 'Canales Comunicación',
         'catalogo' => 'Catálogo',
+        'gestionarcatalogos' => 'Gestionar Catálogos',
+        'ubicacioncatalogos' => 'Ubicación Catálogos',
+
     ],
 
     'superior' => [

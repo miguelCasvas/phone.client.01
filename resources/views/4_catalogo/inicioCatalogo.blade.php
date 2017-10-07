@@ -4,13 +4,13 @@
 
     @slot('menuPagina')
         <h1>
-            CATALOGO DE CONJUNTOS
+            {{trans('catalogo.catalogo.catconjuntos')}}
             <small>.</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li class="active">Catalogos</li>
-            <li class="active">Catalogos</li>
+            <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> {{trans('generales.inicio')}}</a></li>
+            <li class="active">{{trans('catalogo.catalogo.catalogos')}}</li>
+            <li class="active">{{trans('catalogo.catalogo.catalogos')}}</li>
         </ol>
     @endslot
 
@@ -20,8 +20,8 @@
                 <h3></h3>
                 <div class="box-tools">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom"  title="Eliminar Canales marcados" id="btnEliminarCanales"><i class="fa fa-trash-o"></i></button>
-                        <button type="button" class="btn btn-default btn-sm" title="Agregar Canal" id="btnCrearCatalogo"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom"  title="{{trans('catalogo.catalogo.btneliminarmarcados')}}" id="btnEliminarCanales"><i class="fa fa-trash-o"></i></button>
+                        <button type="button" class="btn btn-default btn-sm" title="{{trans('catalogo.catalogo.agregarcanal')}}" id="btnCrearCatalogo"><i class="fa fa-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -33,8 +33,8 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                             <tr class="info">
-                                <th>Conjunto</th>
-                                <th>Catalogo</th>
+                                <th>{{trans('catalogo.catalogo.conjunto')}}</th>
+                                <th>{{trans('catalogo.catalogo.catalogo')}}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,7 +46,7 @@
                                             <small><i class="fa  fa-check"></i></small> {{$_elemento['nombre_catalogo']}}
                                             <input type="checkbox" name="catalogo_conjunto[{{$_elemento['id_conjunto']}}][{{$_elemento['id_catalogo']}}]" value="eliminar" style="display: none" class="checksEliminarCatalogo" data-idcatalogo="{{$_elemento['id_catalogo']}}">
                                             <div class="btn-group btn-group-xs pull-right">
-                                                <button type="button" class="btn btn-default check-eliminarCatalogo" data-toggle="tooltip" data-placement="top" title="Seleccione para eliminar"><i class="fa fa-square-o" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn btn-default check-eliminarCatalogo" data-toggle="tooltip" data-placement="top" title="{{trans('catalogo.catalogo.seleccionareliminar')}}"><i class="fa fa-square-o" aria-hidden="true"></i></button>
                                                 <button
                                                         type="button"
                                                         class="btn btn-default btn-editarCatalogo"
@@ -54,7 +54,7 @@
                                                         data-idcatalogo = "{{$_elemento['id_catalogo']}}"
                                                         data-catalogo = "{{$_elemento['nombre_catalogo']}}"
                                                 ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Ubicaciones" id=""><i class="fa fa-map-marker"></i></button>
+                                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="{{trans('catalogo.catalogo.ubicaciones')}}" id=""><i class="fa fa-map-marker"></i></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -99,8 +99,8 @@
 
             FormularioCatalogo.prototype.eliminacionCatalogo = function(){
                 swal({
-                    title: "Está seguro?",
-                    text: "Por favor, confirme la eliminación de los Catalogos!",
+                    title: "{{trans('catalogo.sweet_alert.error.tituloeliminar')}}",
+                    text: "{{trans('catalogo.sweet_alert.error.textoeliminar')}}",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
@@ -127,8 +127,8 @@
                     $.get('{{route('getUbicacionCatalogoFiltrado')}}?id_catalogo=' + idCatalogo, function(respuesta){
                         if(respuesta.data.length > 0){
                             swal({
-                                title: "Existen Ubicaciones registradas para este catalogo",
-                                text: "Desea ir al modulo de ubicación!",
+                                title: "{{trans('catalogo.sweet_alert.error.tituloubicacion')}}",
+                                text: "{{trans('catalogo.sweet_alert.error.textoubicacion')}}",
                                 icon: "warning",
                                 buttons: true,
                                 dangerMode: true,
