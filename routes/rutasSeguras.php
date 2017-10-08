@@ -65,6 +65,15 @@ Route::get('ubicacioncatalogofiltros', 'Catalogos\UbicacionCatalogoController@ub
  * Rutas para procesos Geograficos
  */
 Route::get('filtrosdepartamentos','Varios\GeograficosController@departamentosFiltrados')->name('getFiltradoDepartamentos');
+Route::get('filtrosCiudades','Varios\GeograficosController@ciudadesFiltrados')->name('getFiltradoCiudades');
+Route::post('pais', 'Varios\GeograficosController@crearPais')->name('postPais');
+Route::post('pais/{idPais}', 'Varios\GeograficosController@editarPais')->name('putPais')->where('idPais', '[0-9]+');
+Route::post('pais/eliminacion/{idPais}', 'Varios\GeograficosController@eliminarPais')->name('delPais')->where('idPais', '[0-9]+');
+
+Route::post('departamento', 'Varios\GeograficosController@crearDepartamento')->name('postDepartamento');
+Route::post('departamento/{idDepto}', 'Varios\GeograficosController@editarDepartamento')->name('putDepartamento')->where('idDepto', '[0-9]+');
+Route::post('departamento/eliminacion/{idDepto}', 'Varios\GeograficosController@eliminarDepartamento')->name('delDepartamento')->where('idDepto', '[0-9]+');
+
 
 /*
  * Rutas configuraciones del sistema

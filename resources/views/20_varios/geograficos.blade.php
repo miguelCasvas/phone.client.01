@@ -1,6 +1,7 @@
 <!-- /.box-body -->
 <div class="box box-warning">
-    <form action="" method="post" class="form">
+    <form action="" method="post" class="form" name="formGeografico">
+        {{ csrf_field() }}
         <div class="box-header with-border">
             <h3 class="box-title">Geograficos</h3>
 
@@ -28,7 +29,6 @@
                 <div class="input-group" >
                     <label for=""><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> País</label>
                     <input type="hidden" name="idPais" value="">
-                    <input type="hidden" name="nombreOficialPais" value="">
                     <input name="nombrePais" class="form-control">
 
                     <div class="input-group-btn" style="top: 13px">
@@ -37,10 +37,10 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span> </button>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar</a></li>
-                            <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i>Eliminar</a></li>
+                            <li><a href="#" id="linkEditPais"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar</a></li>
+                            <li><a href="#" id="linkElimPais"><i class="fa fa-trash-o" aria-hidden="true"></i>Eliminar</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i>Crear</a></li></ul>
+                            <li><a href="#" id="linkCrearPais"><i class="fa fa-plus-circle" aria-hidden="true"></i>Crear</a></li></ul>
                     </div>
                 </div>
 
@@ -56,10 +56,10 @@
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span> </button>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar</a></li>
-                            <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i>Eliminar</a></li>
+                            <li><a href="#" id="linkEditDep"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar</a></li>
+                            <li><a href="#" id="linkElimDep"><i class="fa fa-trash-o" aria-hidden="true"></i>Eliminar</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i>Crear</a></li></ul>
+                            <li><a href="#" id="linkCrearDep"><i class="fa fa-plus-circle" aria-hidden="true"></i>Crear</a></li></ul>
                     </div>
                 </div>
 
@@ -92,13 +92,15 @@
     <script>
         var Geograficos = function(){
 
+            this.forMaestro = $('form[name="formGeografico"]');
+
             this.pais = $('select[name="SelectPais"]');
             this.idPais = $('input[name="idPais"]');
             this.nomPais = $('input[name="nombrePais"]');
 
             this.departamento = $('select[name="selectDepartamento"]');
             this.idDep = $('input[name="idDepartamento"]');
-            this.nomDep = $('input[name="idDepartamento"]');
+            this.nomDep = $('input[name="nombreDepartamento"]');
 
             this.ciudad = $('select[name="selectCiudad"]');
             this.idCiudad = $('input[name="idCiudad"]');
@@ -107,23 +109,90 @@
         };
 
         Geograficos.prototype.cambioPais = function(){
+
             $(this.pais).change(function(){
                 url = '{{route('getFiltradoDepartamentos')}}';
                 params = {id_pais: $(this).val()}
-                objGeograficos.asincrono(url, params, objGeograficos.llenarDepartamentos);
+
+                objGeograficos.llenarDepartamentos(null);
+                objGeograficos.llenarCiudades(null);
+
+                if($(this).val() > 0){
+                    $(objGeograficos.idPais).val($(this).val());
+                    $(objGeograficos.nomPais).val($(this).find('option:selected').text());
+                    objGeograficos.asincrono(url, params, objGeograficos.llenarDepartamentos);
+                }
+                else{
+                    $(objGeograficos.idPais).val('');
+                    $(objGeograficos.nomPais).val('');
+                }
+            });
+
+        };
+
+        Geograficos.prototype.cambioDepartamento = function(){
+
+            $(this.departamento).change(function(){
+                url = '{{route('getFiltradoCiudades')}}';
+                params = {id_departamento: $(this).val()}
+
+                objGeograficos.llenarCiudades(null);
+
+                if($(this).val() !== ''){
+                    $(objGeograficos.idDep).val($(this).val());
+                    $(objGeograficos.nomDep).val($(this).find('option:selected').text());
+                }
+
+                objGeograficos.asincrono(url, params, objGeograficos.llenarCiudades);
+            });
+
+        };
+
+        Geograficos.prototype.cambioCiudad = function(){
+
+            $(this.ciudad).change(function(){
+                if($(this).val() !== ''){
+                    $(objGeograficos.idCiudad).val($(this).val());
+                    $(objGeograficos.nomCiudad).val($(this).find('option:selected').text());
+                }
+                else{
+                    $(objGeograficos.idCiudad).val('');
+                    $(objGeograficos.nomCiudad).val('');
+                }
             });
         };
 
         Geograficos.prototype.llenarDepartamentos = function(departamentos){
 
             $(objGeograficos.departamento).html('');
-            $(objGeograficos.ciudad).html('');
             $(objGeograficos.departamento).append('<option value="">Selección</option>');
 
-            $.each(departamentos.data, function(id, departamento){
-                option = '<option value='+departamento.id_departamento+'>'+departamento.nombre_departamento+'</option>';
-                $(objGeograficos.departamento).append(option);
-            });
+            $(objGeograficos.idDep).val('');
+            $(objGeograficos.nomDep).val('');
+
+            if (departamentos !== null){
+                $.each(departamentos.data, function(id, departamento){
+                    option = '<option value='+departamento.id_departamento+'>'+departamento.nombre_departamento+'</option>';
+                    $(objGeograficos.departamento).append(option);
+                });
+            }
+
+        };
+
+        Geograficos.prototype.llenarCiudades = function(ciudades){
+
+            $(objGeograficos.ciudad).html('');
+            $(objGeograficos.ciudad).append('<option value="">Selección</option>');
+
+            $(objGeograficos.idCiudad).val('');
+            $(objGeograficos.nomCiudad).val('');
+
+            if(ciudades !== null){
+                $.each(ciudades.data, function(id, ciudad){
+                    option = '<option value='+ciudad.id_ciudad+'>'+ciudad.nombre_ciudad+'</option>';
+                    $(objGeograficos.ciudad).append(option);
+                });
+            }
         };
 
         Geograficos.prototype.asincrono = function(url, params, callback){
@@ -131,10 +200,123 @@
             $.get(url, params, callback);
         };
 
+        /*
+        * ACCIONES POR DEFECTO A BOTONES DE FORMULARIO PAIS
+        * */
+        Geograficos.prototype.editarPais = function(){
+            $('#linkEditPais').click(function(){
+
+                idPais = $(objGeograficos.idPais).val();
+
+                if(objGeograficos.validarCampoRequerido(idPais, 'País', 'Editar'))
+                    objGeograficos.enviarFormulario('{{route('putPais', [''])}}/' + idPais);
+
+            });
+        };
+
+        Geograficos.prototype.eliminarPais = function(){
+            $('#linkElimPais').click(function(){
+                idPais = $(objGeograficos.idPais).val();
+
+                if(objGeograficos.validarCampoRequerido(idPais, 'País', 'eliminar'))
+                    objGeograficos.enviarFormulario('{{route('delPais', [''])}}/' + idPais);
+            });
+        };
+
+        Geograficos.prototype.crearPais = function(){
+
+            $('#linkCrearPais').click(function(){
+                nomPais = $(objGeograficos.idPais).val();
+
+                if(objGeograficos.validarCampoRequerido(nomPais, 'País', 'crear'))
+                    objGeograficos.enviarFormulario('{{route('putPais', [''])}}');
+
+            });
+
+        };
+
+        /*
+        * ACCIONES POR DEFECTO A BOTONES DE FORMULARIO DEPARTAMENTO
+        * */
+        Geograficos.prototype.editarDepartamento = function(){
+            $('#linkEditDep').click(function(){
+
+                idPais = $(objGeograficos.idPais).val();
+                if(objGeograficos.validarCampoRequerido(idPais, 'País', ' relacionar depto.')){
+                    idDep = $(objGeograficos.idDep).val();
+                    if(objGeograficos.validarCampoRequerido(idDep, 'Depto', ' modificar')){
+                        objGeograficos.enviarFormulario('{{route('postDepartamento', [''])}}/' + idDep);
+                    }
+                }
+            });
+        };
+
+        Geograficos.prototype.eliminarDepartamento = function(){
+            $('#linkElimDep').click(function(){
+
+                idPais = $(objGeograficos.idPais).val();
+                if(objGeograficos.validarCampoRequerido(idPais, 'País', ' relacionar depto.')){
+                    idDep = $(objGeograficos.idDep).val();
+                    if(objGeograficos.validarCampoRequerido(idDep, 'Depto', 'eliminar')){
+                        objGeograficos.enviarFormulario('{{route('delDepartamento', [''])}}/' + idDep);
+                    }
+                }
+            });
+        };
+
+        Geograficos.prototype.crearDepartamento = function(){
+            $('#linkCrearDep').click(function(){
+
+                idPais = $(objGeograficos.idPais).val();
+                if(objGeograficos.validarCampoRequerido(idPais, 'País', ' relacionar depto.')){
+                    nomDep = $(objGeograficos.nomDep).val();
+                    if(objGeograficos.validarCampoRequerido(nomDep, 'Depto', ' crear')){
+                        objGeograficos.enviarFormulario('{{route('postDepartamento')}}');
+                    }
+                }
+            });
+        };
+
+        Geograficos.prototype.validarCampoRequerido = function(campo, labelCampo, accion){
+            if(campo === null || campo === '' || campo === undefined){
+                swal({
+                    icon: "error",
+                    title: "Por favor, Seleccione "+labelCampo+ " a " + accion
+                });
+
+                return false;
+            }
+
+            return true;
+        };
+
+        Geograficos.prototype.enviarFormulario = function(url){
+            $(objGeograficos.forMaestro)
+                .attr('action', url)
+                .submit();
+        };
+
         var objGeograficos = new Geograficos();
 
         $(function(){
             objGeograficos.cambioPais();
+            objGeograficos.cambioDepartamento();
+            objGeograficos.cambioCiudad();
+
+            objGeograficos.llenarDepartamentos(null);
+            objGeograficos.llenarCiudades(null);
+
+            /*
+            * ASIGNACION DE FUNCIONALIDAD BOTONES (PAIS | DEPARTAMENTO | CIUDAD)
+            * */
+            objGeograficos.editarPais();
+            objGeograficos.eliminarPais();
+            objGeograficos.crearPais();
+
+            objGeograficos.editarDepartamento();
+            objGeograficos.eliminarDepartamento();
+            objGeograficos.crearDepartamento();
+
         });
 
     </script>
