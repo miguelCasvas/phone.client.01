@@ -32,4 +32,15 @@ class GeograficosController extends Controller
 
         return $arregloPaises;
     }
+
+    public function departamentosFiltrados(Request $request)
+    {
+        $url = 'departamentofiltrado';
+
+        $_request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url, $request->all()));
+        $departamento = $_request->formatoRespuesta();
+
+        return response()->json($departamento);
+
+    }
 }

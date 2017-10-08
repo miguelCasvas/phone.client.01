@@ -28,7 +28,7 @@
     @endpush
 
     @push('scriptsPostLoad')
-
+        @yield('scriptsGeograficos')
     @endpush
 
 @endcomponent

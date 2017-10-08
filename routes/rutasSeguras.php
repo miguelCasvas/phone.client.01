@@ -55,11 +55,16 @@ Route::post('catalogo', 'Catalogos\CatalogosController@crearCatalogo')->name('po
 Route::post('catalogo/{idCatalogo}', 'Catalogos\CatalogosController@editarCatalogo')->name('postEditarCatalogo');
 
 /*
- * Rutas parar procesos sobre Ubicacion catalogos
+ * Rutas para procesos sobre Ubicacion catalogos
  */
 Route::get('ubicacioncatalogo', 'Catalogos\UbicacionCatalogoController@index')->name('getUbicacionCatalogo');
 Route::get('ubicacioncatalogofiltros', 'Catalogos\UbicacionCatalogoController@ubicacionCatalogoFiltrado')->name('getUbicacionCatalogoFiltrado');
 
+
+/*
+ * Rutas para procesos Geograficos
+ */
+Route::get('filtrosdepartamentos','Varios\GeograficosController@departamentosFiltrados')->name('getFiltradoDepartamentos');
 
 /*
  * Rutas configuraciones del sistema
@@ -74,6 +79,6 @@ Route::get('inicioUsuario', function () {
 
 
 Route::get('miInfo', function(){
-
+    abort(500, 'HOLA LA');
     dd(Auth::user());
 });
