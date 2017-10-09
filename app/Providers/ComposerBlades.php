@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Http\Controllers\Conjuntos\ConjuntosController;
 use App\Http\Controllers\Roles\RolesController;
-use App\Http\Controllers\Varios\GeograficosController;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\ServiceProvider;
 
 class ComposerBlades extends ServiceProvider
@@ -149,9 +149,25 @@ class ComposerBlades extends ServiceProvider
     {
         view()->composer('20_varios.geograficos', function($view){
 
-            $paises = (new GeograficosController())->listaPaisParaSelect();
+            $controladorGeo = new \App\Http\Controllers\Varios\GeograficosController();
+            $paises = $controladorGeo->listaPaisParaSelect();
+            $departamentos = [0 => 'Selección'];
+            $ciudades = [0 => 'Selección'];
+
+            if (empty(old('idPais')) == false){
+                $departamentos +=
+                    $controladorGeo->listaDeptoParaSelect('departamentofiltrado', ['id_pais' => old('idPais')]);
+            }
+
+            if (empty(old('idDepartamento')) == false){
+                $ciudades +=
+                    $controladorGeo->listaCiudadesParaSelect('ciudadfiltrado', ['id_departamento' => old('idDepartamento')]);
+            }
+
             $view
-                ->with('paises', $paises);
+                ->with('paises', $paises)
+                ->with('departamentos', $departamentos)
+                ->with('ciudades', $ciudades);
 
         });
     }

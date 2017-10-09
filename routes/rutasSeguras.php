@@ -74,6 +74,10 @@ Route::post('departamento', 'Varios\GeograficosController@crearDepartamento')->n
 Route::post('departamento/{idDepto}', 'Varios\GeograficosController@editarDepartamento')->name('putDepartamento')->where('idDepto', '[0-9]+');
 Route::post('departamento/eliminacion/{idDepto}', 'Varios\GeograficosController@eliminarDepartamento')->name('delDepartamento')->where('idDepto', '[0-9]+');
 
+Route::post('ciudad', 'Varios\GeograficosController@crearCiudad')->name('postCiudad');
+Route::post('ciudad/{idCiudad}', 'Varios\GeograficosController@editarCiudad')->name('putCiudad')->where('idCiudad', '[0-9]+');
+Route::post('ciudad/eliminacion/{idCiudad}', 'Varios\GeograficosController@eliminarCiudad')->name('delCiudad')->where('idCiudad', '[0-9]+');
+
 
 /*
  * Rutas configuraciones del sistema
