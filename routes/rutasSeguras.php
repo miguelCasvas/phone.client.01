@@ -77,6 +77,9 @@ Route::get('inicioUsuario', function () {
     return view('inicio');
 })->name('inicioUsuario');
 
+Route::get('enconstruccion', function () {
+    return view('20_varios.enConstruccion');
+})->name('getEnConstruccion');
 
 Route::get('miInfo', function(){
     abort(500, 'HOLA LA');

@@ -25,6 +25,7 @@ return [
         'catalogo' => 'Catalog',
         'gestionarcatalogos' => 'Manage Catalogs',
         'ubicacioncatalogos' => 'Location Catalogs',
+        'configbasicas' => 'Basic Settings',
     ],
 
     'superior' => [

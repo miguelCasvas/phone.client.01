@@ -21,7 +21,7 @@
                 <div class="box-tools">
                     <div class="btn-group">
                         <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom"  title="{{trans('catalogo.catalogo.btneliminarmarcados')}}" id="btnEliminarCanales"><i class="fa fa-trash-o"></i></button>
-                        <button type="button" class="btn btn-default btn-sm" title="{{trans('catalogo.catalogo.agregarcanal')}}" id="btnCrearCatalogo"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-default btn-sm" title="{{trans('catalogo.catalogo.agregarcatalogo')}}" id="btnCrearCatalogo"><i class="fa fa-plus"></i></button>
                     </div>
                 </div>
             </div>

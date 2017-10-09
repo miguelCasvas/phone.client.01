@@ -3,12 +3,12 @@
 
     @slot('menuPagina')
         <h1>
-            CANALES DE COMUNICACIÓN
+            {{trans('cc.titulo')}}
             <small>.</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li class="active">Canales Comunicación</li>
+            <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> {{trans('generales.inicio')}}</a></li>
+            <li class="active">{{trans('cc.canalescomunicacion')}}</li>
         </ol>
     @endslot
 
@@ -18,8 +18,8 @@
                 <h3></h3>
                 <div class="box-tools">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom"  title="Eliminar Canales marcados" id="btnEliminarCanales"><i class="fa fa-trash-o"></i></button>
-                        <button type="button" class="btn btn-default btn-sm" title="Agregar Canal" id="btnCrearCanal"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="bottom"  title="{{trans('cc.eliminarcanales')}}" id="btnEliminarCanales"><i class="fa fa-trash-o"></i></button>
+                        <button type="button" class="btn btn-default btn-sm" title="{{trans('cc.agregarcanal')}}" id="btnCrearCanal"><i class="fa fa-plus"></i></button>
                     </div>
                 </div>
             </div>
@@ -30,9 +30,9 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr class="info">
-                                <th>Conjunto</th>
-                                <th>Indicativo</th>
-                                <th style="width: 250px">Canal</th>
+                                <th>{{trans('cc.conjunto')}}</th>
+                                <th>{{trans('cc.indicativo')}}</th>
+                                <th style="width: 250px">{{trans('cc.canal')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,7 +45,7 @@
                                 <small><i class="fa  fa-check"></i></small> {{$_elemento['canal']}}
                                 <input type="checkbox" name="cc_conjunto[{{$_elemento['id_conjunto']}}][{{$_elemento['id_canal']}}]" value="eliminar" style="display: none">
                                 <div class="btn-group btn-group-xs pull-right">
-                                    <button type="button" class="btn btn-default check-eliminarCC" data-toggle="tooltip" data-placement="top" title="Seleccione para eliminar"><i class="fa fa-square-o" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn btn-default check-eliminarCC" data-toggle="tooltip" data-placement="top" title="{{trans('cc.seleccioneeliminar')}}"><i class="fa fa-square-o" aria-hidden="true"></i></button>
                                     <button
                                             type="button"
                                             class="btn btn-default btn-editarCC"
@@ -98,8 +98,8 @@
 
             FormularioCC.prototype.eliminacionCanales = function(){
                 swal({
-                    title: "Está seguro?",
-                    text: "Por favor, confirme la eliminación de los Canales!",
+                    title: "{{trans('cc.error.titulo')}}",
+                    text: "{{trans('cc.error.texto')}}",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
