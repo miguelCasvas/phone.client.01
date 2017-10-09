@@ -34,6 +34,13 @@
                 </a>
             </li>
             <li class="header text-center">{{trans('menus.izquierdo.gestionconjuntos')}}</li>
+            <!-- GESTION DE CONJUNTOS -->
+            <li class="{{$activeUsuarios or ''}} ">
+                <a href="{{route('getEnConstruccion')}}">
+                    <i class="fa fa-building-o"></i> <span>Conjuntos</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
             <!-- CANALES DE COMUNICACIÓN -->
             <li class="{{$activeCC or ''}} ">
                 <a href="{{route('getModuloCC')}}">

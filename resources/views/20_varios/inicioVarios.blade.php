@@ -1,7 +1,4 @@
 @component('0_layouts.blank')
-    @slot('activeCatalogo', 'active')
-    @slot('activeAdminCatalogo', 'active')
-
     @slot('menuPagina')
         <h1>
             PARAMETRIZACIONES
