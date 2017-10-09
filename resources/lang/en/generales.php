@@ -3,8 +3,8 @@
 return [
 
     /*
-    |----------------------------- ESPAÑOL ------------------------------------
-    | Traducciones para usuario
+    |----------------------------- INGLES ------------------------------------
+    | Traducciones generales
     |--------------------------------------------------------------------------
     |
     */
@@ -15,5 +15,10 @@ return [
             'texto' => 'Please, try again!',
         ],
     ],
+
+    /*Usado para módulos en construccion*/
+    'enconstruccion' => 'IN CONSTRUCTION',
+    'titulo' => 'we are working to offer you this content very soon',
+    'texto' => 'Sorry for the inconvenience',
 
 ];

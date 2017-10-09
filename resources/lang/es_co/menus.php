@@ -25,6 +25,7 @@ return [
         'catalogo' => 'Catálogo',
         'gestionarcatalogos' => 'Gestionar Catálogos',
         'ubicacioncatalogos' => 'Ubicación Catálogos',
+        'configbasicas' => 'Configuraciones Básicas',
 
     ],
 

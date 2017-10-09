@@ -3,8 +3,8 @@
 return [
 
     /*
-    |----------------------------- ESPAÑOL ------------------------------------
-    | Traducciones para usuario
+    |----------------------------- INGLES ------------------------------------
+    | Traducciones para catálogo
     |--------------------------------------------------------------------------
     |
     */
@@ -14,8 +14,8 @@ return [
         'catalogos' => 'Catalogs',
         'conjunto' => 'Residential',
         'catalogo' => 'Catalog',
-        'btneliminarmarcados' => 'Remove marked channels',
-        'agregarcanal' => 'Add Channel',
+        'btneliminarmarcados' => 'Remove marked catalogs',
+        'agregarcatalogo' => 'Add Catalog',
         'seleccionareliminar' => 'Select to delete',
         'ubicaciones' => 'locations',
         'ubicacioncatalogo' => 'Location Catalogs',
