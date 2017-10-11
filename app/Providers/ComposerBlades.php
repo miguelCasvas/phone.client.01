@@ -22,6 +22,8 @@ class ComposerBlades extends ServiceProvider
 
         $this->composerCatalogo();
 
+        $this->composerConjunto();
+
         $this->composerGeograficos();
     }
 
@@ -143,6 +145,84 @@ class ComposerBlades extends ServiceProvider
     }
 
     /**
+     * Vlrs pre-cargar para el modulo de conjuntos
+     */
+    private function composerConjunto()
+    {
+
+        view()->composer('5_conjuntos.inicioConjuntos', function($view){
+
+
+            $listaConjutos = 'active';
+            $formCreacion = '';
+
+            if(session()->get('formularioActivo') == true){
+                $listaConjutos = '';
+                $formCreacion = 'active';
+            }
+
+            $view
+                ->with('listaConjutos', $listaConjutos)
+                ->with('formCreacion', $formCreacion);
+
+        });
+
+        /*
+         * EDICION DE CONJUNTO
+         */
+        view()->composer('5_conjuntos.formularioConjunto', function($view){
+
+            # Datos que se pasan a vista desde controlador
+            $datosVista = $view->getData();
+            # Datos de conjunto
+            $conjunto = $datosVista['conjunto'];
+
+            $controladorGeo = new \App\Http\Controllers\Varios\GeograficosController();
+            $controladorConjunto = new \App\Http\Controllers\Conjuntos\ConjuntosController();
+
+            # Busqueda de (pais | depto | ciudad) del conjunto a editar
+            $geograficos = $controladorConjunto->geograficosConjunto($conjunto->id_conjunto)->getData()->data;
+            $geograficos = current($geograficos);
+
+            # Generar un arreglo con los paises registrados en BD
+            $paises = $controladorGeo->listaPaisParaSelect();
+            # Arreglo a ser cargado en el campo Departamento
+            $departamentos = [0 => 'Selección', $geograficos->id_departamento => $geograficos->nombre_departamento];
+            # Arreglo a ser cargado en el campo Ciudad
+            $ciudades = [0 => 'Selección', $geograficos->id_ciudad => $geograficos->nombre_ciudad];
+
+            $view
+                ->with('paises', $paises)
+                ->with('idPais', $geograficos->id_pais)
+                ->with('departamentos', $departamentos)
+                ->with('idDepartamento', $geograficos->id_departamento)
+                ->with('ciudades', $ciudades);
+
+        });
+
+        /*
+         * CREACION DE CONJUNTO
+         */
+        view()->composer('5_conjuntos.formularioCreacionConjunto', function($view){
+
+            $controladorGeo = new \App\Http\Controllers\Varios\GeograficosController();
+
+            # Generar un arreglo con los paises registrados en BD
+            $paises = $controladorGeo->listaPaisParaSelect();
+            # Arreglo a ser cargado en el campo Departamento
+            $departamentos = [0 => 'Selección'];
+            # Arreglo a ser cargado en el campo Ciudad
+            $ciudades = [0 => 'Selección'];
+
+            $view
+                ->with('paises', $paises)
+                ->with('departamentos', $departamentos)
+                ->with('ciudades', $ciudades);
+
+        });
+    }
+
+    /**
      * Vlrs pre-cargar para el modulo Geografico
      */
     private function composerGeograficos()
@@ -171,5 +251,6 @@ class ComposerBlades extends ServiceProvider
 
         });
     }
+
 
 }

@@ -35,9 +35,16 @@
             </li>
             <li class="header text-center">{{trans('menus.izquierdo.gestionconjuntos')}}</li>
             <!-- GESTION DE CONJUNTOS -->
-            <li class="{{$activeUsuarios or ''}} ">
-                <a href="{{route('getEnConstruccion')}}">
+            <li class="{{$activeConjuntos or ''}} ">
+                <a href="{{route('getInicioConjuntos')}}">
                     <i class="fa fa-building-o"></i> <span>Conjuntos</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
+            <!-- GESTION EXTENSIONES -->
+            <li class="{{$activeExtensiones or ''}} ">
+                <a href="{{route('getInicioExtensiones')}}">
+                    <i class="fa fa-phone"></i> <span>Extensiones</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>

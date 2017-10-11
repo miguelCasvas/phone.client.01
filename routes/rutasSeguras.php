@@ -32,10 +32,16 @@ Route::post('usuario', 'Usuarios\UsuariosController@crearUsuario')->name('postUs
  * Rutas para procesos sobre conjuntos
  */
 # Rutas Conjuntos
+Route::get('inicioconjuntos', 'Conjuntos\ConjuntosController@index')->name('getInicioConjuntos');
+
+Route::get('conjunto/{idConjunto}/edicion', 'Conjuntos\ConjuntosController@vistaEdicionConjunto')->name('getEdicionConjunto')->where('idConjunto', '[0-9]+');
+Route::get('conjunto/{idConjunto}/eliminacion', 'Conjuntos\ConjuntosController@eliminarConjunto')->name('getEliminarConjunto')->where('idConjunto', '[0-9]+');
+Route::post('conjunto/{idConjunto}/edicion', 'Conjuntos\ConjuntosController@editarConjunto')->name('postEdicionConjunto')->where('idConjunto', '[0-9]+');
+Route::post('conjunto/cracion', 'Conjuntos\ConjuntosController@crearConjunto')->name('postCreacionConjunto');
+
 Route::get('conjuntos', 'Conjuntos\ConjuntosController@listadoConjuntos')->name('listadoConjuntos');
 Route::get('conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@busquedaConjunto')->name('getConjunto');
 Route::get('extensiones/conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@listadoExtensionesPorConjunto')->name('getExtensionesConjunto');
-
 
 /*
  * Rutas para procesos sobre canales de comunicación
@@ -44,7 +50,6 @@ Route::get('canalesComunicacion', 'CanalesComunicaciones\CanalesComunicacionesCo
 Route::post('canalesComunicacion/eliminacion', 'CanalesComunicaciones\CanalesComunicacionesController@eliminarCanales')->name('getEliminacionCC');
 Route::post('canalesComunicacion', 'CanalesComunicaciones\CanalesComunicacionesController@crearCanal')->name('postCrearCC');
 Route::post('canalesComunicacion/{idCanal}', 'CanalesComunicaciones\CanalesComunicacionesController@editarCanal')->name('postEditarCC');
-
 
 /*
  * Rutas para procesos sobre catalogos
@@ -60,7 +65,6 @@ Route::post('catalogo/{idCatalogo}', 'Catalogos\CatalogosController@editarCatalo
 Route::get('ubicacioncatalogo', 'Catalogos\UbicacionCatalogoController@index')->name('getUbicacionCatalogo');
 Route::get('ubicacioncatalogofiltros', 'Catalogos\UbicacionCatalogoController@ubicacionCatalogoFiltrado')->name('getUbicacionCatalogoFiltrado');
 
-
 /*
  * Rutas para procesos Geograficos
  */
@@ -70,6 +74,11 @@ Route::post('pais', 'Varios\GeograficosController@crearPais')->name('postPais');
 Route::post('pais/{idPais}', 'Varios\GeograficosController@editarPais')->name('putPais')->where('idPais', '[0-9]+');
 Route::post('pais/eliminacion/{idPais}', 'Varios\GeograficosController@eliminarPais')->name('delPais')->where('idPais', '[0-9]+');
 
+/*
+ * Rutas para procesos extensiones
+ */
+Route::get('extensionesinicio', 'Extensiones\ExtensionesController@index')->name('getInicioExtensiones');
+
 Route::post('departamento', 'Varios\GeograficosController@crearDepartamento')->name('postDepartamento');
 Route::post('departamento/{idDepto}', 'Varios\GeograficosController@editarDepartamento')->name('putDepartamento')->where('idDepto', '[0-9]+');
 Route::post('departamento/eliminacion/{idDepto}', 'Varios\GeograficosController@eliminarDepartamento')->name('delDepartamento')->where('idDepto', '[0-9]+');
@@ -77,7 +86,6 @@ Route::post('departamento/eliminacion/{idDepto}', 'Varios\GeograficosController@
 Route::post('ciudad', 'Varios\GeograficosController@crearCiudad')->name('postCiudad');
 Route::post('ciudad/{idCiudad}', 'Varios\GeograficosController@editarCiudad')->name('putCiudad')->where('idCiudad', '[0-9]+');
 Route::post('ciudad/eliminacion/{idCiudad}', 'Varios\GeograficosController@eliminarCiudad')->name('delCiudad')->where('idCiudad', '[0-9]+');
-
 
 /*
  * Rutas configuraciones del sistema

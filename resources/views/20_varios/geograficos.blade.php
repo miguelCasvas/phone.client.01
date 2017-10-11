@@ -67,7 +67,7 @@
                 <div class="input-group" style="top: 30px; margin-bottom: 40px;">
                     <label for=""><small><i class="fa fa-asterisk" aria-hidden="true"></i></small>Ciudad</label>
                     <input type="hidden" name="idCiudad" value="{{old('idCiudad')}}">
-                    <input name="nombreCiudad" class="form-control" value="{{old('nombreCiudad')}}">
+                    <input name="nombreCiudad" class="form-control" value="{{old('')}}">
 
                     <div class="input-group-btn" style="top: 13px">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -211,7 +211,7 @@
                 objGeograficos.llenarDepartamentos(null);
                 objGeograficos.llenarCiudades(null);
             });
-        }
+        };
 
         /*
         * ACCIONES POR DEFECTO A BOTONES DE FORMULARIO PAIS

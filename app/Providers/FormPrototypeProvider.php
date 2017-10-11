@@ -100,7 +100,7 @@ class FormPrototypeProvider extends ServiceProvider
         /**
          * Campo tipo select
          */
-        Form::component('bsSelect'  ,'0_components.form.select',  ['titulo','nombCamp','value' => [],'selected','attributes' => [], 'obligatorio' => false]);
+        Form::component('bsSelect'  ,'0_components.form.select',  ['titulo','nombCamp','value' => [],'selected' => null,'attributes' => [], 'obligatorio' => false]);
         //
         ///**
         // * Campo Data List

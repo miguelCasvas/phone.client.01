@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Conjuntos;
 
+use App\Http\Requests\Conjunto\StoreRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -10,6 +12,93 @@ class ConjuntosController extends Controller
     public function __construct()
     {
         $this->setClienteApiSegura();
+    }
+
+    public function index()
+    {
+        $url = 'conjuntos/datosgenerales_1';
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
+        $conjuntos = $request->formatoRespuesta()->data;
+
+        $data = compact('conjuntos');
+        return view('5_conjuntos.inicioConjuntos', $data);
+    }
+
+    /**
+     * Redireccionamiento al formulario de edicion
+     *
+     * @param Request $request
+     * @param $idConjunto
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function vistaEdicionConjunto(Request $request, $idConjunto)
+    {
+        $conjunto = $this->busquedaConjunto($request, $idConjunto)->getData()->data;
+        $data = compact('conjunto');
+        return view('5_conjuntos.formularioConjunto', $data);
+
+    }
+
+    /**
+     * Envio de información al API para edición de conjunto
+     *
+     * @param StoreRequest $request
+     * @param $idConjunto
+     * @return \App\Http\PeticionesAPI\Cliente|RedirectResponse
+     */
+    public function editarConjunto(StoreRequest $request, $idConjunto)
+    {
+        $url = 'conjunto/'. $idConjunto;
+        $formulario = $request->all();
+
+        $_request = $this->clienteApi->peticionPUT($url, $formulario);
+        $response = $this->verificarErrorAPI($_request);
+
+        $response = $this->verificarErrorAPI($_request);
+
+        if ($response instanceof RedirectResponse)
+            return $response;
+
+        \Alert::success('Conjunto editado con exito!');
+        return back();
+    }
+
+    /**
+     * Envio de información al API para almacenamiento del conjunto
+     *
+     * @param StoreRequest $request
+     * @return RedirectResponse
+     */
+    public function crearConjunto(StoreRequest $request)
+    {
+        $url = 'conjunto';
+        $formulario = $request->all();
+
+        $_request = $this->clienteApi->peticionPOST($url, $formulario);
+        $response = $this->verificarErrorAPI($_request);
+
+        $response = $this->verificarErrorAPI($_request);
+
+        if ($response instanceof RedirectResponse)
+            return $response->with('formularioActivo', true);
+
+        \Alert::success('Conjunto creado con exito!');
+        return back();
+    }
+
+    /**
+     * Eliminación de conjunto
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function eliminarConjunto(Request $request, $idConjunto)
+    {
+        $url = 'conjunto/' . $idConjunto;
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionDELETE($url));
+
+        \Alert::success('Conjunto eliminado correctamente!');
+        return back();
     }
 
     /**
@@ -40,6 +129,25 @@ class ConjuntosController extends Controller
 
         return response()->json($conjunto);
 
+    }
+
+    /**
+     * Realiza la busqueda geografica del conjunto por su id
+     * * Pais
+     * * Departamento
+     * * Ciudad
+     *
+     * @param $idConjunto
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function geograficosConjunto($idConjunto)
+    {
+        $url = 'conjuntos/datosgenerales_2';
+        $params = ['id_conjunto' => $idConjunto];
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url, $params));
+        $conjunto = $request->formatoRespuesta();
+
+        return response()->json($conjunto);
     }
 
     /**
