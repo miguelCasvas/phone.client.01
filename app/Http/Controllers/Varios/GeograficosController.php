@@ -41,8 +41,8 @@ class GeograficosController extends Controller
     public function listaPaisParaSelect()
     {
         $paises = $this->listaPaises()->getData()->data;
-        $arregloPaises = array('Selección');
-
+        $arregloPaises = array(trans('configbasica.controlador.seleccion'));
+ 
         foreach ($paises as $pais) {
             $arregloPaises[$pais->id_pais] = $pais->nombre_pais;
         }
@@ -64,7 +64,7 @@ class GeograficosController extends Controller
         $datosEnvio['selectPais'] = $datos->id_pais;
         $datosEnvio['idPais'] = $datos->id_pais;
 
-        \Alert::success('País creado con exito!');
+        \Alert::success(trans('configbasica.controlador.paisCreado'));
         return back()->withInput($datosEnvio);
     }
 
@@ -84,7 +84,7 @@ class GeograficosController extends Controller
         $datosEnvio['selectPais'] = $datos->id_pais;
         $datosEnvio['idPais'] = $datos->id_pais;
 
-        \Alert::success('País editado con exito!');
+        \Alert::success(trans('configbasica.controlador.paisEditado'));
         return back()->withInput($datosEnvio);
     }
 
@@ -93,7 +93,7 @@ class GeograficosController extends Controller
         $url = 'pais/' . $idPais;
         $request = $this->verificarErrorAPI($this->clienteApi->peticionDELETE($url));
 
-        \Alert::success('País eliminado con exito!');
+        \Alert::success(trans('configbasica.controlador.paisEliminado'));
         return back();
     }
 
@@ -137,7 +137,7 @@ class GeograficosController extends Controller
         $datosEnvio['selectDepartamento'] = $datos->id_departamento;
         $datosEnvio['idDepartamento'] = $datos->id_departamento;
 
-        \Alert::success('Departamento creado con exito!');
+        \Alert::success(trans('configbasica.controlador.deptoCreado'));
         return back()->withInput($datosEnvio);
     }
 
@@ -152,7 +152,7 @@ class GeograficosController extends Controller
         if ($response instanceof RedirectResponse)
             return $response;
 
-        \Alert::success('Departamento editado con exito!');
+        \Alert::success(trans('configbasica.controlador.deptoEditado'));
         return back()->withInput($request->all());
     }
 
@@ -161,7 +161,7 @@ class GeograficosController extends Controller
         $url = 'departamento/' . $idDepartamento;
         $request = $this->verificarErrorAPI($this->clienteApi->peticionDELETE($url));
 
-        \Alert::success('Departamento eliminado con exito!');
+        \Alert::success(trans('configbasica.controlador.deptoEliminado'));
         return back();
     }
 
@@ -210,7 +210,7 @@ class GeograficosController extends Controller
         $datosEnvio['selectCiudad'] = $datos->id_ciudad;
         $datosEnvio['idCiudad'] = $datos->id_ciudad;
 
-        \Alert::success('Ciudad creada con exito!');
+        \Alert::success(trans('configbasica.controlador.ciudadCreada'));
         return back()->withInput($datosEnvio);
     }
 
@@ -229,7 +229,7 @@ class GeograficosController extends Controller
         if ($response instanceof RedirectResponse)
             return $response;
 
-        \Alert::success('Ciudad editada con exito!');
+        \Alert::success(trans('configbasica.controlador.ciudadEditada'));
         return back()->withInput($request->all());
     }
 
@@ -238,7 +238,7 @@ class GeograficosController extends Controller
         $url = 'ciudad/' . $idCiudad;
         $request = $this->verificarErrorAPI($this->clienteApi->peticionDELETE($url));
 
-        \Alert::success('Ciudad eliminado con exito!');
+        \Alert::success(trans('configbasica.controlador.ciudadEliminada'));
         return back();
     }
 }

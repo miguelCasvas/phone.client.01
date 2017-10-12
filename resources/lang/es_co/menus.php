@@ -26,6 +26,14 @@ return [
         'gestionarcatalogos' => 'Gestionar Catálogos',
         'ubicacioncatalogos' => 'Ubicación Catálogos',
         'configbasicas' => 'Configuraciones Básicas',
+        'conjunto' => 'Conjuntos',
+        'extensiones' => 'Extensiones',
+        'historial' => 'Historial',
+        'marcado' => 'Marcado',
+        'notificaciones' => 'Notificaciones',
+        'gestionsalidas' => 'Gestión de Salidas',
+
+
 
     ],
 

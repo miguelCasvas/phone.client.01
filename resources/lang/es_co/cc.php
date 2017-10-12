@@ -17,6 +17,8 @@ return [
         'seleccioneeliminar' => 'Seleccione para eliminar',
         'eliminarcanales' => 'Eliminar Canales Marcados',
         'agregarcanal' => 'Agregar Canal',
+        'crearcanal' => '.:: Crear Canal ::.',
+        'canalcomunicacion' => 'Canal de Comunicación',
 
         'error' => [
             'titulo' => 'Está seguro?',

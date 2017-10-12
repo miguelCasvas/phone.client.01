@@ -69,13 +69,13 @@
             </div>
         </div>
 
-        @component('0_partials.defaultModal', ['idModalDef' => 'modalCrearCanal', 'titleModalDef' => '.:: Crear Canal ::.', 'idBtnSave' => 'btnSaveCanal'])
+        @component('0_partials.defaultModal', ['idModalDef' => 'modalCrearCanal', 'titleModalDef' => trans('cc.crearcanal'), 'idBtnSave' => 'btnSaveCanal'])
             <form action="{{route('postCrearCC')}}" name="formCrearCC" method="post">
                 {{ csrf_field() }}
                 <div class="row">
-                    <div class="col-xs-12">{{Form::bsSelect('Conjunto', 'idConjunto', $conjuntos, null, [], true)}}</div>
-                    <div class="col-lg-3 col-xs-12">{{Form::bsText('Indicativo', 'indicativo', null, [], true)}}</div>
-                    <div class="col-lg-9 col-xs-12">{{Form::bsText('Canal de comunicación', 'canal', null, [], true)}}</div>
+                    <div class="col-xs-12">{{Form::bsSelect(trans('cc.conjunto'), 'idConjunto', $conjuntos, null, [], true)}}</div>
+                    <div class="col-lg-3 col-xs-12">{{Form::bsText(trans('cc.indicativo'), 'indicativo', null, [], true)}}</div>
+                    <div class="col-lg-9 col-xs-12">{{Form::bsText(trans('cc.canalcomunicacion'), 'canal', null, [], true)}}</div>
                 </div>
             </form>
         @endcomponent
