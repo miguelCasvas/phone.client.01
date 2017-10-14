@@ -49,8 +49,8 @@
             </li>
             <li class="header text-center">{{trans('menus.izquierdo.gestionconjuntos')}}</li>
             <!-- GESTION DE CONJUNTOS -->
-            <li class="{{$activeGestionConjuntos or ''}} ">
-                <a href="{{route('getEnConstruccion')}}">
+            <li class="{{$activeConjuntos or ''}} ">
+                <a href="{{route('getInicioConjuntos')}}">
                     <i class="fa fa-building-o"></i> <span>{{trans('menus.izquierdo.conjunto')}}</span>
                     <span class="pull-right-container"></span>
                 </a>
