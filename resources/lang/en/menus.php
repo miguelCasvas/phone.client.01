@@ -29,7 +29,11 @@ return [
         'ubicacioncatalogos' => 'Location Catalogs',
         'configbasicas' => 'Basic Settings',
         'conjunto' => 'Residentials',
-
+        'extensiones' => 'Extensions',
+        'historial' => 'Record',
+        'marcado' => 'Marked',
+        'notificaciones' => 'Notifications',
+        'gestionsalidas' => 'Exit Management',
     ],
 
     /*Traducciones menú superior*/

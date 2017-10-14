@@ -98,7 +98,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{$activeAdminCatalogo or ''}}"><a href="{{route('getEnConstruccion')}}"><i class="fa fa-sitemap"></i> {{trans('menus.izquierdo.gestionsalidas')}}</a></li>
+                    <li class="{{$activeAdminCatalogo or ''}}"><a href="{{route('getEnConstruccion')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionsalidas')}}</a></li>
                 </ul>
             </li>
             <!-- CONFIGURACIONES BASICAS -->
