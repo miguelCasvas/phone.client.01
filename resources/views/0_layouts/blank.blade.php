@@ -71,7 +71,23 @@
 <!-- SweetAlert -->
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
 <!-- Include this after the sweet alert js file -->
-@include('sweet::alert')
+{{--@include('sweet::alert')--}}
+@if (session()->has('sweet_alert.alert'))
+    <script>
+        swal({
+            text: "{!! session()->get('sweet_alert.text') !!}",
+            title: "{!! session()->get('sweet_alert.title') !!}",
+            timer: {!! session()->get('sweet_alert.timer') !!},
+            icon: "{!! session()->get('sweet_alert.type') !!}",
+            type: "{!! session()->get('sweet_alert.type') !!}",
+            showConfirmButton: "{!! session()->get('sweet_alert.showConfirmButton') !!}",
+            confirmButtonText: "{!! session()->get('sweet_alert.confirmButtonText') !!}",
+            confirmButtonColor: "#AEDEF4"
+
+            // more options
+        });
+    </script>
+@endif
 
 @stack('scriptsPostLoad')
 

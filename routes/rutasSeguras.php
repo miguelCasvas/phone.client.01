@@ -40,8 +40,9 @@ Route::post('conjunto/{idConjunto}/edicion', 'Conjuntos\ConjuntosController@edit
 Route::post('conjunto/cracion', 'Conjuntos\ConjuntosController@crearConjunto')->name('postCreacionConjunto');
 
 Route::get('conjuntos', 'Conjuntos\ConjuntosController@listadoConjuntos')->name('listadoConjuntos');
-Route::get('conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@busquedaConjunto')->name('getConjunto');
-Route::get('extensiones/conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@listadoExtensionesPorConjunto')->name('getExtensionesConjunto');
+Route::get('conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@busquedaConjunto')->name('getConjunto')->where('idConjunto', '[0-9]+');
+Route::get('conjunto/extensiones/{idConjunto}', 'Conjuntos\ConjuntosController@listadoExtensionesPorConjunto')->name('getExtensionesConjunto');
+Route::get('conjunto/extension_ft_usuario', 'Conjuntos\ConjuntosController@listadoExtensionUsuarioPorConjunto')->name('getExtensionFtUsuarioConjunto');
 
 /*
  * Rutas para procesos sobre canales de comunicación
@@ -78,6 +79,7 @@ Route::post('pais/eliminacion/{idPais}', 'Varios\GeograficosController@eliminarP
  * Rutas para procesos extensiones
  */
 Route::get('extensionesinicio', 'Extensiones\ExtensionesController@index')->name('getInicioExtensiones');
+Route::post('extensiones/eliminarelacion', 'Extensiones\ExtensionesController@eliminarRelExtensiones')->name('delRelExtensiones');
 
 Route::post('departamento', 'Varios\GeograficosController@crearDepartamento')->name('postDepartamento');
 Route::post('departamento/{idDepto}', 'Varios\GeograficosController@editarDepartamento')->name('putDepartamento')->where('idDepto', '[0-9]+');

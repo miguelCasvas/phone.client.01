@@ -175,9 +175,27 @@ class ConjuntosController extends Controller
      */
     public function listadoExtensionesPorConjunto($idConjunto)
     {
-        $url = 'extensiones/conjunto/' . $idConjunto;
-        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
+        $url = 'conjuntos/datosgenerales_3';
+        $params = ['id_conjunto' => $idConjunto];
+
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url, $params));
         $extensiones = $request->formatoRespuesta();
+
+        return response()->json($extensiones);
+    }
+
+    /**
+     * Busqueda de extensiones activa por conjunto con relacion a usuarios
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function listadoExtensionUsuarioPorConjunto(Request $request)
+    {
+        $url = 'conjuntos/datosgenerales_4';
+        $params = $request->all();
+        $_request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url, $params));
+        $extensiones = $_request->formatoRespuesta();
 
         return response()->json($extensiones);
     }
