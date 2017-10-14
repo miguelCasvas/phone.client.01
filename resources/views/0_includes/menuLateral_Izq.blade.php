@@ -34,14 +34,14 @@
                 </a>
             </li>
             <!-- HISTORIAL -->
-            <li class="{{$activeUsuarios or ''}} ">
+            <li class="{{$activeHistorial or ''}} ">
                 <a href="{{route('getEnConstruccion')}}">
                     <i class="fa fa-history"></i> <span>{{trans('menus.izquierdo.historial')}}</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
             <!-- MARCADO -->
-            <li class="{{$activeUsuarios or ''}} ">
+            <li class="{{$activeMarcado or ''}} ">
                 <a href="{{route('getEnConstruccion')}}">
                     <i class="fa fa-book"></i> <span>{{trans('menus.izquierdo.marcado')}}</span>
                     <span class="pull-right-container"></span>
@@ -49,16 +49,9 @@
             </li>
             <li class="header text-center">{{trans('menus.izquierdo.gestionconjuntos')}}</li>
             <!-- GESTION DE CONJUNTOS -->
-            <li class="{{$activeUsuarios or ''}} ">
+            <li class="{{$activeGestionConjuntos or ''}} ">
                 <a href="{{route('getEnConstruccion')}}">
                     <i class="fa fa-building-o"></i> <span>{{trans('menus.izquierdo.conjunto')}}</span>
-                    <span class="pull-right-container"></span>
-                </a>
-            </li>
-            <!-- GESTION DE EXTENSIONES -->
-            <li class="{{$activeUsuarios or ''}} ">
-                <a href="{{route('getEnConstruccion')}}">
-                    <i class="fa fa-phone-square"></i> <span>{{trans('menus.izquierdo.extensiones')}}</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
@@ -90,7 +83,7 @@
                 </ul>
             </li>
             <!-- NOTIFICACIONES -->
-            <li class="treeview {{$activeCatalogo or ''}}">
+            <li class="treeview {{$activeNotificaciones or ''}}">
                 <a href="#">
                     <i class="fa fa-bell-o"></i> <span>{{trans('menus.izquierdo.notificaciones')}}</span>
                     <span class="pull-right-container">
@@ -98,7 +91,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{$activeAdminCatalogo or ''}}"><a href="{{route('getEnConstruccion')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionsalidas')}}</a></li>
+                    <li class="{{$activeNotificacionesInicio or ''}}"><a href="{{route('getInicioNotificaciones')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionsalidas')}}</a></li>
                 </ul>
             </li>
             <!-- CONFIGURACIONES BASICAS -->
