@@ -1,12 +1,12 @@
 @component('0_layouts.blank')
     @slot('menuPagina')
         <h1>
-            PARAMETRIZACIONES
-            <small>Configuraciones basicas</small>
+            {{trans('configbasica.varios.parametrizaciones')}}
+            <small>{{trans('configbasica.varios.configbasicas')}}</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li class="active">Parametrizaciones</li>
+            <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> {{trans('generales.inicio')}}</a></li>
+            <li class="active">{{trans('configbasica.varios.parametrizaciones2')}}</li>
         </ol>
     @endslot
 

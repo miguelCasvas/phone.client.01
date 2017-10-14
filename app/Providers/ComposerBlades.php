@@ -231,8 +231,8 @@ class ComposerBlades extends ServiceProvider
 
             $controladorGeo = new \App\Http\Controllers\Varios\GeograficosController();
             $paises = $controladorGeo->listaPaisParaSelect();
-            $departamentos = [0 => 'Selección'];
-            $ciudades = [0 => 'Selección'];
+            $departamentos = [0 => trans('configbasica.controlador.seleccion')];
+            $ciudades = [0 => trans('configbasica.controlador.seleccion')];
 
             if (empty(old('idPais')) == false){
                 $departamentos +=

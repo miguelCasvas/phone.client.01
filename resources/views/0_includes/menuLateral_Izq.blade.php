@@ -33,11 +33,32 @@
                     <span class="pull-right-container"></span>
                 </a>
             </li>
+            <!-- HISTORIAL -->
+            <li class="{{$activeUsuarios or ''}} ">
+                <a href="{{route('getEnConstruccion')}}">
+                    <i class="fa fa-history"></i> <span>{{trans('menus.izquierdo.historial')}}</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
+            <!-- MARCADO -->
+            <li class="{{$activeUsuarios or ''}} ">
+                <a href="{{route('getEnConstruccion')}}">
+                    <i class="fa fa-book"></i> <span>{{trans('menus.izquierdo.marcado')}}</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
             <li class="header text-center">{{trans('menus.izquierdo.gestionconjuntos')}}</li>
             <!-- GESTION DE CONJUNTOS -->
-            <li class="{{$activeConjuntos or ''}} ">
-                <a href="{{route('getInicioConjuntos')}}">
-                    <i class="fa fa-building-o"></i> <span>Conjuntos</span>
+            <li class="{{$activeUsuarios or ''}} ">
+                <a href="{{route('getEnConstruccion')}}">
+                    <i class="fa fa-building-o"></i> <span>{{trans('menus.izquierdo.conjunto')}}</span>
+                    <span class="pull-right-container"></span>
+                </a>
+            </li>
+            <!-- GESTION DE EXTENSIONES -->
+            <li class="{{$activeUsuarios or ''}} ">
+                <a href="{{route('getEnConstruccion')}}">
+                    <i class="fa fa-phone-square"></i> <span>{{trans('menus.izquierdo.extensiones')}}</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
@@ -66,6 +87,18 @@
                 <ul class="treeview-menu">
                     <li class="{{$activeAdminCatalogo or ''}}"><a href="{{route('getModuloCatalogos')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionarcatalogos')}}</a></li>
                     <li class="{{$activeAdminUbicacion or ''}}"><a href="{{route('getUbicacionCatalogo')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.ubicacioncatalogos')}}</a></li>
+                </ul>
+            </li>
+            <!-- NOTIFICACIONES -->
+            <li class="treeview {{$activeCatalogo or ''}}">
+                <a href="#">
+                    <i class="fa fa-bell-o"></i> <span>{{trans('menus.izquierdo.notificaciones')}}</span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{$activeAdminCatalogo or ''}}"><a href="{{route('getEnConstruccion')}}"><i class="fa fa-sitemap"></i> {{trans('menus.izquierdo.gestionsalidas')}}</a></li>
                 </ul>
             </li>
             <!-- CONFIGURACIONES BASICAS -->

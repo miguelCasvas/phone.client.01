@@ -3,7 +3,7 @@
 return [
 
     /*
-    |----------------------------- ESPAÑOL ------------------------------------
+    |----------------------------- INGLES ------------------------------------
     | Traducciones menu derecho
     |--------------------------------------------------------------------------
     |
@@ -16,6 +16,8 @@ return [
         'bienvenido' => 'Welcome'
     ],
 
+    /*Traducciones menú izquierdo*/
+
     'izquierdo' => [
         'enlinea' => 'Online',
         'navprincipal' => 'MAIN NAVIGATION',
@@ -26,7 +28,12 @@ return [
         'gestionarcatalogos' => 'Manage Catalogs',
         'ubicacioncatalogos' => 'Location Catalogs',
         'configbasicas' => 'Basic Settings',
+        'conjunto' => 'Residentials',
+
     ],
+
+    /*Traducciones menú superior*/
+
 
     'superior' => [
         'informacion' => 'User Information',
@@ -36,6 +43,7 @@ return [
         'cerrarsesion' => 'Log Out',
     ],
 
+    /*Traducciones menú usuario*/
 
     'usuario' => [
         'infoPersonal' => 'Personal Information',

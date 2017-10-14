@@ -17,6 +17,9 @@ return [
         'seleccioneeliminar' => 'Select to delete',
         'eliminarcanales' => 'Remove marked channels',
         'agregarcanal' => 'Add Channel',
+        'crearcanal' => '.:: Add Channel ::.',
+        'canalcomunicacion' => 'Communication Channel',
+
 
         'error' => [
             'titulo' => 'Are you sure?',

@@ -3,7 +3,7 @@
     <form action="" method="post" class="form" name="formGeografico">
         {{ csrf_field() }}
         <div class="box-header with-border">
-            <h3 class="box-title">Geograficos</h3>
+            <h3 class="box-title">{{trans('configbasica.geograficos')}}</h3>
 
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -13,72 +13,72 @@
         <!-- /.box-header -->
         <div class="box-body">
             <div class="col-lg-4 col-lg-offset-2">
-                <h4>Seleccione <small class="text-muted">(País / Departamento / Ciudad)</small></h4>
+                <h4>{{trans('configbasica.seleccione')}} <small class="text-muted">({{trans('configbasica.pais')}} / {{trans('configbasica.depto')}} / {{trans('configbasica.ciudad')}})</small></h4>
 
-                {{Form::bsSelect('Paises', 'selectPais', $paises, null, [], false)}}
-                {{Form::bsSelect('Departamentos', 'selectDepartamento', $departamentos, null, [], false)}}
-                {{Form::bsSelect('Ciudades', 'selectCiudad', $ciudades, null, [], false)}}
+                {{Form::bsSelect(trans('configbasica.paises'), 'selectPais', $paises, null, [], false)}}
+                {{Form::bsSelect(trans('configbasica.deptos'), 'selectDepartamento', $departamentos, null, [], false)}}
+                {{Form::bsSelect(trans('configbasica.ciudades'), 'selectCiudad', $ciudades, null, [], false)}}
 
             </div>
 
             <!-- (EDICION / ELIMINACION) -->
             <div class="col-lg-4">
-                <h4>Gestión <a href="#" id="linkLimpiarForm" class="pull-right" title="Limpiar formulario"><i class="fa fa-refresh"></i></a></h4>
+                <h4>{{trans('configbasica.gestion')}} <a href="#" id="linkLimpiarForm" class="pull-right" title="{{trans('configbasica.limpiarform')}}"><i class="fa fa-refresh"></i></a></h4>
 
                 <!-- GESTION DE PAIS -->
                 <div class="input-group" >
-                    <label for=""><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> País</label>
+                    <label for=""><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> {{trans('configbasica.pais')}}</label>
                     <input type="hidden" name="idPais" value="{{old('idPais')}}">
                     <input name="nombrePais" class="form-control" value="{{old('nombrePais')}}">
 
                     <div class="input-group-btn" style="top: 13px">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Acción
+                            {{trans('configbasica.accion')}}
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span> </button>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#" id="linkEditPais"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar</a></li>
-                            <li><a href="#" id="linkElimPais"><i class="fa fa-trash-o" aria-hidden="true"></i>Eliminar</a></li>
+                            <li><a href="#" id="linkEditPais"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{trans('configbasica.editar')}}</a></li>
+                            <li><a href="#" id="linkElimPais"><i class="fa fa-trash-o" aria-hidden="true"></i>{{trans('configbasica.eliminar')}}</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#" id="linkCrearPais"><i class="fa fa-plus-circle" aria-hidden="true"></i>Crear</a></li></ul>
+                            <li><a href="#" id="linkCrearPais"><i class="fa fa-plus-circle" aria-hidden="true"></i>{{trans('configbasica.crear')}}</a></li></ul>
                     </div>
                 </div>
 
                 <!-- GESTION DE DEPARTAMENTO -->
                 <div class="input-group" style="top: 15px;">
-                    <label for=""><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> Departamento</label>
+                    <label for=""><small><i class="fa fa-asterisk" aria-hidden="true"></i></small> {{trans('configbasica.depto')}}</label>
                     <input type="hidden" name="idDepartamento" value="{{old('idDepartamento')}}">
                     <input name="nombreDepartamento" class="form-control" value="{{old('nombreDepartamento')}}">
 
                     <div class="input-group-btn" style="top: 13px">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Acción
+                            {{trans('configbasica.accion')}}
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span> </button>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#" id="linkEditDep"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar</a></li>
-                            <li><a href="#" id="linkElimDep"><i class="fa fa-trash-o" aria-hidden="true"></i>Eliminar</a></li>
+                            <li><a href="#" id="linkEditDep"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{trans('configbasica.editar')}}</a></li>
+                            <li><a href="#" id="linkElimDep"><i class="fa fa-trash-o" aria-hidden="true"></i>{{trans('configbasica.eliminar')}}</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#" id="linkCrearDep"><i class="fa fa-plus-circle" aria-hidden="true"></i>Crear</a></li></ul>
+                            <li><a href="#" id="linkCrearDep"><i class="fa fa-plus-circle" aria-hidden="true"></i>{{trans('configbasica.crear')}}</a></li></ul>
                     </div>
                 </div>
 
                 <!-- GESTION DE CIUDAD -->
                 <div class="input-group" style="top: 30px; margin-bottom: 40px;">
-                    <label for=""><small><i class="fa fa-asterisk" aria-hidden="true"></i></small>Ciudad</label>
+                    <label for=""><small><i class="fa fa-asterisk" aria-hidden="true"></i></small>{{trans('configbasica.ciudad')}}</label>
                     <input type="hidden" name="idCiudad" value="{{old('idCiudad')}}">
                     <input name="nombreCiudad" class="form-control" value="{{old('')}}">
 
                     <div class="input-group-btn" style="top: 13px">
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Acción
+                            {{trans('configbasica.accion')}}
                             <span class="caret"></span>
                             <span class="sr-only">Toggle Dropdown</span> </button>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="#" id="linkEditCiudad"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Editar</a></li>
-                            <li><a href="#" id="linkElimCiudad"><i class="fa fa-trash-o" aria-hidden="true"></i>Eliminar</a></li>
+                            <li><a href="#" id="linkEditCiudad"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{trans('configbasica.editar')}}</a></li>
+                            <li><a href="#" id="linkElimCiudad"><i class="fa fa-trash-o" aria-hidden="true"></i>{{trans('configbasica.eliminar')}}</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#" id="linkCrearCiudad"><i class="fa fa-plus-circle" aria-hidden="true"></i>Crear</a></li></ul>
+                            <li><a href="#" id="linkCrearCiudad"><i class="fa fa-plus-circle" aria-hidden="true"></i>{{trans('configbasica.crear')}}</a></li></ul>
                     </div>
                 </div>
 
@@ -221,7 +221,7 @@
 
                 idPais = $(objGeograficos.idPais).val();
 
-                if(objGeograficos.validarCampoRequerido(idPais, 'Seleccione páis a modificar'))
+                if(objGeograficos.validarCampoRequerido(idPais, '{{trans('configbasica.error.sPaisModificar')}}'))
                     objGeograficos.enviarFormulario('{{route('putPais', [''])}}/' + idPais);
 
             });
@@ -231,7 +231,7 @@
             $('#linkElimPais').click(function(){
                 idPais = $(objGeograficos.idPais).val();
 
-                if(objGeograficos.validarCampoRequerido(idPais, 'Seleccione páis a eliminar'))
+                if(objGeograficos.validarCampoRequerido(idPais, '{{trans('configbasica.error.sPaisEliminar')}}'))
                     objGeograficos.enviarFormulario('{{route('delPais', [''])}}/' + idPais);
             });
         };
@@ -241,7 +241,7 @@
             $('#linkCrearPais').click(function(){
                 nomPais = $(objGeograficos.nomPais).val();
 
-                if(objGeograficos.validarCampoRequerido(nomPais, 'Ingrese un país valido a crear'))
+                if(objGeograficos.validarCampoRequerido(nomPais, '{{trans('configbasica.error.iPaisValidoCrear')}}'))
                     objGeograficos.enviarFormulario('{{route('postPais')}}');
 
             });
@@ -255,10 +255,10 @@
             $('#linkEditDep').click(function(){
 
                 idPais = $(objGeograficos.idPais).val();
-                if(objGeograficos.validarCampoRequerido(idPais, 'Seleccione un país para modificar un depto.')){
+                if(objGeograficos.validarCampoRequerido(idPais, '{{trans('configbasica.error.sPaisModificarDepto')}}')){
 
                     idDep = $(objGeograficos.idDep).val();
-                    if(objGeograficos.validarCampoRequerido(idDep, 'Seleccione un depto a modificar.')){
+                    if(objGeograficos.validarCampoRequerido(idDep, '{{trans('configbasica.error.sDeptoModificar')}}')){
                         objGeograficos.enviarFormulario('{{route('putDepartamento', [''])}}/' + idDep);
                     }
                 }
@@ -269,9 +269,9 @@
             $('#linkElimDep').click(function(){
 
                 idPais = $(objGeograficos.idPais).val();
-                if(objGeograficos.validarCampoRequerido(idPais, 'Seleccione un país para eliminar un depto.')){
+                if(objGeograficos.validarCampoRequerido(idPais, '{{trans('configbasica.error.sPaisEliminarDepto')}}')){
                     idDep = $(objGeograficos.idDep).val();
-                    if(objGeograficos.validarCampoRequerido(idDep, 'Seleccione un depto. para su eliminación.')){
+                    if(objGeograficos.validarCampoRequerido(idDep, '{{trans('configbasica.error.sDeptoEliminar')}}')){
                         objGeograficos.enviarFormulario('{{route('delDepartamento', [''])}}/' + idDep);
                     }
                 }
@@ -282,9 +282,9 @@
             $('#linkCrearDep').click(function(){
 
                 idPais = $(objGeograficos.idPais).val();
-                if(objGeograficos.validarCampoRequerido(idPais, 'Seleccione un país para crear el depto.')){
+                if(objGeograficos.validarCampoRequerido(idPais, '{{trans('configbasica.error.sPaisCrearDepto')}}')){
                     nomDep = $(objGeograficos.nomDep).val();
-                    if(objGeograficos.validarCampoRequerido(nomDep, 'Ingrese un depto. valido para su creación')){
+                    if(objGeograficos.validarCampoRequerido(nomDep, '{{trans('configbasica.error.iDeptoValidoCrear')}}')){
                         objGeograficos.enviarFormulario('{{route('postDepartamento')}}');
                     }
                 }
@@ -298,13 +298,13 @@
             $('#linkEditCiudad').click(function(){
 
                 idPais = $(objGeograficos.idPais).val();
-                if(objGeograficos.validarCampoRequerido(idPais, 'Seleccione un país para modificar una ciudad')){
+                if(objGeograficos.validarCampoRequerido(idPais, '{{trans('configbasica.error.sPaisModificarCiudad')}}')){
 
                     idDep = $(objGeograficos.idDep).val();
-                    if(objGeograficos.validarCampoRequerido(idDep, 'Seleccione un depto. para modificar una ciudad')){
+                    if(objGeograficos.validarCampoRequerido(idDep, '{{trans('configbasica.error.sDeptoModificarCiudad')}}')){
 
                         idCiudad = $(objGeograficos.idCiudad).val();
-                        if(objGeograficos.validarCampoRequerido(idCiudad, 'Seleccione una ciudad para su modificación')) {
+                        if(objGeograficos.validarCampoRequerido(idCiudad, '{{trans('configbasica.error.sCiudadModificar')}}')) {
                             objGeograficos.enviarFormulario('{{route('putCiudad', [''])}}/' + idCiudad);
                         }
                     }
@@ -316,13 +316,13 @@
             $('#linkElimCiudad').click(function(){
 
                 idPais = $(objGeograficos.idPais).val();
-                if(objGeograficos.validarCampoRequerido(idPais, 'Seleccione un país para eliminar una ciudad')){
+                if(objGeograficos.validarCampoRequerido(idPais, '{{trans('configbasica.error.sPaisEliminarCiudad')}}')){
 
                     idDep = $(objGeograficos.idDep).val();
-                    if(objGeograficos.validarCampoRequerido(idDep, 'Seleccione un depto. para eliminar una ciudad')){
+                    if(objGeograficos.validarCampoRequerido(idDep, '{{trans('configbasica.error.sDeptoEliminarCiudad')}}')){
 
                         idCiudad = $(objGeograficos.idCiudad).val();
-                        if(objGeograficos.validarCampoRequerido(idCiudad, 'Seleccione una ciudad para su eliminación')){
+                        if(objGeograficos.validarCampoRequerido(idCiudad, '{{trans('configbasica.error.sCiudadEliminar')}}')){
                             objGeograficos.enviarFormulario('{{route('delCiudad', [''])}}/' + idCiudad);
                         }
                     }
@@ -334,13 +334,13 @@
             $('#linkCrearCiudad').click(function(){
 
                 idPais = $(objGeograficos.idPais).val();
-                if(objGeograficos.validarCampoRequerido(idPais, 'Seleccione un país para crear una ciudad')){
+                if(objGeograficos.validarCampoRequerido(idPais, '{{trans('configbasica.error.sPaisCrearCiudad')}}')){
 
                     idDep = $(objGeograficos.idDep).val();
-                    if(objGeograficos.validarCampoRequerido(idDep, 'Seleccione un depto. para crear una ciudad')){
+                    if(objGeograficos.validarCampoRequerido(idDep, '{{trans('configbasica.error.sDeptoCrearCiudad')}}')){
 
                         nomCiudad = $(objGeograficos.nomCiudad).val();
-                        if(objGeograficos.validarCampoRequerido(nomCiudad, 'Ingrese una ciudad valida para su creación')) {
+                        if(objGeograficos.validarCampoRequerido(nomCiudad, '{{trans('configbasica.error.iCiudadValidaCrear')}}')) {
                             objGeograficos.enviarFormulario('{{route('postCiudad')}}');
                         }
                     }
