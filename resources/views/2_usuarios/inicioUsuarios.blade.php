@@ -173,6 +173,7 @@
 
             var objFormUsuario = new FormUsuarios();
             selectConjunto = $('select[name="idConjunto"]');
+            console.log(selectConjunto);
 
             $(selectConjunto).change(function(){
                 objFormUsuario.selectConjunto($(this).val());
