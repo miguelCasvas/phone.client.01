@@ -16,11 +16,12 @@ class ConjuntosController extends Controller
 
     public function index()
     {
-        $url = 'conjuntos/datosgenerales_1';
+        $url = 'v1/conjuntos/datosgenerales_1';
         $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
         $conjuntos = $request->formatoRespuesta()->data;
 
         $data = compact('conjuntos');
+        dd($request->formatoRespuesta(), $request);
         return view('5_conjuntos.inicioConjuntos', $data);
     }
 
