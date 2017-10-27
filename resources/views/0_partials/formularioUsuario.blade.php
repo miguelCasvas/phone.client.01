@@ -76,6 +76,9 @@
             {{ Form::bsText('Teléfono Conjunto', 'telefono', $datosUsuario->telefono, ['disabled' => 'disabled'], false) }}
 
         </div>
+        <div class="col-xs-12 col-md-6">
+            {{Form::bsSelect('Extensiones', 'idExtension', [], null, [], true)}}
+        </div>
     </div>
     <div class="box-footer">
         <span class="text-muted"><small>(<i class="fa fa-asterisk" aria-hidden="true"></i>) {{trans('usuario.transversales.campoobligatorio')}}</small></span>

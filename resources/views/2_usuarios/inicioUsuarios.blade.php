@@ -137,19 +137,18 @@
                     var selectExtensiones = $('select[name="idExtension"]');
                     $(selectExtensiones).empty();
 
-
                     optionTag = $('<option>', {value: '', text: 'Selección'});
                     $(selectExtensiones).append(optionTag);
 
                     $(response.data).each(function(index, element){
 
                         statusDisabled = false;
-                        textOption = elementextension;
+                        textOption = element.extension;
 
-                        if(element.usuarioAsignado !== null){
+                        /*if(element.usuarioAsignado !== null){
                             statusDisabled = true;
                             textOption += ' (Asignada)';
-                        }
+                        }*/
 
                         optionTag = $('<option>', {value: element.id_extension, text: textOption, disabled:statusDisabled});
                         $(selectExtensiones).append(optionTag);

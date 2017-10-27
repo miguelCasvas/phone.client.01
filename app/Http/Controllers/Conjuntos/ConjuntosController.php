@@ -176,10 +176,11 @@ class ConjuntosController extends Controller
      */
     public function listadoExtensionesPorConjunto($idConjunto)
     {
-        $url = 'conjuntos/datosgenerales_3';
+        $url = 'v1/conjuntos/'.$idConjunto.'/extensiones';
         $params = ['id_conjunto' => $idConjunto];
 
         $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url, $params));
+
         $extensiones = $request->formatoRespuesta();
 
         return response()->json($extensiones);

@@ -184,6 +184,7 @@ class UsuariosController extends Controller
         $url = 'usuarios/' . $idUsuario;
         $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
         $datosUsuario = $request->formatoRespuesta()->data;
+        //dd($datosUsuario);
         $data = compact('datosUsuario');
         return view('2_usuarios.usuario', $data);
 
