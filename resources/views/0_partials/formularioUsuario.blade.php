@@ -77,7 +77,7 @@
 
         </div>
         <div class="col-xs-12 col-md-6">
-            {{Form::bsSelect('Extensiones', 'idExtension', [], null, [], true)}}
+            {{Form::bsSelect('Extensiones', 'idExtension', [], [], [], true)}}
         </div>
     </div>
     <div class="box-footer">

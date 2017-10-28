@@ -61,7 +61,7 @@
                     @endforeach
                 </div>
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default pull-right">{{trans('usuario.transversales.btncrearextension')}}</button>
+                    <button type="submit" class="btn btn-default pull-right" disabled>{{trans('usuario.transversales.btncrearextension')}}</button>
                 </div>
             </div>
 
@@ -126,6 +126,7 @@
     <script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <script>
 
+
         var FormUsuarios = function(){};
 
         /*
@@ -164,10 +165,10 @@
                         statusDisabled = false;
                         textOption = element.extension;
 
-                        if(element.usuarioAsignado !== null){
-                            statusDisabled = true;
-                            textOption += ' (Asignada)';
-                        }
+                        //if(element.usuarioAsignado !== null){
+                        //    statusDisabled = true;
+                        //    textOption += ' (Asignada)';
+                        //}
 
                         optionTag = $('<option>', {value: element.id_extension, text: textOption, disabled:statusDisabled});
                         $(selectExtensiones).append(optionTag);

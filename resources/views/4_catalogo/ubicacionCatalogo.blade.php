@@ -15,7 +15,7 @@
     @endslot
 
 @section('contenidoPagina')
-    HOLA MUNDO
+    
 @endsection
 
 @push('stylesheets')

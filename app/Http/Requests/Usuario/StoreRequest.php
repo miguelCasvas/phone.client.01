@@ -8,15 +8,15 @@ use Illuminate\Http\JsonResponse;
 class StoreRequest extends FormRequest
 {
 
-        /**
-         * Determine if the user is authorized to make this request.
-         *
-         * @return bool
-         */
-        public function authorize()
-        {
-            return true;
-        }
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -33,9 +33,15 @@ class StoreRequest extends FormRequest
             'correo' => ['required', 'email'],
             'contrasenia' => ['required', 'confirmed'],
             'idRol' => ['required', 'numeric'],
+            'idConjunto' => ['required', 'numeric'],
+            'idExtension' => ['required', 'numeric'],
         ];
     }
 
+    /**
+     * @param array $errors
+     * @return mixed
+     */
     public function response(array $errors)
     {
         $redireccionamiento =

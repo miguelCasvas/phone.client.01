@@ -21,7 +21,6 @@ class ConjuntosController extends Controller
         $conjuntos = $request->formatoRespuesta()->data;
 
         $data = compact('conjuntos');
-        dd($request->formatoRespuesta(), $request);
         return view('5_conjuntos.inicioConjuntos', $data);
     }
 

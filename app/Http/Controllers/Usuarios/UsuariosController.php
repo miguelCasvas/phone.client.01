@@ -34,11 +34,23 @@ class UsuariosController extends Controller
         return view('2_usuarios.miUsuario', $datosView);
     }
 
+    /**
+     * @param StoreRequest $request
+     * @return RedirectResponse
+     */
     public function crearUsuario(StoreRequest $request)
     {
         $formulario = $request->all();
-        $_request = $this->clienteApi->peticionPOST('usuarios', $formulario);
+        $formulario['contrasenia'] = bcrypt($formulario['contrasenia']);
 
+        $_request = $this->clienteApi->peticionPOST('v1/usuarios', $formulario);
+        $response = $this->verificarErrorAPI($_request);
+
+        if ($response instanceof RedirectResponse)
+            return $response->with('formActivo', true);
+
+        $formulario = ['idExtension' => $request->get('idExtension'), 'idUsuario' => $response->formatoRespuesta()->id_usuario];
+        $_request = $this->clienteApi->peticionPOST('v1/usuarioextension', $formulario);
         $response = $this->verificarErrorAPI($_request);
 
         if ($response instanceof RedirectResponse)

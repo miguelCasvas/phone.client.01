@@ -43,7 +43,6 @@
                         <div class="box-body">
                             <div class="row">
                                 @php $contador = 0;
-                                    dd($conjuntos);
                                 @endphp
                                 @foreach($conjuntos as $conjunto)
                                 <div class="col-lg-6">
