@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Usuarios;
 
 use App\Http\Requests\Usuario\StoreRequest;
 use App\Http\Requests\Usuario\UpdateRequest;
+use App\Http\Requests\Usuario\UpdateRequestPW;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -41,16 +42,8 @@ class UsuariosController extends Controller
     public function crearUsuario(StoreRequest $request)
     {
         $formulario = $request->all();
-        $formulario['contrasenia'] = bcrypt($formulario['contrasenia']);
 
         $_request = $this->clienteApi->peticionPOST('v1/usuarios', $formulario);
-        $response = $this->verificarErrorAPI($_request);
-
-        if ($response instanceof RedirectResponse)
-            return $response->with('formActivo', true);
-
-        $formulario = ['idExtension' => $request->get('idExtension'), 'idUsuario' => $response->formatoRespuesta()->id_usuario];
-        $_request = $this->clienteApi->peticionPOST('v1/usuarioextension', $formulario);
         $response = $this->verificarErrorAPI($_request);
 
         if ($response instanceof RedirectResponse)
@@ -75,14 +68,6 @@ class UsuariosController extends Controller
 
         if ($response instanceof RedirectResponse)
             return $response->with('formActivo', true);
-
-        if (empty($formulario['idExtension']) == false){
-            $relacion = $this->relacionUsuarioExtension($formulario['idExtension']);
-
-            if ($relacion == false)
-                return back();
-
-        }
 
         \Alert::success('Actualización correcta!');
         return back();
@@ -132,6 +117,25 @@ class UsuariosController extends Controller
     }
 
     /**
+     * Actualizacion de contraseña por usuario
+     *
+     * @param UpdateRequestPW $requestPW
+     * @return RedirectResponse
+     */
+    public function actualizarContrasenia(updateRequestPW $requestPW, $idUsuario)
+    {
+        $this->idUsuario = $idUsuario;
+        $formulario = $this->filtrarCampos($requestPW->all());
+        $formulario['contrasenia'] = bcrypt($formulario['contrasenia']);
+        $formulario['contrasenia_confirmation'] = $formulario['contrasenia'];
+
+        $url = 'v1/usuarios/' . $idUsuario . '/cambioContrasenia';
+
+        return
+            $this->actualizarInformacion($url, $formulario);
+    }
+
+    /**
      * Realiza filtrado de campos no necesarios en la consulta
      *
      * @param $campos
@@ -140,18 +144,9 @@ class UsuariosController extends Controller
     public function filtrarCampos($campos)
     {
 
-        # Valida si la contraseña viene definida si es asi la serealiza para su envio
-        if (empty($campos['contrasenia']) == false){
-            $campos['password'] = Hash::make($campos['contrasenia']);
-            $campos['password_confirmation'] = $campos['password'];
-        }
-
         # Eliminacion de campos no necesarios
         unset($campos['_token']);
         unset($campos['_method']);
-        unset($campos['contrasenia']);
-        unset($campos['contrasenia_confirmation']);
-
         return $campos;
     }
 
@@ -205,22 +200,19 @@ class UsuariosController extends Controller
     /**
      * Insercion o actualizacion de extension para usuario
      */
-    private function relacionUsuarioExtension($idExtension)
+    public function relacionUsuarioExtension(Request $request, $idUsuario)
     {
-        $url = 'usuarioextension/' . $idExtension;
-        $request = $this->clienteApi->peticionGET($url);
-        $response = $this->verificarErrorAPI($request);
+        $formulario = $request->all();
 
-        if(empty($response->formatoRespuesta()->data) == false){
-            \Alert::error('Esta Extensión ya se encuentra asignada!');
-            return false;
-        }
+        $_request = $this->clienteApi->peticionPOST('v1/usuarios/' . $idUsuario . '/extensiones', $formulario);
+        $response = $this->verificarErrorAPI($_request);
 
-        $formulario['idExtension'] = $idExtension;
-        $formulario['idUsuario'] = $this->idUsuario;
+        if ($response instanceof RedirectResponse)
+            return $response->with('formActivo', true);
 
-        $request = $this->clienteApi->peticionPOST($url, $formulario);
-
-        return true;
+        \Alert::success('Se relaciono con exito la extensión al usuario!');
+        return back();
     }
+
+
 }

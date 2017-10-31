@@ -31,10 +31,8 @@ class StoreRequest extends FormRequest
             'nombres' => ['required'],
             'apellidos' => ['required'],
             'correo' => ['required', 'email'],
-            'contrasenia' => ['required', 'confirmed'],
             'idRol' => ['required', 'numeric'],
             'idConjunto' => ['required', 'numeric'],
-            'idExtension' => ['required', 'numeric'],
         ];
     }
 

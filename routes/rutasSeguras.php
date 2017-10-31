@@ -23,6 +23,10 @@ Route::put('miperfil/{idUsuario}', 'Usuarios\UsuariosController@actualizarMiInfo
 Route::get('usuarios', 'Usuarios\UsuariosController@listadoUsuarios')->name('getListadoUsuarios');
 # Info. Usuario
 Route::get('usuario/{idUsuario}','Usuarios\UsuariosController@usuario')->name('getUsuario');
+# Actualizacion contraseña usuarios
+Route::put('usuario/{idUsuario}/contrasenia', 'Usuarios\UsuariosController@actualizarContrasenia')->name('putUsuarioPW');
+# asociar extension con usuario
+Route::post('usuario/{idUsuario}/extension', 'Usuarios\UsuariosController@relacionUsuarioExtension')->name('postUsuarioExten');
 # Actualizacion info usuarios por Administrador
 Route::put('usuario/{idUsuario}', 'Usuarios\UsuariosController@actualizarInformacionUsuario')->name('putUsuario');
 # Creación de usuarios por Administrador
@@ -37,11 +41,12 @@ Route::get('inicioconjuntos', 'Conjuntos\ConjuntosController@index')->name('getI
 Route::get('conjunto/{idConjunto}/edicion', 'Conjuntos\ConjuntosController@vistaEdicionConjunto')->name('getEdicionConjunto')->where('idConjunto', '[0-9]+');
 Route::get('conjunto/{idConjunto}/eliminacion', 'Conjuntos\ConjuntosController@eliminarConjunto')->name('getEliminarConjunto')->where('idConjunto', '[0-9]+');
 Route::post('conjunto/{idConjunto}/edicion', 'Conjuntos\ConjuntosController@editarConjunto')->name('postEdicionConjunto')->where('idConjunto', '[0-9]+');
-Route::post('conjunto/cracion', 'Conjuntos\ConjuntosController@crearConjunto')->name('postCreacionConjunto');
+Route::post('conjunto/creacion', 'Conjuntos\ConjuntosController@crearConjunto')->name('postCreacionConjunto');
+
 
 Route::get('conjuntos', 'Conjuntos\ConjuntosController@listadoConjuntos')->name('listadoConjuntos');
 Route::get('conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@busquedaConjunto')->name('getConjunto')->where('idConjunto', '[0-9]+');
-Route::get('conjunto/extensiones/{idConjunto}', 'Conjuntos\ConjuntosController@listadoExtensionesPorConjunto')->name('getExtensionesConjunto');
+Route::get('conjunto/{idConjunto}/extensiones', 'Conjuntos\ConjuntosController@listadoExtensionesPorConjunto')->name('getExtensionesConjunto');
 Route::get('conjunto/extension_ft_usuario', 'Conjuntos\ConjuntosController@listadoExtensionUsuarioPorConjunto')->name('getExtensionFtUsuarioConjunto');
 
 /*

@@ -83,7 +83,7 @@
                             {{ csrf_field() }}
                             <table class="table table-hover table-striped">
                                 <tbody id="tbodyExtensiones">
-                                    <td align="center" class="text-muted"><h4>Estensiones</h4></td>
+                                    <td align="center" class="text-muted"><h4>Extensiones</h4></td>
                                 </tbody>
                             </table>
                         </form>
@@ -184,7 +184,7 @@
             var tbody = '';
             $(objExtensiones.nombreConjunto).html(response.data[0].nombre_conjunto);
 
-
+            console.log(response);
             $.each(response.data, function(pos, elemento){
 
                 tdNombres = (elemento.nombres === null) ? 'Sin Asignar' : '<b>' + elemento.nombres + '</b> - Apto #';

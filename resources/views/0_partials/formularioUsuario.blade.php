@@ -4,6 +4,18 @@
     {{ $metodo or ''}}
     <div class="box-header with-border">
         <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">{{trans('usuario.transversales.usuario')}}</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <div class="btn-group">
+                <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                    <i class="fa fa-wrench"></i></button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#" data-toggle="modal" data-target="#ModalPW">{{trans('usuario.transversales.cambioPw')}}</a></li>
+                    <li class="divider"></li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="box-body row">
         <div class="col-xs-12 col-md-6">
@@ -49,12 +61,6 @@
                 )
              }}
 
-            {{-- CONTRASEÑA --}}
-            {{ Form::bsPassword(trans('usuario.transversales.contraseña'), 'contrasenia', [ 'placeholder'=> '*******'], true) }}
-
-            {{-- CONTRASEÑA --}}
-            {{ Form::bsPassword(trans('usuario.transversales.confirmacioncontraseña'), 'contrasenia_confirmation', [ 'placeholder'=> '*******'], true) }}
-
         </div>
     </div>
     <div class="box-header with-border">
@@ -69,15 +75,13 @@
                 {{ Form::bsText('Conjunto Residencial', 'nombreConjunto', $datosUsuario->nombre_conjunto, ['disabled' => 'disabled'], false) }}
                 <input type="hidden" value="{{$datosUsuario->id_conjunto}}" name="idConjunto">
             @endif
+        </div>
+        <div class="col-xs-12 col-md-6">
             {{-- DIRECCION CONJUNTO --}}
             {{ Form::bsText('Dirección Conjunto', 'direccion', $datosUsuario->direccion, ['disabled' => 'disabled'], false) }}
 
             {{-- TELEFONO CONJUNTO --}}
             {{ Form::bsText('Teléfono Conjunto', 'telefono', $datosUsuario->telefono, ['disabled' => 'disabled'], false) }}
-
-        </div>
-        <div class="col-xs-12 col-md-6">
-            {{Form::bsSelect('Extensiones', 'idExtension', [], [], [], true)}}
         </div>
     </div>
     <div class="box-footer">

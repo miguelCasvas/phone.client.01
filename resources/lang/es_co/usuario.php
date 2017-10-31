@@ -26,7 +26,9 @@ return [
         'permisos' => 'Permisos',
         'permiso' => 'Permiso',
         'modulo' => 'Módulo',
-
+        'cambioPw' => 'Cambio contraseña',
+        'tituloPW' => 'Cambio Contraseña usuario :usuario',
+        'tituloRelExten' => 'Relación de extensión con :usuario'
     ],
 
     'gestionusuarios' => [

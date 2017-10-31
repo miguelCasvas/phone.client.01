@@ -26,6 +26,9 @@ return [
         'permisos' => 'Permissions',
         'permiso' => 'Permission',
         'modulo' => 'Module',
+        'cambioPw' => 'Change password',
+        'tituloPW' => 'Change password user :usuario',
+        'tituloRelExten' => 'Relation extension with :usuario'
 
     ],
 

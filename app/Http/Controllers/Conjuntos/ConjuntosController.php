@@ -193,7 +193,7 @@ class ConjuntosController extends Controller
      */
     public function listadoExtensionUsuarioPorConjunto(Request $request)
     {
-        $url = 'conjuntos/datosgenerales_4';
+        $url = 'v1/conjuntos/datosgenerales_4';
         $params = $request->all();
         $_request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url, $params));
         $extensiones = $_request->formatoRespuesta();

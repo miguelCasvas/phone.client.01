@@ -30,10 +30,16 @@
             </div>
         </div>
 
+        <!--/.box (EXTENSIONES USUARIO) -->
         <div class="col-xs-12">
             <div class="box box-warning">
                 <div class="box-header with-border">
                     <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">{{trans('usuario.transversales.relacionextension')}}<span class="text-muted">(es)</span></h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="box-body row">
                     @foreach($datosUsuario->extensiones as $extension)
@@ -56,18 +62,17 @@
                                 </div>
                                 <!-- /.box-body -->
                             </div>
-{{--                            {{dump($extension)}}--}}
                         </div>
                     @endforeach
                 </div>
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-default pull-right" disabled>{{trans('usuario.transversales.btncrearextension')}}</button>
+                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#ModalExten">{{trans('usuario.transversales.btncrearextension')}}</button>
                 </div>
             </div>
 
         </div>
 
-        <!--/.box (FORMULARIO EDICION USUARIO) -->
+        <!--/.box (PERMISOS USUARIO) -->
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">
@@ -113,6 +118,20 @@
             </div>
         </div>
     </div>
+
+    <!-- ( FORMULARIO PARA ACTUALIZACION DE CONTRASEÑA ) -->
+    @component('0_partials.cambioContrasenia')
+        @slot('idUsuario', $datosUsuario->id_usuario)
+        @slot('nomUsuario', $datosUsuario->nombres)
+    @endcomponent
+
+    <!-- ( FORMULARIO PARA ACTUALIZACION DE CONTRASEÑA ) -->
+    @component('0_partials.relacionUsuarioExtension')
+        @slot('idUsuario', $datosUsuario->id_usuario)
+        @slot('nomUsuario', $datosUsuario->nombres)
+        @slot('idConjunto', $datosUsuario->id_conjunto)
+    @endcomponent
+
 @endsection
 
 @push('stylesheets')
@@ -125,7 +144,6 @@
     <script src="/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
     <script src="/plugins/input-mask/jquery.inputmask.extensions.js"></script>
     <script>
-
 
         var FormUsuarios = function(){};
 
@@ -148,39 +166,8 @@
 
                 var response_1 = response;
 
-                /*
-                 * Consulta de extensiones del conjunto seleccionado
-                 */
-                $.get('{{route('getExtensionesConjunto', [null])}}/' + response.data.id_conjunto, function(response){
-
-                    var selectExtensiones = $('select[name="idExtension"]');
-                    $(selectExtensiones).empty();
-
-
-                    optionTag = $('<option>', {value: '', text: 'Selección'});
-                    $(selectExtensiones).append(optionTag);
-
-                    $(response.data).each(function(index, element){
-
-                        statusDisabled = false;
-                        textOption = element.extension;
-
-                        //if(element.usuarioAsignado !== null){
-                        //    statusDisabled = true;
-                        //    textOption += ' (Asignada)';
-                        //}
-
-                        optionTag = $('<option>', {value: element.id_extension, text: textOption, disabled:statusDisabled});
-                        $(selectExtensiones).append(optionTag);
-                    });
-
-                    $('input[name="direccion"]').val(response_1.data.direccion);
-                    $('input[name="telefono"]').val(response_1.data.telefono);
-                }).
-                fail(function(){
-                    swal ( "{{trans('generales.sweet_alert.error.titulo')}}" ,  "{{trans('generales.sweet_alert.error.texto')}}" ,  "error" );
-                    return null;
-                });
+                $('input[name="direccion"]').val(response_1.data.direccion);
+                $('input[name="telefono"]').val(response_1.data.telefono);
 
             }).
             fail(function(){
@@ -188,17 +175,29 @@
             });
         };
 
+    </script>
+    <!-- cambio PW -->
+    @yield('scriptPW')
+    <!-- Relacion Extension-->
+    @yield('scriptRelExten')
+
+    <script>
         $(function () {
 
             var objFormUsuario = new FormUsuarios();
+            var objFormExten = new RelExtesion();
+
+
             selectConjunto = $('select[name="idConjunto"]');
 
             $(selectConjunto).change(function(){
                 objFormUsuario.selectConjunto($(this).val());
+                objFormExten.busquedaExten($(this).val());
             });
 
             // Inicializar vlrs si viene por defecto el conjunto
             objFormUsuario.selectConjunto($(selectConjunto).val());
+            objFormExten.busquedaExten({{$datosUsuario->id_conjunto}});
 
             //Money Euro
             $('[data-mask]').inputmask();
