@@ -31,7 +31,7 @@ class ExtensionesController extends Controller
     {
 
         if ($request->has('extension') == false){
-            \Alert::success('Por favor, seleccione una o mas extensiones para desasociar');
+            \Alert::warning('Por favor, seleccione una o mas extensiones para desasociar');
             return back();
         }
 
@@ -52,7 +52,7 @@ class ExtensionesController extends Controller
         }
 
         if (empty($idsUsuarioExtension)){
-            \Alert::error('Por favor, seleccione una o mas extensiones con relación a usuarios');
+            \Alert::warning('Por favor, seleccione una o mas extensiones con relación a usuarios');
             return back();
         }
 
@@ -62,6 +62,26 @@ class ExtensionesController extends Controller
         }
 
         \Alert::success('Eliminación de relacion(es) Correcta');
+        return back();
+
+    }
+
+    public function eliminarExtension(Request $request)
+    {
+        $extensiones = $request->get('extensiones');
+
+        # Validar si no viene ninguna extension a eliminar
+        if (empty($extensiones)){
+            \Alert::warning('Por favor, seleccione una o mas extensiones para eliminar');
+            return back();
+        }
+
+        foreach ($extensiones as $extension) {
+            $url = 'v1/extensiones/' . $extension;
+            $this->verificarErrorAPI($this->clienteApi->peticionDELETE($url));
+        }
+
+        \Alert::success('Eliminación de extension(es) Correcta!');
         return back();
 
     }

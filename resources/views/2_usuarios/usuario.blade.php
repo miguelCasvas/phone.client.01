@@ -43,26 +43,30 @@
                 </div>
                 <div class="box-body row">
                     @foreach($datosUsuario->extensiones as $extension)
-                        <div class="col-lg-4">
-                            <div class="box box-solid">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Extensión <span class="text-primary">{{$extension->extension}}</span></h3>
+                        <form action="{{route('delUsuarioExten', [$datosUsuario->id_usuario, $extension->id_extension])}}" method="post">
+                            {{method_field('delete')}}
+                            {{csrf_field()}}
+                            <div class="col-lg-4">
+                                <div class="box box-solid">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Extensión <span class="text-primary">{{$extension->extension}}</span></h3>
 
-                                    <div class="box-tools">
-                                        <button type="button" class="btn btn-box-tool" title="Eliminar Extensión {{$extension->extension}}"><i class="fa fa-trash-o text-danger"></i>
-                                        </button>
+                                        <div class="box-tools">
+                                            <button type="submit" class="btn btn-box-tool" title="Eliminar Extensión {{$extension->extension}}"><i class="fa fa-trash-o text-danger"></i>
+                                            </button>
+                                        </div>
                                     </div>
+                                    <div class="box-body no-padding" style="">
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Conjunto: <strong>{{ $extension->nombre_conjunto }}</strong></a></li>
+                                            <li>Dirección: {{$extension->direccion}}</li>
+                                            <li>Telefóno: {{$extension->telefono}}</li>
+                                        </ul>
+                                    </div>
+                                    <!-- /.box-body -->
                                 </div>
-                                <div class="box-body no-padding" style="">
-                                    <ul class="nav nav-pills nav-stacked">
-                                        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Conjunto: <strong>{{ $extension->nombre_conjunto }}</strong></a></li>
-                                        <li>Dirección: {{$extension->direccion}}</li>
-                                        <li>Telefóno: {{$extension->telefono}}</li>
-                                    </ul>
-                                </div>
-                                <!-- /.box-body -->
                             </div>
-                        </div>
+                        </form>
                     @endforeach
                 </div>
                 <div class="box-footer">

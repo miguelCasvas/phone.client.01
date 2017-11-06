@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Usuarios;
 
+use App\Http\Controllers\Extensiones\ExtensionesController;
 use App\Http\Requests\Usuario\StoreRequest;
 use App\Http\Requests\Usuario\UpdateRequest;
 use App\Http\Requests\Usuario\UpdateRequestPW;
@@ -243,5 +244,20 @@ class UsuariosController extends Controller
         return back();
     }
 
+    /**
+     * Eliminación de extension por usuario (mis extensiones) ó por usuario admin | super admin
+     *
+     * @param Request $request
+     * @param $idUsuario
+     * @param $idExtension
+     * @return RedirectResponse
+     */
+    public function eliminarRelExtension(Request $request, $idUsuario, $idExtension)
+    {
+        $newRequest = $request->duplicate(['extensiones' => [$idExtension]]);
+        $response = (new ExtensionesController())->eliminarExtension($newRequest);
+
+        return $response;
+    }
 
 }

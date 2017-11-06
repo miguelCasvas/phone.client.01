@@ -27,6 +27,7 @@ Route::get('usuario/{idUsuario}','Usuarios\UsuariosController@usuario')->name('g
 Route::put('usuario/{idUsuario}/contrasenia', 'Usuarios\UsuariosController@actualizarContrasenia')->name('putUsuarioPW');
 # asociar extension con usuario
 Route::post('usuario/{idUsuario}/extension', 'Usuarios\UsuariosController@relacionUsuarioExtension')->name('postUsuarioExten');
+Route::delete('usuario/{idUsuario}/extension/{idExtension}', 'Usuarios\UsuariosController@eliminarRelExtension')->name('delUsuarioExten');
 # Actualizacion info usuarios por Administrador
 Route::put('usuario/{idUsuario}', 'Usuarios\UsuariosController@actualizarInformacionUsuario')->name('putUsuario');
 # Creación de usuarios por Administrador
