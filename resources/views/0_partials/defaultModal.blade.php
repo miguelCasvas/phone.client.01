@@ -12,6 +12,7 @@
                 {{ $slot }}
             </div>
             <div class="modal-footer">
+                {!! $btnsAdd or '' !!}
                 <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" id="{{$idBtnClose or ''}}">
                     {{$textBtnCancel or 'Cancelar'}}</button>
 

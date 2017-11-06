@@ -32,6 +32,11 @@ class HandlerErrores
                             $objHandler->erroresFormularios($erroresPeticion, $url);
                     break;
 
+                case 'Register Exist in the system':
+                        return
+                            $objHandler->duplicidadEnRegistro($erroresPeticion, $url);
+                    break;
+
                 # Registro no encontrado
                 case 'Id Not Found':
 
@@ -67,6 +72,22 @@ class HandlerErrores
 
     }
 
+    /**
+     * Control de errores para cuando se genera una respuesta error MYSQL - 23000
+     *
+     * @param array $errores
+     * @param $url
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    public function duplicidadEnRegistro(array $errores, $url)
+    {
+        $redireccion = ($url instanceof RedirectResponse) ? $url : redirect($url);
+        return $redireccion
+            ->withInput()
+            ->withErrors($errores);
+
+    }
+    
     public function errorRegistroNoEncontrado()
     {
 

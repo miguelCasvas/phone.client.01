@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\Catalogos\UbicacionCatalogoController;
 use App\Http\Controllers\Conjuntos\ConjuntosController;
 use App\Http\Controllers\Roles\RolesController;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\ServiceProvider;
+use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 
 class ComposerBlades extends ServiceProvider
 {
@@ -25,6 +27,8 @@ class ComposerBlades extends ServiceProvider
         $this->composerConjunto();
 
         $this->composerGeograficos();
+
+        $this->composerUbicacionCatalogo();
     }
 
     /**
@@ -252,5 +256,43 @@ class ComposerBlades extends ServiceProvider
         });
     }
 
+    /**
+     * Vlrs pre-cargar para el modulo ubicacion Catalogos
+     */
+    private function composerUbicacionCatalogo()
+    {
+        view()->composer('4_catalogo.ubicacionCatalogo', function($view){
+            $conjuntoSelected = null;
+            $catalogo = [];
+            $contentTdUbicacion = '<td align="center" class="text-muted"><h4>Ubicaciones</h4></td>';
+            $idCatalogo = null;
+            $scriptModalUbicCat = '';
 
+            # Si por url llega como parametro el id del conjunto
+            if (\request()->has('idConjunto')){
+                $conjuntoSelected = \request()->get('idConjunto');
+                $catalogo = (new ConjuntosController())->listadoCatalogosPorConjunto(\request(), $conjuntoSelected)->data;
+
+            }
+
+            # Si por url llega como parametro el id del catalogo
+            if (\request()->has('idCatalogo')){
+                $newRequest = \request()->duplicate(['id_catalogo' => \request()->get('idCatalogo')]);
+                $contentTdUbicacion = (new UbicacionCatalogoController())->renderUbicaciones($newRequest);
+                $idCatalogo = \request()->get('idCatalogo');
+            }
+
+            # Si se generan errores en la actualizacion de la ubicación
+            if (session('formUbicCat_Activo') == true)
+                $scriptModalUbicCat = '$("#ModalUbicacionCat").modal()';
+
+            $view
+                ->with('conjuntoSelected', $conjuntoSelected)
+                ->with('catalogo', $catalogo)
+                ->with('contentTdUbicacion', $contentTdUbicacion)
+                ->with('idCatalogo', $idCatalogo)
+                ->with('scriptModalUbicCat', $scriptModalUbicCat);
+
+        });
+    }
 }

@@ -24,7 +24,7 @@ class ExtensionesController extends Controller
 
     public function getListadoConjuntos()
     {
-        return (new ConjuntosController())->listadoConjuntos()->data;
+        return (new ConjuntosController())->listadoConjuntos(\request())->data;
     }
 
     public function eliminarRelExtensiones(Request $request)

@@ -46,6 +46,15 @@ class CatalogosController extends Controller
         return view('4_catalogo/inicioCatalogo', $data);
     }
 
+    public function listadoCatalogoPorConjunto(Request $request, $idConjunto)
+    {
+        $url = 'v1/conjuntos/' . $idConjunto . '/catalogos';
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
+        $catalogos = $request->formatoRespuesta();
+
+        return $catalogos;
+    }
+
     public function crearCatalogo(StoreRequest $request)
     {
         $formulario = $request->all();

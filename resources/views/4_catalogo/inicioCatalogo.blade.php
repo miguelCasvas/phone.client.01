@@ -54,7 +54,14 @@
                                                         data-idcatalogo = "{{$_elemento['id_catalogo']}}"
                                                         data-catalogo = "{{$_elemento['nombre_catalogo']}}"
                                                 ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                                <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="{{trans('catalogo.catalogo.ubicaciones')}}" id=""><i class="fa fa-map-marker"></i></button>
+                                                <button
+                                                        type="button"
+                                                        class="btn btn-default btn-sm btn-linkUbicacion"
+                                                        data-toggle="tooltip"
+                                                        data-placement="top"
+                                                        title="{{trans('catalogo.catalogo.ubicaciones')}}"
+                                                        data-href-ubic="{{route('getUbicacionCatalogo', ['porPagina' => 1000, 'idConjunto' => $_elemento['id_conjunto'], 'idCatalogo' => $_elemento['id_catalogo']])}}"
+                                                        id=""><i class="fa fa-map-marker"></i></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -87,10 +94,6 @@
     @endpush
 
     @push('scriptsPostLoad')
-        <!-- InputMask -->
-        <script src="{{asset('plugins/input-mask/jquery.inputmask.js')}}"></script>
-        <script src="{{asset('plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
-        <script src="{{asset('plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
         <script>
 
             var FormularioCatalogo = function(){
@@ -183,6 +186,11 @@
                 objFormCC.validarUbicacionCatalogo(elementCheck, btn);
             };
 
+            FormularioCatalogo.prototype.redireccionUbicacion=function(btn){
+                urlUbicacion = $(btn).data('href-ubic');
+                window.location.href = urlUbicacion;
+            };
+
             var objFormCC = new FormularioCatalogo();
 
             $(document).ready(function(){
@@ -210,6 +218,10 @@
                 $('.btn-editarCatalogo').click(function(){
                     $(this).blur();
                     objFormCC.editarCatalogo($(this));
+                });
+
+                $('.btn-linkUbicacion').click(function(){
+                    objFormCC.redireccionUbicacion($(this));
                 });
 
                 {!! $scriptModal !!}

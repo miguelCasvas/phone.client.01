@@ -18,50 +18,50 @@
         </div>
     </div>
     <div class="box-body row">
-        <div class="col-xs-12 col-md-6">
-            {{-- IDENTIFICACION --}}
-            {{ Form::bsText(trans('usuario.transversales.identificacion'), 'identificacion', $datosUsuario->identificacion, [], true) }}
+            <div class="col-xs-12 col-lg-6">
+                {{-- IDENTIFICACION --}}
+                {{ Form::bsText(trans('usuario.transversales.identificacion'), 'identificacion', $datosUsuario->identificacion, [], true) }}
 
-            {{-- NOMBRES --}}
-            {{ Form::bsText(trans('usuario.transversales.nombres'), 'nombres', $datosUsuario->nombres, [], true) }}
+                {{-- NOMBRES --}}
+                {{ Form::bsText(trans('usuario.transversales.nombres'), 'nombres', $datosUsuario->nombres, [], true) }}
 
-            {{-- APELLIDOS --}}
-            {{ Form::bsText(trans('usuario.transversales.apellidos'), 'apellidos', $datosUsuario->apellidos, [], true) }}
+                {{-- APELLIDOS --}}
+                {{ Form::bsText(trans('usuario.transversales.apellidos'), 'apellidos', $datosUsuario->apellidos, [], true) }}
 
-            {{-- FECHA NACIMIENTO --}}
-            {{ Form::bsTextIcon(
-                    trans('usuario.transversales.fechaNacimiento'),
-                    'fechaNacimiento',
-                    $datosUsuario->fecha_nacimiento,
-                    ['data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask' => ''],
-                    'fa-calendar',
-                    true
-                )
-             }}
+                {{-- FECHA NACIMIENTO --}}
+                {{ Form::bsTextIcon(
+                        trans('usuario.transversales.fechaNacimiento'),
+                        'fechaNacimiento',
+                        $datosUsuario->fecha_nacimiento,
+                        ['data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask' => ''],
+                        'fa-calendar',
+                        true
+                    )
+                 }}
 
-        </div>
-        <div class="col-xs-12 col-md-6">
+            </div>
+            <div class="col-xs-12 col-md-6">
 
-            {{-- ROL --}}
-            @if($campos->rol->select)
-                {{Form::bsSelect(trans('usuario.transversales.rol'), 'idRol', $campos->rol->opc, $datosUsuario->id_rol, [], true)}}
-            @else
-                {{ Form::bsText('Rol', 'rol', $datosUsuario->nombre_rol, ['disabled' => 'disabled'], false) }}
-                <input name="idRol" type="hidden" value="{{$datosUsuario->id_rol}}">
-            @endif
+                {{-- ROL --}}
+                @if($campos->rol->select)
+                    {{Form::bsSelect(trans('usuario.transversales.rol'), 'idRol', $campos->rol->opc, $datosUsuario->id_rol, [], true)}}
+                @else
+                    {{ Form::bsText('Rol', 'rol', $datosUsuario->nombre_rol, ['disabled' => 'disabled'], false) }}
+                    <input name="idRol" type="hidden" value="{{$datosUsuario->id_rol}}">
+                @endif
 
-            {{-- CORREO --}}
-            {{ Form::bsTextIcon(
-                    trans('usuario.transversales.correo'),
-                    'correo',
-                    $datosUsuario->email,
-                    ['readonly' => $campos->correo->readOnly],
-                    'fa-envelope-o',
-                    false
-                )
-             }}
+                {{-- CORREO --}}
+                {{ Form::bsTextIcon(
+                        trans('usuario.transversales.correo'),
+                        'correo',
+                        $datosUsuario->email,
+                        ['readonly' => $campos->correo->readOnly],
+                        'fa-envelope-o',
+                        false
+                    )
+                 }}
 
-        </div>
+            </div>
     </div>
     <div class="box-header with-border">
         <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">{{trans('conjunto')}}</h3>

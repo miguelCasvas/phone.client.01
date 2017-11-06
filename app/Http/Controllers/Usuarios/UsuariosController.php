@@ -110,7 +110,7 @@ class UsuariosController extends Controller
     {
         $this->idUsuario = $idUsuario;
         $formulario = $this->filtrarCampos($request->all());
-        $url = 'usuarios/' . $idUsuario;
+        $url = 'v1/usuarios/' . $idUsuario;
 
         return
             $this->actualizarInformacion($url, $formulario);
@@ -202,15 +202,44 @@ class UsuariosController extends Controller
      */
     public function relacionUsuarioExtension(Request $request, $idUsuario)
     {
-        $formulario = $request->all();
+        $formulario = array('idEstado' => 1, 'idConjunto' => (int) $request->get('idConjunto'));
+
+        $ubicCat = $request->get('ubicCatalogo');
+        $numExt = $request->get('numExt');
+        $extension = '';
+
+        for ($i = 0; $i <= count($ubicCat); $i++){
+            if (empty($ubicCat[$i]) == false){
+                $formulario['idUbicacionCatalogo_' . ($i+1)] = (int) $ubicCat[$i];
+                $extension .= $numExt[$i];
+            }
+        }
+
+        $formulario['extension'] = $extension;
+
+        $_request = $this->clienteApi->peticionPOST('v1/extensiones', $formulario);
+        $response = $this->verificarErrorAPI($_request);
+
+        if ($response instanceof RedirectResponse){
+
+            if ($response->getSession()->get('errors')->has('extDupli'))
+                \Alert::error(current($response->getSession()->get('errors')->get('extDupli')));
+            else
+                \Alert::error('Error al crear la extension');
+
+            return $response->with('formActivo', true);
+        }
+
+        $formulario = array();
+        $formulario['idExtension'] = $_request->formatoRespuesta()->data->id_extension;
 
         $_request = $this->clienteApi->peticionPOST('v1/usuarios/' . $idUsuario . '/extensiones', $formulario);
         $response = $this->verificarErrorAPI($_request);
-
         if ($response instanceof RedirectResponse)
             return $response->with('formActivo', true);
 
         \Alert::success('Se relaciono con exito la extensión al usuario!');
+
         return back();
     }
 

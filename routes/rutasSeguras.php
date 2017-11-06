@@ -47,6 +47,9 @@ Route::post('conjunto/creacion', 'Conjuntos\ConjuntosController@crearConjunto')-
 Route::get('conjuntos', 'Conjuntos\ConjuntosController@listadoConjuntos')->name('listadoConjuntos');
 Route::get('conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@busquedaConjunto')->name('getConjunto')->where('idConjunto', '[0-9]+');
 Route::get('conjunto/{idConjunto}/extensiones', 'Conjuntos\ConjuntosController@listadoExtensionesPorConjunto')->name('getExtensionesConjunto');
+
+Route::get('conjunto/{idConjunto}/catalogos', 'Conjuntos\ConjuntosController@renderSelectsCatalogo')->name('getSelectsCatalogosConjunto');
+
 Route::get('conjunto/extension_ft_usuario', 'Conjuntos\ConjuntosController@listadoExtensionUsuarioPorConjunto')->name('getExtensionFtUsuarioConjunto');
 
 /*
@@ -69,6 +72,8 @@ Route::post('catalogo/{idCatalogo}', 'Catalogos\CatalogosController@editarCatalo
  * Rutas para procesos sobre Ubicacion catalogos
  */
 Route::get('ubicacioncatalogo', 'Catalogos\UbicacionCatalogoController@index')->name('getUbicacionCatalogo');
+Route::post('ubicacioncatalogo','Catalogos\UbicacionCatalogoController@crearUbicacionCatalogo')->name('postCrearUbicacionCatalogo');
+Route::post('ubicacioncatalogo/{idUbic}','Catalogos\UbicacionCatalogoController@editarUbicacionCatalogo')->name('postUbicacionCatalogo');
 Route::get('ubicacioncatalogofiltros', 'Catalogos\UbicacionCatalogoController@ubicacionCatalogoFiltrado')->name('getUbicacionCatalogoFiltrado');
 
 /*

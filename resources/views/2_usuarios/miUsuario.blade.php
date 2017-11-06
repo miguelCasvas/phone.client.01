@@ -12,7 +12,7 @@
         <div class="row">
 
             {{-- INCLUSION DE FORMULARIO USUARIO --}}
-            <div class="col-xs-12">
+            <div class="col-lg-12">
                 <div class="box box-primary">
 
                     {{-- FORMULARIO --}}
@@ -28,7 +28,8 @@
                 </div>
             </div>
 
-            <div class="col-xs-12">
+            <!--/.box (EXTENSIONES USUARIO) -->
+            <div class="col-lg-12">
                 <div class="box box-warning">
                     <div class="box-header with-border">
                         <i class="fa fa-tag" aria-hidden="true"></i> <h3 class="box-title">{{trans('usuario.transversales.relacionextension')}}<span class="text-muted">(es)</span></h3>
@@ -71,6 +72,7 @@
 
             </div>
 
+            <!--/.box (PERMISOS USUARIO) -->
             <div class="col-xs-12 col-md-6">
                 <div class="box">
                     <div class="box-header with-border">
@@ -192,9 +194,25 @@
 
                 selectConjunto = $('select[name="idConjunto"]');
 
+                // Inicializar vlrs si viene por defecto el conjunto
+                objFormUsuario.selectConjunto($(selectConjunto).val());
+                objFormExten.busquedaExten({{$datosUsuario->id_conjunto}});
+
                 $(selectConjunto).change(function(){
                     objFormUsuario.selectConjunto($(this).val());
                     objFormExten.busquedaExten($(this).val());
+                });
+
+                $('#ModalExten').delegate('.selectCat', 'change', function(){
+                    objFormExten.busquedaUbicCat($(this));
+                });
+
+                $('#ModalExten').delegate('.selectUbicCat', 'change', function(){
+                    objFormExten.defineSegmentoExt($(this));
+                });
+
+                $('#ModalExten').delegate('#btnClearFormUbic', 'click', function(){
+                    objFormExten.limpiarForm();
                 });
 
                 // Inicializar vlrs si viene por defecto el conjunto

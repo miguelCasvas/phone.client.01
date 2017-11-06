@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Conjuntos;
 
+use App\Http\Controllers\Catalogos\CatalogosController;
 use App\Http\Requests\Conjunto\StoreRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -54,8 +55,6 @@ class ConjuntosController extends Controller
         $_request = $this->clienteApi->peticionPUT($url, $formulario);
         $response = $this->verificarErrorAPI($_request);
 
-        $response = $this->verificarErrorAPI($_request);
-
         if ($response instanceof RedirectResponse)
             return $response;
 
@@ -75,8 +74,6 @@ class ConjuntosController extends Controller
         $formulario = $request->all();
 
         $_request = $this->clienteApi->peticionPOST($url, $formulario);
-        $response = $this->verificarErrorAPI($_request);
-
         $response = $this->verificarErrorAPI($_request);
 
         if ($response instanceof RedirectResponse)
@@ -106,10 +103,11 @@ class ConjuntosController extends Controller
      *
      * @return mixed
      */
-    public function listadoConjuntos()
+    public function listadoConjuntos(Request $request)
     {
         $url = 'conjunto';
-        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
+        $params = $request->all();
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url, $params));
         $conjuntos = $request->formatoRespuesta();
 
         return $conjuntos;
@@ -158,7 +156,7 @@ class ConjuntosController extends Controller
      */
     public function listadoConjuntosSelect()
     {
-        $conjuntos = $this->listadoConjuntos()->data;
+        $conjuntos = $this->listadoConjuntos(\request())->data;
         $arregloConjuntos[] = 'Selección';
 
         foreach ($conjuntos as $conjunto)
@@ -199,5 +197,27 @@ class ConjuntosController extends Controller
         $extensiones = $_request->formatoRespuesta();
 
         return response()->json($extensiones);
+    }
+
+    public function listadoCatalogosPorConjunto(Request $request, $idConjunto)
+    {
+        $catalogos = (new CatalogosController())->listadoCatalogoPorConjunto($request, $idConjunto);
+
+        return $catalogos;
+
+    }
+
+    public function renderSelectsCatalogo(Request $request, $idConjunto)
+    {
+        $catalogo = $this->listadoCatalogosPorConjunto($request, $idConjunto)->data;
+        $grupoSelect = json_decode(json_encode($catalogo), true);
+        $options = array(null => 'Selección');
+
+        foreach ($grupoSelect as $elemento)
+            $options[$elemento['id_catalogo']] = $elemento['nombre_catalogo'];
+
+        $data = compact('catalogo', 'options');
+
+        return view('0_partials.segmentosExtension', $data)->render();
     }
 }

@@ -73,7 +73,7 @@
         </div>
 
         <!--/.box (PERMISOS USUARIO) -->
-        <div class="col-md-6">
+        <div class="col-xs-12 col-md-6">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">{{trans('usuario.transversales.permisos')}}</h3>
@@ -125,7 +125,7 @@
         @slot('nomUsuario', $datosUsuario->nombres)
     @endcomponent
 
-    <!-- ( FORMULARIO PARA ACTUALIZACION DE CONTRASEÑA ) -->
+    <!-- ( FORMULARIO PARA CREACION DE EXTENSION ) -->
     @component('0_partials.relacionUsuarioExtension')
         @slot('idUsuario', $datosUsuario->id_usuario)
         @slot('nomUsuario', $datosUsuario->nombres)
@@ -195,6 +195,17 @@
                 objFormExten.busquedaExten($(this).val());
             });
 
+            $('#ModalExten').delegate('.selectCat', 'change', function(){
+                objFormExten.busquedaUbicCat($(this));
+            });
+
+            $('#ModalExten').delegate('.selectUbicCat', 'change', function(){
+                objFormExten.defineSegmentoExt($(this));
+            });
+
+            $('#ModalExten').delegate('#btnClearFormUbic', 'click', function(){
+                objFormExten.limpiarForm();
+            });
             // Inicializar vlrs si viene por defecto el conjunto
             objFormUsuario.selectConjunto($(selectConjunto).val());
             objFormExten.busquedaExten({{$datosUsuario->id_conjunto}});
