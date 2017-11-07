@@ -236,7 +236,7 @@
                 $('#' + idTablaCat).attr('style', 'cursor: pointer');
                 $('#' + idTablaCat).find('.fa-sort').removeClass('fa-sort').addClass('fa-check');
 
-                $.get('{{route('getOrdenUbicacionCatalogos')}}?' + posiciones, function(response){
+                $.get('{{route('getOrdenCatalogos')}}?' + posiciones, function(response){
                     console.log(response);
                 });
 

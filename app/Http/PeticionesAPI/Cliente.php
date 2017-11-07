@@ -161,7 +161,9 @@ class Cliente
             return $this->exception;
 
         switch ($tpo){
-            case '...':
+            case 'Array':
+                    $datosPeticion =
+                        json_decode( (string) $this->respuesta->getBody(), true );
                 break;
 
             case 'JSON':

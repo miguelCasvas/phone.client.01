@@ -68,6 +68,7 @@ Route::get('catalogos', 'Catalogos\CatalogosController@index')->name('getModuloC
 Route::post('catalogos/eliminacion', 'Catalogos\CatalogosController@eliminarCatalogo')->name('postEliminacionCatalogo');
 Route::post('catalogo', 'Catalogos\CatalogosController@crearCatalogo')->name('postCrearCatalogo');
 Route::post('catalogo/{idCatalogo}', 'Catalogos\CatalogosController@editarCatalogo')->name('postEditarCatalogo');
+Route::get('catalogos/orden', 'Catalogos\CatalogosController@ordenCatalogo')->name('getOrdenCatalogos');
 
 /*
  * Rutas para procesos sobre Ubicacion catalogos

@@ -109,8 +109,4 @@ class UbicacionCatalogoController extends Controller
         return back();
     }
 
-    public function ordenUbicacionCatalogo(Request $request)
-    {
-        return response()->json($request->all());
-    }
 }

@@ -16,7 +16,7 @@ class CatalogosController extends Controller
 
     private function listadoCatalogos()
     {
-        $url = 'catalogo';
+        $url = 'v1/catalogos';
         $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
         $catalogos = $request->formatoRespuesta();
 
@@ -120,6 +120,27 @@ class CatalogosController extends Controller
         \Alert::success('Catalogo(s) eliminado(s) correctamente!');
         return back();
 
+    }
+
+    /**
+     * Actualización del orden de los items del catalogo por conjunto
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ordenCatalogo(Request $request)
+    {
+        $itemsCatalogo = $request->get('catalogo');
+        $itemsCatalogoEnvio = array();
+
+        foreach ($itemsCatalogo as $orden => $item) {
+            $itemsCatalogoEnvio["ordenCatalogo"][$item] = ($orden + 1);
+        }
+        $_request = $this->clienteApi->peticionPOST('v1/catalogos/orden', $itemsCatalogoEnvio);
+        $response = $this->verificarErrorAPI($_request);
+
+        return response()->json($response->formatoRespuesta('Array'));
     }
 
 }
