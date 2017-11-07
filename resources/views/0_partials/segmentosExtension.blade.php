@@ -3,18 +3,18 @@
     PARA LA SELECCIÓN DE LA EXTENSIÓN POR UN USUARIO
 --}}
 <div class="row">
-    @for($i = 0; $i < count($catalogo); $i++)
+    @foreach($catalogo as $pos => $item)
         <div class="col-lg-4">
-            {!! Form::bsSelect('', 'catalogo[]', $options, null, ['data-select-ubic' => 'selectUbic_'.$i, 'class' => 'form-control selectCat'], false) !!}
+            {!! Form::bsText('', '', $item->nombre_catalogo, ['data-select-ubic' => 'selectUbic_'.$pos, 'disabled', 'id' => 'segmentExt'.$pos, 'class' => 'form-control selectCat'], false) !!}
+            <input type="hidden" name="catalogo[]" value="{{$item->id_catalogo}}">
         </div>
 
         <div class="col-lg-4">
-            {!! Form::bsSelect('', 'ubicCatalogo[]', [null => 'selección'], null, ['id' => 'selectUbic_'.$i, 'data-segment-ext' => 'segmentExt'.$i, 'class' => 'form-control selectUbicCat'], false) !!}
+            {!! Form::bsSelect('', 'ubicCatalogo[]', $optUbic[$item->id_catalogo], null, ['id' => 'selectUbic_'.$pos, 'data-segment-ext' => 'segmentExt'.$pos, 'class' => 'form-control selectUbicCat'], false) !!}
         </div>
 
         <div class="col-lg-4">
-            {!! Form::bsText('', 'numExt[]', null, ['placeholder' => 'segmento extensión', 'readonly', 'id' => 'segmentExt'.$i], false) !!}
+            {!! Form::bsText('', 'numExt[]', null, ['placeholder' => 'segmento extensión', 'readonly', 'id' => 'segmentExt'.$pos], false) !!}
         </div>
-        <div class="hidden-lg col-xs-12 primary"><hr></div>
-    @endfor
+    @endforeach
 </div>

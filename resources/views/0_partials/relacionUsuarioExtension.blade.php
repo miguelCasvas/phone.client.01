@@ -38,11 +38,10 @@
             rutaFinal = ruta.replace('%idConjunto%', idConjunto);
 
             $.get( rutaFinal , function(response){
-
                 $('#contentCatalago').html(response);
-
             }).
-            fail(function(){
+            fail(function(response){
+                console.log(response);
                 swal ( "{{trans('generales.sweet_alert.error.titulo')}}" ,  "{{trans('generales.sweet_alert.error.texto')}}" ,  "error" );
                 return null;
             });

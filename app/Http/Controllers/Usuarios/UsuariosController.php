@@ -185,14 +185,16 @@ class UsuariosController extends Controller
 
     /**
      * @param Request $request
-     * @param $idUsuario
+     * @param         $idUsuario
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function usuario(Request $request, $idUsuario)
     {
         $url = 'usuarios/' . $idUsuario;
         $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
         $datosUsuario = $request->formatoRespuesta()->data;
-        //dd($datosUsuario);
+
         $data = compact('datosUsuario');
         return view('2_usuarios.usuario', $data);
 

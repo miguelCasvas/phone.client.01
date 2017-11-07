@@ -122,9 +122,3 @@ Route::get('enconstruccion', function () {
  * Rutas para procesos Notificaciones
  */
 Route::get('inicionotificaciones', 'Notificaciones\NotificacionesController@index')->name('getInicioNotificaciones');
-
-
-Route::get('miInfo', function(){
-    abort(500, 'HOLA LA');
-    dd(Auth::user());
-});

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Conjuntos;
 
 use App\Http\Controllers\Catalogos\CatalogosController;
+use App\Http\Controllers\Catalogos\UbicacionCatalogoController;
 use App\Http\Requests\Conjunto\StoreRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -207,16 +208,37 @@ class ConjuntosController extends Controller
 
     }
 
+
+    /**
+     *
+     *
+     * @param Request $request
+     * @param         $idConjunto
+     *
+     * @return string
+     */
     public function renderSelectsCatalogo(Request $request, $idConjunto)
     {
         $catalogo = $this->listadoCatalogosPorConjunto($request, $idConjunto)->data;
-        $grupoSelect = json_decode(json_encode($catalogo), true);
-        $options = array(null => 'Selección');
+        $optUbic = [];
 
-        foreach ($grupoSelect as $elemento)
-            $options[$elemento['id_catalogo']] = $elemento['nombre_catalogo'];
+        foreach ($catalogo as $item) {
+            # Replica peticion cambiando los params del request
+            $newRequest = $request->duplicate(['id_catalogo' => $item->id_catalogo]);
+            //var_dump($newRequest);
 
-        $data = compact('catalogo', 'options');
+            # Se genera la busqueda de las ubicaciones de cada catalogo
+            //$ubicacionesCat = (new UbicacionCatalogoController())->ubicacionCatalogoFiltrado($newRequest);
+
+            //# Armando options de cada catalogo
+            //$optUbic[$item->id_catalogo][null] = 'Selección';
+            //foreach ($ubicacionesCat as $subItem) {
+            //    $optUbic[$item->id_catalogo][$subItem->id_ubicacion_catalogo] = $subItem->nombre_ubicacion_catalogo;
+            //}
+        }
+        return 'HOLA';
+
+        $data = compact('catalogo', 'optUbic');
 
         return view('0_partials.segmentosExtension', $data)->render();
     }
