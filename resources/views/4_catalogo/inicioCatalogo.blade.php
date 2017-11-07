@@ -29,8 +29,8 @@
             <div class="box-body row">
                 <form action="#" name="formCatalogo" method="post">
                     {{ csrf_field() }}
-                    <div class="col-lg-8 col-xs-12">
-                        <table class="table table-bordered table-hover">
+                    <div class="col-lg-12 col-xs-12">
+                        <table class="table table-bordered">
                             <thead>
                             <tr class="info">
                                 <th>{{trans('catalogo.catalogo.conjunto')}}</th>
@@ -39,33 +39,54 @@
                             </thead>
                             <tbody>
                             @foreach($arregloCatalogos as $elemento)
-                                <tr><td rowspan="{{count($elemento['catalogo']) + 1}}"><strong><u>{{$elemento['conjunto']}}</u></strong></td></tr>
-                                @foreach($elemento['catalogo'] as $_elemento)
-                                    <tr class="info">
-                                        <td>
-                                            <small><i class="fa  fa-check"></i></small> {{$_elemento['nombre_catalogo']}}
-                                            <input type="checkbox" name="catalogo_conjunto[{{$_elemento['id_conjunto']}}][{{$_elemento['id_catalogo']}}]" value="eliminar" style="display: none" class="checksEliminarCatalogo" data-idcatalogo="{{$_elemento['id_catalogo']}}">
-                                            <div class="btn-group btn-group-xs pull-right">
-                                                <button type="button" class="btn btn-default check-eliminarCatalogo" data-toggle="tooltip" data-placement="top" title="{{trans('catalogo.catalogo.seleccionareliminar')}}"><i class="fa fa-square-o" aria-hidden="true"></i></button>
-                                                <button
-                                                        type="button"
-                                                        class="btn btn-default btn-editarCatalogo"
-                                                        data-conjunto = "{{$_elemento['id_conjunto']}}"
-                                                        data-idcatalogo = "{{$_elemento['id_catalogo']}}"
-                                                        data-catalogo = "{{$_elemento['nombre_catalogo']}}"
-                                                ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
-                                                <button
-                                                        type="button"
-                                                        class="btn btn-default btn-sm btn-linkUbicacion"
-                                                        data-toggle="tooltip"
-                                                        data-placement="top"
-                                                        title="{{trans('catalogo.catalogo.ubicaciones')}}"
-                                                        data-href-ubic="{{route('getUbicacionCatalogo', ['porPagina' => 1000, 'idConjunto' => $_elemento['id_conjunto'], 'idCatalogo' => $_elemento['id_catalogo']])}}"
-                                                        id=""><i class="fa fa-map-marker"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                <tr>
+                                    <td>
+                                        <strong><u>{{$elemento['conjunto']}}</u></strong>
+                                        <button
+                                                class="btn btn-xs btn-primary pull-right btnOrdenarCatalogo"
+                                                type="button"
+                                                data-order="catalogo_{{$elemento['id_conjunto']}}">
+                                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></button>
+
+                                        <button
+                                                class="btn btn-xs btn-success pull-right btnConfirmarOrden hidden"
+                                                type="button"
+                                                data-order="catalogo_{{$elemento['id_conjunto']}}">
+                                            <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i></button>
+                                    </td>
+                                    <td>
+                                        <table class="table table-condensed">
+                                            <tbody id="catalogo_{{$elemento['id_conjunto']}}">
+                                            @foreach($elemento['catalogo'] as $_elemento)
+                                                <tr id="itemCatalogo_{{$_elemento['id_catalogo']}}">
+                                                    <td>
+                                                        <small><i class="fa  fa-check"></i></small> {{$_elemento['nombre_catalogo']}}
+                                                        <input type="checkbox" name="catalogo_conjunto[{{$_elemento['id_conjunto']}}][{{$_elemento['id_catalogo']}}]" value="eliminar" style="display: none" class="checksEliminarCatalogo" data-idcatalogo="{{$_elemento['id_catalogo']}}">
+                                                        <div class="btn-group btn-group-xs pull-right">
+                                                            <button type="button" class="btn btn-default check-eliminarCatalogo" data-toggle="tooltip" data-placement="top" title="{{trans('catalogo.catalogo.seleccionareliminar')}}"><i class="fa fa-square-o" aria-hidden="true"></i></button>
+                                                            <button
+                                                                    type="button"
+                                                                    class="btn btn-default btn-editarCatalogo"
+                                                                    data-conjunto = "{{$_elemento['id_conjunto']}}"
+                                                                    data-idcatalogo = "{{$_elemento['id_catalogo']}}"
+                                                                    data-catalogo = "{{$_elemento['nombre_catalogo']}}"
+                                                            ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                                            <button
+                                                                    type="button"
+                                                                    class="btn btn-default btn-sm btn-linkUbicacion"
+                                                                    data-toggle="tooltip"
+                                                                    data-placement="top"
+                                                                    title="{{trans('catalogo.catalogo.ubicaciones')}}"
+                                                                    data-href-ubic="{{route('getUbicacionCatalogo', ['porPagina' => 1000, 'idConjunto' => $_elemento['id_conjunto'], 'idCatalogo' => $_elemento['id_catalogo']])}}"
+                                                                    id=""><i class="fa fa-map-marker"></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>
@@ -94,6 +115,7 @@
     @endpush
 
     @push('scriptsPostLoad')
+        <script src="{{asset('bower_components/jquery-ui/jquery-ui.js')}}"></script>
         <script>
 
             var FormularioCatalogo = function(){
@@ -191,6 +213,35 @@
                 window.location.href = urlUbicacion;
             };
 
+            FormularioCatalogo.prototype.ordenCatalogo=function(btn){
+                idTablaCat = $(btn).data('order');
+
+                $(btn).addClass('hidden');
+                $(btn).next().removeClass('hidden');
+
+                $('#' + idTablaCat).sortable();
+                $('#' + idTablaCat).attr('style', 'cursor: row-resize');
+                $('#' + idTablaCat).find('.fa-check').removeClass('fa-check').addClass('fa-sort')
+
+            };
+
+            FormularioCatalogo.prototype.confirmarOrden=function(btn){
+                idTablaCat = $(btn).data('order');
+
+                $(btn).addClass('hidden');
+                $(btn).prev().removeClass('hidden');
+                posiciones = $('#' + idTablaCat).sortable("serialize", {key:"catalogo[]"});
+
+                $('#' + idTablaCat).sortable( "destroy" );
+                $('#' + idTablaCat).attr('style', 'cursor: pointer');
+                $('#' + idTablaCat).find('.fa-sort').removeClass('fa-sort').addClass('fa-check');
+
+                $.get('{{route('getOrdenUbicacionCatalogos')}}?' + posiciones, function(response){
+                    console.log(response);
+                });
+
+            };
+
             var objFormCC = new FormularioCatalogo();
 
             $(document).ready(function(){
@@ -224,7 +275,16 @@
                     objFormCC.redireccionUbicacion($(this));
                 });
 
+                $('.btnOrdenarCatalogo').click(function(){
+                    objFormCC.ordenCatalogo($(this));
+                });
+
+                $('.btnConfirmarOrden').click(function(){
+                    objFormCC.confirmarOrden($(this));
+                });
+
                 {!! $scriptModal !!}
+
             });
 
         </script>

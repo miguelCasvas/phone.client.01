@@ -188,11 +188,9 @@
             $.each(response.data, function(pos, elemento){
 
                 tdNombres = (elemento.nombres === null) ? 'Sin Asignar' : '<b>' + elemento.nombres + '</b> - Apto #';
-                nomCheck = 'extension['+elemento.id_extension+']['+elemento.id_usuario_extension+']['+elemento.id_usuario+']';
-                dataLink = 'data-relacion="'+elemento.id_usuario_extension+'"';
 
                 tbody += '<tr>';
-                tbody += '<td><input type="checkbox" name="'+nomCheck+'" '+dataLink+'></td>';
+                tbody += '<td><input type="checkbox" name="extensiones[]" value="'+elemento.id_extension+'"></td>';
                 tbody += '<td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>';
                 tbody += '<td><a href="#">' + elemento.extension + '</a></td>';
                 tbody += '<td class="mailbox-subject">'+ tdNombres +'</td>';
@@ -238,7 +236,8 @@
         Extensiones.prototype.eliminarExtensiones = function(){
 
             $(this.btnElimExten).click(function(){
-
+                $(objExtensiones.formExtensiones).attr('action', '{{route('delExtensiones')}}');
+                $(objExtensiones.formExtensiones).submit();
             });
 
         };
@@ -248,7 +247,6 @@
                 $(objExtensiones.formExtensiones).attr('action', '{{route('delRelExtensiones')}}');
                 $(objExtensiones.formExtensiones).submit();
             });
-
         };
 
         var objExtensiones = new Extensiones();
@@ -257,7 +255,7 @@
 
             objExtensiones.cargueExtensiones();
             objExtensiones.checkEliminacion(true);
-            objExtensiones.eliminarRelExtensiones();
+            objExtensiones.eliminarExtensiones();
 
             //Handle starring for glyphicon and font awesome
             $(".mailbox-star").click(function (e) {

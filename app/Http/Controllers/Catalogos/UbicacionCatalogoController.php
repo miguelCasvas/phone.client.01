@@ -108,4 +108,9 @@ class UbicacionCatalogoController extends Controller
         \Alert::success('Ubicación creada con exito!');
         return back();
     }
+
+    public function ordenUbicacionCatalogo(Request $request)
+    {
+        return response()->json($request->all());
+    }
 }

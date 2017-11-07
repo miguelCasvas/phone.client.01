@@ -76,6 +76,7 @@ Route::get('ubicacioncatalogo', 'Catalogos\UbicacionCatalogoController@index')->
 Route::post('ubicacioncatalogo','Catalogos\UbicacionCatalogoController@crearUbicacionCatalogo')->name('postCrearUbicacionCatalogo');
 Route::post('ubicacioncatalogo/{idUbic}','Catalogos\UbicacionCatalogoController@editarUbicacionCatalogo')->name('postUbicacionCatalogo');
 Route::get('ubicacioncatalogofiltros', 'Catalogos\UbicacionCatalogoController@ubicacionCatalogoFiltrado')->name('getUbicacionCatalogoFiltrado');
+Route::get('ubicacioncatalogo/orden', 'Catalogos\UbicacionCatalogoController@ordenUbicacionCatalogo')->name('getOrdenUbicacionCatalogos');
 
 /*
  * Rutas para procesos Geograficos
@@ -91,6 +92,7 @@ Route::post('pais/eliminacion/{idPais}', 'Varios\GeograficosController@eliminarP
  */
 Route::get('extensionesinicio', 'Extensiones\ExtensionesController@index')->name('getInicioExtensiones');
 Route::post('extensiones/eliminarelacion', 'Extensiones\ExtensionesController@eliminarRelExtensiones')->name('delRelExtensiones');
+Route::post('extensiones/eliminar', 'Extensiones\ExtensionesController@eliminarExtension')->name('delExtensiones');
 
 Route::post('departamento', 'Varios\GeograficosController@crearDepartamento')->name('postDepartamento');
 Route::post('departamento/{idDepto}', 'Varios\GeograficosController@editarDepartamento')->name('putDepartamento')->where('idDepto', '[0-9]+');
