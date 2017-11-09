@@ -211,15 +211,16 @@ class UsuariosController extends Controller
         $numExt = $request->get('numExt');
         $extension = '';
 
+        $contador = 1;
         for ($i = 0; $i <= count($ubicCat); $i++){
             if (empty($ubicCat[$i]) == false){
-                $formulario['idUbicacionCatalogo_' . ($i+1)] = (int) $ubicCat[$i];
+                $formulario['idUbicacionCatalogo_' . ($contador)] = (int) $ubicCat[$i];
                 $extension .= $numExt[$i];
+                $contador++;
             }
         }
 
         $formulario['extension'] = $extension;
-
         $_request = $this->clienteApi->peticionPOST('v1/extensiones', $formulario);
         $response = $this->verificarErrorAPI($_request);
 

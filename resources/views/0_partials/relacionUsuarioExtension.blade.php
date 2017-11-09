@@ -41,37 +41,10 @@
                 $('#contentCatalago').html(response);
             }).
             fail(function(response){
-                console.log(response);
                 swal ( "{{trans('generales.sweet_alert.error.titulo')}}" ,  "{{trans('generales.sweet_alert.error.texto')}}" ,  "error" );
                 return null;
             });
 
-        };
-
-        /*
-         * CARGA LOS OPTION DEL CAMPO UBICACION CATALOGO DEPENDIENDO
-         * CATALOGO SELECCIONADO
-         */
-        RelExtesion.prototype.busquedaUbicCat = function(campSelect){
-            var idSelectCatalogo = $(campSelect).data('select-ubic');
-            idCatalogo = $(campSelect).val();
-            url = '{{route('getUbicacionCatalogoFiltrado')}}?id_catalogo=' + idCatalogo;
-
-            $('#' + idSelectCatalogo).html('');
-            $('#' + idSelectCatalogo).append('<option value="">Selección</option>');
-            this.defineSegmentoExt($('#' + idSelectCatalogo));
-
-            $.get(url, function(ubicaconesCatalogo){
-                if(ubicaconesCatalogo !== null){
-                    $.each(ubicaconesCatalogo.data, function(id, ubicacion){
-                        option = '<option value='+ubicacion.id_ubicacion_catalogo+' data-vlr-ext="'+ubicacion.valor_extension+'">'+ubicacion.nombre_ubicacion_catalogo+'</option>';
-                        $('#' + idSelectCatalogo).append(option);
-                    });
-                }
-            }).fail(function(){
-                    swal ( "{{trans('generales.sweet_alert.error.titulo')}}" ,  "{{trans('generales.sweet_alert.error.texto')}}" ,  "error" );
-                    return null;
-            });
         };
 
         /*
@@ -88,11 +61,9 @@
          * LIMPIA TODOS LOS CAMPOS DEL FORMULARIO CREACION DE EXTENSION
          */
         RelExtesion.prototype.limpiarForm = function(){
-            $('.selectCat').each(function(index, elemento){
+            $('.selectUbicCat').each(function(index, elemento){
                 $(elemento).val('');
-                elementUbicCat = $('#' + $(elemento).data('select-ubic'));
-
-                (new RelExtesion()).busquedaUbicCat($(elemento));
+                (new RelExtesion()).defineSegmentoExt($(elemento));
             });
         };
 

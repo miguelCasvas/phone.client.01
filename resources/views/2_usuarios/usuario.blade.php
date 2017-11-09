@@ -199,10 +199,6 @@
                 objFormExten.busquedaExten($(this).val());
             });
 
-            $('#ModalExten').delegate('.selectCat', 'change', function(){
-                objFormExten.busquedaUbicCat($(this));
-            });
-
             $('#ModalExten').delegate('.selectUbicCat', 'change', function(){
                 objFormExten.defineSegmentoExt($(this));
             });

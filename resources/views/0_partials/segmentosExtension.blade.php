@@ -5,12 +5,19 @@
 <div class="row">
     @foreach($catalogo as $pos => $item)
         <div class="col-lg-4">
-            {!! Form::bsText('', '', $item->nombre_catalogo, ['data-select-ubic' => 'selectUbic_'.$pos, 'disabled', 'id' => 'segmentExt'.$pos, 'class' => 'form-control selectCat'], false) !!}
+            {!! Form::bsText('', '', $item->nombre_catalogo, ['data-select-ubic' => 'selectUbic_'.$pos, 'disabled', 'class' => 'form-control selectCat'], false) !!}
             <input type="hidden" name="catalogo[]" value="{{$item->id_catalogo}}">
         </div>
 
         <div class="col-lg-4">
-            {!! Form::bsSelect('', 'ubicCatalogo[]', $optUbic[$item->id_catalogo], null, ['id' => 'selectUbic_'.$pos, 'data-segment-ext' => 'segmentExt'.$pos, 'class' => 'form-control selectUbicCat'], false) !!}
+            <div class="form-group ">
+                <label id="ubicCatalogo[]"></label>
+                <select class="form-control selectUbicCat" id="{{'selectUbic_'.$pos}}" data-segment-ext="{{'segmentExt'.$pos}}" name="ubicCatalogo[]">
+                    @foreach($optUbic[$item->id_catalogo] as $key => $items)
+                        <option value="{{$key}}" data-vlr-ext="{{$items['dataExt']}}">{{$items['text']}}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
 
         <div class="col-lg-4">

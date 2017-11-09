@@ -8,6 +8,7 @@ use App\Http\Requests\Conjunto\StoreRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mockery\Exception;
 
 class ConjuntosController extends Controller
 {
@@ -223,23 +224,22 @@ class ConjuntosController extends Controller
         $optUbic = [];
 
         foreach ($catalogo as $item) {
+
             # Replica peticion cambiando los params del request
-            $newRequest = $request->duplicate(['id_catalogo' => $item->id_catalogo]);
-            //var_dump($newRequest);
-
             # Se genera la busqueda de las ubicaciones de cada catalogo
-            //$ubicacionesCat = (new UbicacionCatalogoController())->ubicacionCatalogoFiltrado($newRequest);
+            $url = 'ubicacioncatalogofiltrado';
+            $_request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url, ['id_catalogo' => $item->id_catalogo]));
+            $ubicacionCatalogo = $_request->formatoRespuesta()->data;
 
-            //# Armando options de cada catalogo
-            //$optUbic[$item->id_catalogo][null] = 'Selección';
-            //foreach ($ubicacionesCat as $subItem) {
-            //    $optUbic[$item->id_catalogo][$subItem->id_ubicacion_catalogo] = $subItem->nombre_ubicacion_catalogo;
-            //}
+            # Armando options de cada catalogo
+            $optUbic[$item->id_catalogo][null] = ['text' => 'Selección', 'dataExt' => null];
+
+            foreach ($ubicacionCatalogo as $subItem) {
+                $optUbic[$item->id_catalogo][$subItem->id_ubicacion_catalogo]['text'] = $subItem->nombre_ubicacion_catalogo;
+                $optUbic[$item->id_catalogo][$subItem->id_ubicacion_catalogo]['dataExt'] = $subItem->valor_extension;
+            }
         }
-        return 'HOLA';
-
         $data = compact('catalogo', 'optUbic');
-
         return view('0_partials.segmentosExtension', $data)->render();
     }
 }
