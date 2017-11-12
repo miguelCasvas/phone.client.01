@@ -209,6 +209,14 @@ class ConjuntosController extends Controller
 
     }
 
+    public function listadoTipoSalidaPorCatalogo(Request $request)
+    {
+        $url = 'v1/conjuntos/canalesComunicacion/tipoSalida';
+        $params = $request->all();
+
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url, $params));
+        return $request->formatoRespuesta()->data;
+    }
 
     /**
      *

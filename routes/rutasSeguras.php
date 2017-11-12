@@ -121,3 +121,20 @@ Route::get('enconstruccion', function () {
  * Rutas para procesos Notificaciones
  */
 Route::get('inicionotificaciones', 'Notificaciones\NotificacionesController@index')->name('getInicioNotificaciones');
+
+
+/*
+ * Rutas para procesos MARCADOS
+ * */
+Route::group(['prefix' => 'marcados'],function(){
+
+    #Inicio de MODULO
+    Route::get('', 'Marcados\MarcadosController@index')->name('getInicioMarcados');
+
+    # Creacion de marcado
+    //Route::post('','');
+
+
+
+}
+);

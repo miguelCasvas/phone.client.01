@@ -4,7 +4,7 @@
 
     @slot('menuPagina')
         <h1>
-            TIPOS DE SALIDA PARA CALANDES DE COMUNICACIÓN
+            TIPOS DE SALIDA PARA CANALES DE COMUNICACIÓN
             <small>.</small>
         </h1>
         <ol class="breadcrumb">

@@ -42,7 +42,7 @@
             </li>
             <!-- MARCADO -->
             <li class="{{$activeMarcado or ''}} ">
-                <a href="{{route('getEnConstruccion')}}">
+                <a href="{{route('getInicioMarcados')}}">
                     <i class="fa fa-book"></i> <span>{{trans('menus.izquierdo.marcado')}}</span>
                     <span class="pull-right-container"></span>
                 </a>
@@ -71,8 +71,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{$activeInicio or ''}}"><a href="{{route('getModuloCatalogos')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionarcatalogos')}}</a></li>
-                    <li class="{{$activeTpoSalida or ''}}"><a href="{{route('getTiposSalida')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.ubicacioncatalogos')}}</a></li>
+                    <li class="{{$activeInicio or ''}}"><a href="{{route('getModuloCC')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionarcatalogos')}}</a></li>
+                    <li class="{{$activeTpoSalida or ''}}"><a href="{{route('getTiposSalida')}}"><i class="fa fa-circle-o"></i> Salidas del sistema</a></li>
                 </ul>
             </li>
             <!-- CATALOGO -->
@@ -97,7 +97,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{$activeNotificacionesInicio or ''}}"><a href="{{route('getInicioNotificaciones')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionsalidas')}}</a></li>
+                    <li class="{{$activeNotificacionesInicio or ''}}"><a href="{{route('getEnConstruccion')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionsalidas')}}</a></li>
                 </ul>
             </li>
             <!-- CONFIGURACIONES BASICAS -->

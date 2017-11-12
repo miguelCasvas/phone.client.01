@@ -32,6 +32,8 @@ class ComposerBlades extends ServiceProvider
         $this->composerUbicacionCatalogo();
 
         $this->composerTipoSalida();
+
+        $this->composerMarcado();
     }
 
     /**
@@ -332,5 +334,29 @@ class ComposerBlades extends ServiceProvider
 
         });
 
+    }
+
+    private function composerMarcado()
+    {
+        view()->composer('9_marcado.inicio_marcado', function($view){
+
+            # Items del campo Conjunto formulario de creación
+            $conjuntos = (new ConjuntosController())->listadoConjuntosSelect();
+            $idConjunto = null;
+
+            $canalesComunicacion = [null => 'Selección'];
+
+            # Si se selecciona un conjunto
+            if (\request()->has('id_conjunto')){
+                $tiposSalida = (new ConjuntosController())->listadoTipoSalidaPorCatalogo(\request());
+                $idConjunto = \request()->get('id_conjunto');
+            }
+
+            $view
+                ->with('idConjunto', $idConjunto)
+                ->with('conjuntos', $conjuntos)
+                ->with('tiposSalida', $tiposSalida);
+
+        });
     }
 }
