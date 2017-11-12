@@ -1,5 +1,6 @@
 @component('0_layouts.blank')
     @slot('activeCC', 'active')
+    @slot('activeInicio', 'active')
 
     @slot('menuPagina')
         <h1>

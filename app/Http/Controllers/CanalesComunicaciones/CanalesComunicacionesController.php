@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CanalesComunicaciones;
 
 use App\Http\Requests\CanalComunicacion\StoreRequest;
+use App\Http\Requests\TipoSalida\StoreRequest As StoreTpoSalida;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -37,6 +38,38 @@ class CanalesComunicacionesController extends Controller
         return view('3_canalesComunicaciones.inicioCC', $datos);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function moduloTiposDeSalida()
+    {
+        $listado = $this->listadoTpoSalida_ft_Canales();
+        $data = compact('listado');
+
+        return view('3_canalesComunicaciones.tipoSalida', $data);
+    }
+
+    public function crearTipoSalida(StoreTpoSalida $request)
+    {
+        $formulario = $request->all();
+        unset($formulario['_token']);
+
+        $url = 'v1/tiposalida';
+        $_request = $this->clienteApi->peticionPOST($url, $formulario);
+        $response = $this->verificarErrorAPI($_request);
+
+        if ($response instanceof RedirectResponse)
+            \Alert::error('Error al crear el tipo de salida vuelva a intentarlo!');
+        else
+            \Alert::success('Tipo salida creada con exito!');
+
+        return back();
+    }
+
+    /**
+     * @param StoreRequest $request
+     * @return RedirectResponse
+     */
     public function crearCanal(StoreRequest $request)
     {
         $formulario = $request->all();
@@ -52,6 +85,11 @@ class CanalesComunicacionesController extends Controller
 
     }
 
+    /**
+     * @param StoreRequest $request
+     * @param $idCanal
+     * @return RedirectResponse
+     */
     public function editarCanal(StoreRequest $request, $idCanal)
     {
         $url = 'canalcomunicacion/'. $idCanal;
@@ -99,4 +137,39 @@ class CanalesComunicacionesController extends Controller
 
     }
 
+    /**
+     * @return mixed
+     */
+    private function listadoTpoSalida_ft_Canales()
+    {
+        $url = 'v1/tiposalida/listado';
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
+        return $request->formatoRespuesta()->data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function listadoCanalesPorConjunto()
+    {
+        $url = 'v1/conjuntos/canalesComunicacion';
+        $params = \request()->all();
+        $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url, $params));
+        return $request->formatoRespuesta()->data;
+    }
+
+    /**
+     * @return array
+     */
+    public function listadoCanalesPorConjunto_Select()
+    {
+        $data = $this->listadoCanalesPorConjunto();
+        $options = [null => 'Selección'];
+
+        foreach ($data as $datum) {
+            $options[$datum->id_canal] = $datum->canal;
+        }
+
+        return $options;
+    }
 }

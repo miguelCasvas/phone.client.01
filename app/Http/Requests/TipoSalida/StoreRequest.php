@@ -5,8 +5,19 @@ namespace App\Http\Requests\TipoSalida;
 use App\Http\Requests\FormRequestToAPI\FormRequestToAPI;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequestToAPI
+class StoreRequest extends FormRequest
 {
+
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -16,8 +27,8 @@ class StoreRequest extends FormRequestToAPI
     {
         return [
             'nombreTipoSalida' => ['required'],
-            'idMarcado' => ['required', 'numeric', 'exists:marcados,id_marcado'],
-            'idNotificacion' => ['required', 'numeric', 'exists:notificaciones,id_notificacion'],
+            'idCanal' => ['required', 'numeric'],
+            'idNotificacion' => ['numeric'],
         ];
     }
 }

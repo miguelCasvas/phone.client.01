@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\CanalesComunicaciones\CanalesComunicacionesController;
 use App\Http\Controllers\Catalogos\UbicacionCatalogoController;
 use App\Http\Controllers\Conjuntos\ConjuntosController;
 use App\Http\Controllers\Roles\RolesController;
@@ -29,6 +30,8 @@ class ComposerBlades extends ServiceProvider
         $this->composerGeograficos();
 
         $this->composerUbicacionCatalogo();
+
+        $this->composerTipoSalida();
     }
 
     /**
@@ -294,5 +297,40 @@ class ComposerBlades extends ServiceProvider
                 ->with('scriptModalUbicCat', $scriptModalUbicCat);
 
         });
+    }
+
+    /**
+     * Vlrs pre-cargar para el modulo Tipo salida
+     */
+    private function composerTipoSalida()
+    {
+        view()->composer('3_canalesComunicaciones.tipoSalida', function($view){
+
+            $scriptModal = '';
+
+            # Activar modal para creacion si el formulario presenta errores
+            if (session('modalCCActivo') == true)
+                $scriptModal = "$('#modalCrearCanal').modal()";
+
+            # Items del campo Conjunto formulario de creación
+            $conjuntos = (new ConjuntosController())->listadoConjuntosSelect();
+            $idConjunto = null;
+
+            $canalesComunicacion = [null => 'Selección'];
+
+            # Si se selecciona un conjunto
+            if (\request()->has('id_conjunto')){
+                $canalesComunicacion = (new CanalesComunicacionesController())->listadoCanalesPorConjunto_Select();
+                $idConjunto = \request()->get('id_conjunto');
+            }
+
+            $view
+                ->with('idConjunto', $idConjunto)
+                ->with('conjuntos', $conjuntos)
+                ->with('canalesComunicacion', $canalesComunicacion);
+
+
+        });
+
     }
 }

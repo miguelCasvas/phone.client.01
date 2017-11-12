@@ -63,11 +63,17 @@
                 </a>
             </li>
             <!-- CANALES DE COMUNICACIÓN -->
-            <li class="{{$activeCC or ''}} ">
+            <li class="treeview {{$activeCC or ''}} ">
                 <a href="{{route('getModuloCC')}}">
                     <i class="fa fa-commenting"></i> <span>{{trans('menus.izquierdo.cc')}}</span>
-                    <span class="pull-right-container"></span>
+                    <span class="pull-right-container">
+                      <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
+                <ul class="treeview-menu">
+                    <li class="{{$activeInicio or ''}}"><a href="{{route('getModuloCatalogos')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionarcatalogos')}}</a></li>
+                    <li class="{{$activeTpoSalida or ''}}"><a href="{{route('getTiposSalida')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.ubicacioncatalogos')}}</a></li>
+                </ul>
             </li>
             <!-- CATALOGO -->
             <li class="treeview {{$activeCatalogo or ''}}">

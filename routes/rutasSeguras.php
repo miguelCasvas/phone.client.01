@@ -44,19 +44,18 @@ Route::get('conjunto/{idConjunto}/eliminacion', 'Conjuntos\ConjuntosController@e
 Route::post('conjunto/{idConjunto}/edicion', 'Conjuntos\ConjuntosController@editarConjunto')->name('postEdicionConjunto')->where('idConjunto', '[0-9]+');
 Route::post('conjunto/creacion', 'Conjuntos\ConjuntosController@crearConjunto')->name('postCreacionConjunto');
 
-
 Route::get('conjuntos', 'Conjuntos\ConjuntosController@listadoConjuntos')->name('listadoConjuntos');
 Route::get('conjunto/{idConjunto}', 'Conjuntos\ConjuntosController@busquedaConjunto')->name('getConjunto')->where('idConjunto', '[0-9]+');
 Route::get('conjunto/{idConjunto}/extensiones', 'Conjuntos\ConjuntosController@listadoExtensionesPorConjunto')->name('getExtensionesConjunto');
-
 Route::get('conjunto/{idConjunto}/catalogos', 'Conjuntos\ConjuntosController@renderSelectsCatalogo')->name('getSelectsCatalogosConjunto');
-
 Route::get('conjunto/extension_ft_usuario', 'Conjuntos\ConjuntosController@listadoExtensionUsuarioPorConjunto')->name('getExtensionFtUsuarioConjunto');
 
 /*
  * Rutas para procesos sobre canales de comunicación
  */
 Route::get('canalesComunicacion', 'CanalesComunicaciones\CanalesComunicacionesController@index')->name('getModuloCC');
+Route::get('canalesComunicacion/tiposSalida', 'CanalesComunicaciones\CanalesComunicacionesController@moduloTiposDeSalida')->name('getTiposSalida');
+Route::post('canalesComunicacion/tiposSalida','CanalesComunicaciones\CanalesComunicacionesController@crearTipoSalida')->name('postTiposSalida');
 Route::post('canalesComunicacion/eliminacion', 'CanalesComunicaciones\CanalesComunicacionesController@eliminarCanales')->name('getEliminacionCC');
 Route::post('canalesComunicacion', 'CanalesComunicaciones\CanalesComunicacionesController@crearCanal')->name('postCrearCC');
 Route::post('canalesComunicacion/{idCanal}', 'CanalesComunicaciones\CanalesComunicacionesController@editarCanal')->name('postEditarCC');
