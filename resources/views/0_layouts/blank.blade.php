@@ -65,7 +65,7 @@
 <!-- SlimScroll -->
 <script src="{{asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 <!-- ChartJS -->
-<script src="{{asset('bower_components/chart.js/chart.js')}}"></script>
+<script src="{{asset('bower_components/chart.js/Chart.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('js/demo.js')}}"></script>
 <!-- SweetAlert -->
