@@ -130,11 +130,8 @@ Route::group(['prefix' => 'marcados'],function(){
 
     #Inicio de MODULO
     Route::get('', 'Marcados\MarcadosController@index')->name('getInicioMarcados');
-
-    # Creacion de marcado
-    //Route::post('','');
-
-
+    Route::post('', 'Marcados\MarcadosController@crearMarcado')->name('postMarcado');
+    Route::get('genera/orden', 'Marcados\MarcadosController@generarOrden')->name('generarOrden');
 
 }
 );

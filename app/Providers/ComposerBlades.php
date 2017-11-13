@@ -5,8 +5,10 @@ namespace App\Providers;
 use App\Http\Controllers\CanalesComunicaciones\CanalesComunicacionesController;
 use App\Http\Controllers\Catalogos\UbicacionCatalogoController;
 use App\Http\Controllers\Conjuntos\ConjuntosController;
+use App\Http\Controllers\Marcados\MarcadosController;
 use App\Http\Controllers\Roles\RolesController;
 use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 
@@ -340,21 +342,45 @@ class ComposerBlades extends ServiceProvider
     {
         view()->composer('9_marcado.inicio_marcado', function($view){
 
+            # Listado extensiones
+            $extensiones = [null => 'Selección'];
+            $extensionGet = null;
+
+            # Plan de marcado de extension
+            $planMarcado = [];
+
             # Items del campo Conjunto formulario de creación
             $conjuntos = (new ConjuntosController())->listadoConjuntosSelect();
             $idConjunto = null;
 
             $canalesComunicacion = [null => 'Selección'];
+            $tiposSalida = [];
 
             # Si se selecciona un conjunto
             if (\request()->has('id_conjunto')){
-                $tiposSalida = (new ConjuntosController())->listadoTipoSalidaPorCatalogo(\request());
+                $newRequest = \request()->duplicate(['id_conjunto' => \request()->get('id_Conjunto')]);
+                $tiposSalida = (new ConjuntosController())->listadoTipoSalidaPorCatalogo($newRequest);
                 $idConjunto = \request()->get('id_conjunto');
+            }
+
+            # Si se selecciona una extension
+            if (\request()->has('extension')){
+                $extensionGet = \request()->get('extension');
+                $planMarcado =
+                    (new MarcadosController())->obtenerPlanDeMarcado_Extension($extensionGet);
+
+            }
+
+            foreach (\Auth::user()->extensiones as $extension) {
+                $extensiones[$extension->extension] = $extension->extension;
             }
 
             $view
                 ->with('idConjunto', $idConjunto)
+                ->with('extensiones', $extensiones)
+                ->with('extensionGet', $extensionGet)
                 ->with('conjuntos', $conjuntos)
+                ->with('planMarcado', $planMarcado)
                 ->with('tiposSalida', $tiposSalida);
 
         });

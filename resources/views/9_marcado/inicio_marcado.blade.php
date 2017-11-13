@@ -13,7 +13,7 @@
         <div class="box-header with-border">
             <h3></h3>
             <div class="box-tools">
-                <button type="button" class="btn btn-primary btn-sm" title="Confirma cambios" id="btnCrearCanal"><i class="fa fa-check"></i></button>
+                <button type="button" class="btn btn-primary btn-sm" title="Confirma cambios" id="btnConfirmarOrdem"><i class="fa fa-check"></i></button>
             </div>
         </div>
         <!-- /.box-header -->
@@ -25,25 +25,29 @@
                             <h4 class="box-title">Marcados disponibles</h4>
                         </div>
                         <div class="box-body">
+                            {{-- EXTENSIONES --}}
+                            {{Form::bsSelect('Extensiones', 'selectExtension', $extensiones, $extensionGet, [], true)}}
 
                             {{-- CONJUNTOS --}}
-                            {{Form::bsSelect('Conjunto', 'idConjunto', $conjuntos, $idConjunto, [], false)}}
+                            {{Form::bsSelect('Conjunto', 'idConjunto', $conjuntos, $idConjunto, [], true)}}
 
                             <!-- the events -->
-                            <div id="">
-                                @php $contador = 0; @endphp
-                                @foreach($tiposSalida as $tipoSalida)
-                                    @php $color = (($contador % 2) == 0) ? 'bg-light-blue' : 'bg-red'@endphp
-
-                                    <div
-                                            class="external-event {{$color}} ui-draggable ui-draggable-handle"
-                                            style="position: relative; cursor: pointer;">
-                                                {{$tipoSalida->nombre_tipo_salida}}
-                                                <i class="pull-right fa fa-mouse-pointer" aria-hidden="true"></i>
-                                    </div>
-                                    @php $contador += 1; @endphp
-                                @endforeach
-                            </div>
+                            @php $contador = 0; @endphp
+                            @foreach($tiposSalida as $tipoSalida)
+                                @php $color = (($contador % 2) == 0) ? 'bg-light-blue' : 'bg-red'@endphp
+                                <div
+                                        class="external-event {{$color}} ui-draggable ui-draggable-handle"
+                                        style="position: relative; cursor: pointer;"
+                                        data-marcado="{{$tipoSalida->nombre_tipo_salida}}"
+                                        data-comentario="{{$tipoSalida->comentarios}}"
+                                        data-metodo="{{$tipoSalida->metodo}}"
+                                        data-metodo-params="{{$tipoSalida->metodo_params}}"
+                                >
+                                    {{$tipoSalida->nombre_tipo_salida}}
+                                    <i class="pull-right fa fa-mouse-pointer" aria-hidden="true"></i>
+                                </div>
+                                @php $contador += 1; @endphp
+                            @endforeach
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -60,25 +64,19 @@
                         <div class="box-header with-border">
                             <h4 class="box-title">Sus Marcados</h4>
                         </div>
+                        <div class="box-body">
+                            <ul class="list-group" id="marcadosUsuario">
+                                <!--ITEMS MARCADO-->
+                                @foreach($planMarcado as $plan)
+                                    <li class="list-group-item" style="cursor: n-resize;" id="marcado_{{$plan->id}}">
+                                        <span><span class="text-muted">Extensión:</span> {{$plan->exten}}</span>
+                                        <span style="margin-left: 20px">{{$plan->appdata}}</span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
 
-                        <ul class="list-group" id="marcadosUsuario">
-                            <li class="list-group-item" style="cursor: n-resize;">Cras justo odio
-                                <a class="text-danger pull-right eliminaMarcado" style="cursor: pointer"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="list-group-item" style="cursor: n-resize;">Dapibus ac facilisis in
-                                <a class="text-danger pull-right eliminaMarcado" style="cursor: pointer"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="list-group-item" style="cursor: n-resize;">Morbi leo risus
-                                <a class="text-danger pull-right eliminaMarcado" style="cursor: pointer"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="list-group-item" style="cursor: n-resize;">Porta ac consectetur ac
-                                <a class="text-danger pull-right eliminaMarcado" style="cursor: pointer"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="list-group-item" style="cursor: n-resize;">Vestibulum at eros
-                                <a class="text-danger pull-right eliminaMarcado" style="cursor: pointer"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                            </li>
-                        </ul>
                 </div>
             </div>
         </div>
@@ -103,9 +101,76 @@
 
         FormMarcado.prototype.cargueTposMarcado = function(selectConjunto){
             idConjunto = $(selectConjunto).find('option:selected').val();
+            url = '{{request()->url()}}';
+            extension = '{{request()->get('extension')}}';
 
-            window.location.href = '{{route('getInicioMarcados')}}?id_conjunto=' + idConjunto;
+            if(extension !== '')
+                window.location.href = url + '?id_conjunto=' + idConjunto + '&extension=' + extension;
+            else
+                window.location.href = url + '?id_conjunto=' + idConjunto;
         };
+
+        FormMarcado.prototype.renderItem = function(tipoMarcado){
+
+            texto = $(tipoMarcado).data('marcado');
+            comentario = $(tipoMarcado).data('comentario');
+            metodo = $(tipoMarcado).data('metodo');
+            metodoParams = $(tipoMarcado).data('metodo-params');
+
+            newLi = '@include('0_partials.itemMarcado', ['textoMarcado' => '%textoMarcado%', 'scriptMarcado' => true])';
+            newLi = newLi.replace('%textoMarcado%', texto);
+            newLi = newLi.replace('%comentario%', comentario);
+            newLi = newLi.replace('%metodo%', metodo);
+            newLi = newLi.replace('%metodoParams%', metodoParams);
+
+            $('#marcadosUsuario').append(newLi);
+
+        };
+
+        FormMarcado.prototype.editarMarcado = function(btn){
+
+            placeHolder = $(btn).data('comentario');
+            metodo = $(btn).data('metodo');
+            metodoParams = $(btn).data('metodo-params');
+
+            esquemaLi = '@include('0_partials.itemMarcado', ['scriptEditarMarcado' => true])';
+            esquemaLi = esquemaLi.replace('%comentarioMarcado%', placeHolder);
+            esquemaLi = esquemaLi.replace('%metodo%', metodo);
+            esquemaLi = esquemaLi.replace('%metodoParams%', metodoParams);
+            liParent = $(btn).parent().parent();
+            $(liParent).append(esquemaLi);
+            $(btn).attr('disabled', true);
+
+        };
+
+        FormMarcado.prototype.seleccionExtension = function(selectExtensiones){
+            extension = $(selectExtensiones).find('option:selected').val();
+            $('.inputExtension').val(extension);
+        };
+
+        FormMarcado.prototype.cambioExtension = function(selectExtensiones){
+            extension = $(selectExtensiones).find('option:selected').val();
+            url = '{{request()->url()}}';
+            idConjunto = '{{request()->get('id_conjunto')}}';
+
+            if(idConjunto !== '')
+                window.location.href = url + '?id_conjunto=' + idConjunto + '&extension=' + extension;
+            else
+                window.location.href = url + '?extension=' + extension;
+
+        };
+
+        FormMarcado.prototype.confirmarOrden = function(){
+            orden = $('#marcadosUsuario').sortable("serialize", {key:"Marcado[]"});
+
+            $.get('{{route('generarOrden')}}?' + orden, function(response){
+
+                swal ( "" ,  "Ordenado correctamente!" ,  "success" )
+
+            });
+        };
+
+        btnConfirmarOrdem
 
         var objFormMarcados = new FormMarcado();
 
@@ -115,18 +180,31 @@
                 objFormMarcados.cargueTposMarcado($(this));
             });
 
+            $('select[name="selectExtension"]').change(function(){
+                objFormMarcados.cambioExtension($(this));
+            });
+
+            $("#marcadosUsuario").delegate('.formMarcador', 'submit', function(){
+                objFormMarcados.seleccionExtension($('select[name="selectExtension"]'));
+            });
+
             $( "#marcadosUsuario" ).sortable();
             $( "#marcadosUsuario" ).disableSelection();
 
             $('.external-event').click(function(){
-                newLi = $('<li class="list-group-item" style="cursor: n-resize;">nuevo elemento' +
-                    '<a class="text-danger pull-right eliminaMarcado" style="cursor: pointer"><i class="fa fa-trash" aria-hidden="true"></i></a>' +
-                    '</li>');
-                $('#marcadosUsuario').append(newLi);
+                objFormMarcados.renderItem($(this));
             });
 
             $("#marcadosUsuario").delegate('.eliminaMarcado', 'click', function(){
-                $(this).parent().remove();
+                $(this).parent().parent().remove();
+            });
+
+            $("#marcadosUsuario").delegate('.editarMarcado', 'click', function(){
+                objFormMarcados.editarMarcado($(this));
+            });
+
+            $("#btnConfirmarOrdem").click(function(){
+                objFormMarcados.confirmarOrden();
             });
 
         } );
