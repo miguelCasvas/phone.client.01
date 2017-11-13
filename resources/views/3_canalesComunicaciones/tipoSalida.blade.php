@@ -29,6 +29,12 @@
 
                         {{csrf_field()}}
 
+                        {{-- CONJUNTOS --}}
+                        {{Form::bsSelect('Conjunto', 'idConjunto', $conjuntos, $idConjunto, [], true)}}
+
+                        {{-- CANAL DE COMUNICACIÓN PARA ELEGIR --}}
+                        {{Form::bsSelect('Canal de comunicación', 'idCanal', $canalesComunicacion, null, [], true)}}
+
                         {{-- NOMBRE DEL TIPO DE IDENTIFICACION --}}
                         {{ Form::bsText('Nombre tipo Salida', 'nombreTipoSalida', null, [], true) }}
 
@@ -37,12 +43,6 @@
 
                         {{-- PARAMETROS PARA METODO --}}
                         {{ Form::bsText('Variables metodo', 'metodoParams', null, [], true) }}
-
-                        {{-- CONJUNTOS --}}
-                        {{Form::bsSelect('Conjunto', 'idConjunto', $conjuntos, $idConjunto, [], true)}}
-
-                        {{-- CANAL DE COMUNICACIÓN PARA ELEGIR --}}
-                        {{Form::bsSelect('Canal de comunicación', 'idCanal', $canalesComunicacion, null, [], true)}}
 
                         <button class="btn btn-primary pull-right" type="submit">Confirmar</button>
                     </form>
