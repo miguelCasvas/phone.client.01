@@ -43,12 +43,12 @@
                 </a>
             </li>
             <!-- HISTORIAL -->
-            <li class="{{$activeHistorial or ''}} ">
-                <a href="{{route('getEnConstruccion')}}">
-                    <i class="fa fa-history"></i> <span>{{trans('menus.izquierdo.historial')}}</span>
-                    <span class="pull-right-container"></span>
-                </a>
-            </li>
+            {{--<li class="{{$activeHistorial or ''}} ">--}}
+                {{--<a href="{{route('getEnConstruccion')}}">--}}
+                    {{--<i class="fa fa-history"></i> <span>{{trans('menus.izquierdo.historial')}}</span>--}}
+                    {{--<span class="pull-right-container"></span>--}}
+                {{--</a>--}}
+            {{--</li>--}}
             <li class="header text-center">{{trans('menus.izquierdo.gestionconjuntos')}}</li>
             <!-- GESTION DE USUARIOS -->
             <li class="{{$activeUsuarios or ''}} ">
@@ -98,17 +98,17 @@
                 </ul>
             </li>
             <!-- NOTIFICACIONES -->
-            <li class="treeview {{$activeNotificaciones or ''}}">
-                <a href="#">
-                    <i class="fa fa-bell-o"></i> <span>{{trans('menus.izquierdo.notificaciones')}}</span>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{$activeNotificacionesInicio or ''}}"><a href="{{route('getEnConstruccion')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionsalidas')}}</a></li>
-                </ul>
-            </li>
+            {{--<li class="treeview {{$activeNotificaciones or ''}}">--}}
+                {{--<a href="#">--}}
+                    {{--<i class="fa fa-bell-o"></i> <span>{{trans('menus.izquierdo.notificaciones')}}</span>--}}
+                    {{--<span class="pull-right-container">--}}
+                      {{--<i class="fa fa-angle-left pull-right"></i>--}}
+                    {{--</span>--}}
+                {{--</a>--}}
+                {{--<ul class="treeview-menu">--}}
+                    {{--<li class="{{$activeNotificacionesInicio or ''}}"><a href="{{route('getEnConstruccion')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionsalidas')}}</a></li>--}}
+                {{--</ul>--}}
+            {{--</li>--}}
             <!-- CONFIGURACIONES BASICAS -->
             <li class="bg-orange"><a href="{{route('getConfiguraciones')}}"><i class="fa fa-cog" style="color: rgb(255, 255, 255);"></i><span style="color: rgb(255, 255, 255);"> {{trans('menus.izquierdo.configbasicas')}}</span></a></li>
         </ul>

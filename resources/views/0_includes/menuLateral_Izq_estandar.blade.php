@@ -31,12 +31,12 @@
                 </a>
             </li>
             <!-- HISTORIAL -->
-            <li class="{{$activeHistorial or ''}} ">
-                <a href="{{route('getEnConstruccion')}}">
-                    <i class="fa fa-history"></i> <span>{{trans('menus.izquierdo.historial')}}</span>
-                    <span class="pull-right-container"></span>
-                </a>
-            </li>
+            {{--<li class="{{$activeHistorial or ''}} ">--}}
+                {{--<a href="{{route('getEnConstruccion')}}">--}}
+                    {{--<i class="fa fa-history"></i> <span>{{trans('menus.izquierdo.historial')}}</span>--}}
+                    {{--<span class="pull-right-container"></span>--}}
+                {{--</a>--}}
+            {{--</li>--}}
 
         </ul>
     </section>
