@@ -11,7 +11,7 @@
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
-        <p class="login-box-msg">Inicie sesión para comenzar su sesión</p>
+        <p class="login-box-msg">Inicie sesión</p>
 
         <form action="{{route('postFormularioInicioSesion')}}" method="post">
             <div class="form-group has-feedback">
@@ -32,8 +32,8 @@
             </div>
         </form>
 
-        <a href="#">I forgot my password</a><br>
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <!--<a href="#">I forgot my password</a><br>
+        <a href="register.html" class="text-center">Register a new membership</a>-->
 
     </div>
     <!-- /.login-box-body -->
