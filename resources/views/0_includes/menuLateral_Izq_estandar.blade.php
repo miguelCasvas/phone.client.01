@@ -37,9 +37,7 @@
                     <span class="pull-right-container"></span>
                 </a>
             </li>
-            <li class="header text-center">{{trans('menus.izquierdo.gestionconjuntos')}}</li>
-            <!-- CONFIGURACIONES BASICAS -->
-            <li class="bg-orange"><a href="{{route('getConfiguraciones')}}"><i class="fa fa-cog" style="color: rgb(255, 255, 255);"></i><span style="color: rgb(255, 255, 255);"> {{trans('menus.izquierdo.configbasicas')}}</span></a></li>
+
         </ul>
     </section>
     <!-- /.sidebar -->
