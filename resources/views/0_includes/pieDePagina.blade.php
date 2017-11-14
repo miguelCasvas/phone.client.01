@@ -27,9 +27,9 @@
         </div>
         <div class="col-sm-12 col-lg-2">
             <h4><strong>Siganos en:</strong></h4>
-            <a href="#"><img src="{{asset('img/icono_facebook.png')}}" alt="facebook" width="35px"></a>
-            <a href="#"><img src="{{asset('img/icono_linkedin.png')}}" alt="linkedin" width="35px"></a>
-            <a href="#"><img src="{{asset('img/icono_youtube.png')}}" alt="youTube" width="35px"></a>
+            <a href="#" class="full-opacity-hover"><img src="{{asset('img/icono_facebook.png')}}" alt="facebook" width="35px"></a>
+            <a href="#" class="full-opacity-hover"><img src="{{asset('img/icono_linkedin.png')}}" alt="linkedin" width="35px"></a>
+            <a href="#" class="full-opacity-hover"><img src="{{asset('img/icono_youtube.png')}}" alt="youTube" width="35px"></a>
         </div>
 
         <div class="col-sm-12 col-lg-2">
