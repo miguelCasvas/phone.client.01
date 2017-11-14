@@ -22,8 +22,13 @@
 
     </header>
 
-    {{-- MENU LATERAL IZQ. --}}
-    @include('0_includes.menuLateral_Izq')
+    @if(\Auth::user()->id_rol == 1)
+        {{-- MENU LATERAL IZQ. --}}
+        @include('0_includes.menuLateral_Izq')
+    @elseif(\Auth::user()->id_rol == 2)
+        {{-- MENU LATERAL IZQ. --}}
+        @include('0_includes.menuLateral_Izq_admin')
+    @endif
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

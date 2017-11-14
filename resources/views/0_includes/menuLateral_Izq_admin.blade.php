@@ -12,18 +12,6 @@
                 <a href="#"><i class="fa fa-circle text-success"></i>{{trans('menus.izquierdo.enlinea')}}</a>
             </div>
         </div>
-        <!-- search form
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-        </form>-->
-        <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul id="menu_Pp_Izq" class="sidebar-menu" data-widget="tree">
             <li class="header text-center">{{trans('menus.izquierdo.navprincipal')}}</li>
@@ -60,7 +48,7 @@
             <!-- GESTION DE CONJUNTOS -->
             <li class="{{$activeConjuntos or ''}} ">
                 <a href="{{route('getInicioConjuntos')}}">
-                    <i class="fa fa-building-o"></i> <span>{{trans('menus.izquierdo.conjuntos')}}</span>
+                    <i class="fa fa-building-o"></i> <span>{{trans('menus.izquierdo.conjunto')}}</span>
                     <span class="pull-right-container"></span>
                 </a>
             </li>
@@ -70,32 +58,6 @@
                     <i class="fa fa-phone"></i> <span>Extensiones</span>
                     <span class="pull-right-container"></span>
                 </a>
-            </li>
-            <!-- CANALES DE COMUNICACIÓN -->
-            <li class="treeview {{$activeCC or ''}} ">
-                <a href="{{route('getModuloCC')}}">
-                    <i class="fa fa-commenting"></i> <span>{{trans('menus.izquierdo.cc')}}</span>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{$activeInicio or ''}}"><a href="{{route('getModuloCC')}}"><i class="fa fa-circle-o"></i> Gestionar Canales</a></li>
-                    <li class="{{$activeTpoSalida or ''}}"><a href="{{route('getTiposSalida')}}"><i class="fa fa-circle-o"></i> Salidas del sistema</a></li>
-                </ul>
-            </li>
-            <!-- CATALOGO -->
-            <li class="treeview {{$activeCatalogo or ''}}">
-                <a href="#">
-                    <i class="fa fa-table"></i> <span>{{trans('menus.izquierdo.catalogo')}}</span>
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="{{$activeAdminCatalogo or ''}}"><a href="{{route('getModuloCatalogos')}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.gestionarcatalogos')}}</a></li>
-                    <li class="{{$activeAdminUbicacion or ''}}"><a href="{{route('getUbicacionCatalogo', ['porPagina' => 1000])}}"><i class="fa fa-circle-o"></i> {{trans('menus.izquierdo.ubicacioncatalogos')}}</a></li>
-                </ul>
             </li>
             <!-- NOTIFICACIONES -->
             <li class="treeview {{$activeNotificaciones or ''}}">

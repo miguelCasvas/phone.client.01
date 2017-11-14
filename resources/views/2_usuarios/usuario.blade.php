@@ -207,7 +207,7 @@
                 objFormExten.limpiarForm();
             });
             // Inicializar vlrs si viene por defecto el conjunto
-            objFormUsuario.selectConjunto($(selectConjunto).val());
+            objFormUsuario.selectConjunto($(selectConjunto).find('option:selected').val());
             objFormExten.busquedaExten({{$datosUsuario->id_conjunto}});
 
             //Money Euro

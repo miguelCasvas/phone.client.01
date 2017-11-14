@@ -10,17 +10,17 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{asset('img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+                    <img src="{{asset('img/user_default.jpg')}}" class="user-image" alt="User Image">
                     <span class="hidden-xs">{{\Auth::user()->nombres}}</span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
-                        <img src="{{asset('img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+                        <img src="{{asset('img/user_default.jpg')}}" class="img-circle" alt="User Image">
 
                         <p>
                             {{\Auth::user()->nombres}} - {{trans('menus.superior.administrador')}}
-                            <small>{{trans('menus.superior.miembrodesde')}}</small>
+                            <small class="divider"></small>
                         </p>
                     </li>
                     <!-- Menu Body -->

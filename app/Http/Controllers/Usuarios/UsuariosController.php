@@ -170,10 +170,10 @@ class UsuariosController extends Controller
         $datosUsuario->nombres = null;
         $datosUsuario->apellidos = null;
         $datosUsuario->fecha_nacimiento = null;
-        $datosUsuario->nombre_conjunto = null;
-        $datosUsuario->id_conjunto = null;
-        $datosUsuario->direccion = null;
-        $datosUsuario->telefono = null;
+        $datosUsuario->nombre_conjunto = \Auth::user()->nombre_conjunto;
+        $datosUsuario->id_conjunto = \Auth::user()->id_conjunto;
+        $datosUsuario->direccion = \Auth::user()->direccion;
+        $datosUsuario->telefono = \Auth::user()->telefono;
         $datosUsuario->email = null;
         $datosUsuario->nombre_rol = null;
         $datosUsuario->id_rol = null;

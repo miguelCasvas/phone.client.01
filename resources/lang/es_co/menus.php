@@ -26,10 +26,11 @@ return [
         'gestionarcatalogos' => 'Gestionar Catálogos',
         'ubicacioncatalogos' => 'Ubicación Catálogos',
         'configbasicas' => 'Configuraciones Básicas',
-        'conjunto' => 'Conjuntos',
+        'conjuntos' => 'Conjuntos',
+        'conjunto' => ' Conjunto',
         'extensiones' => 'Extensiones',
         'historial' => 'Historial',
-        'marcado' => 'Marcado',
+        'marcado' => 'Mi plan de marcado',
         'notificaciones' => 'Notificaciones',
         'gestionsalidas' => 'Gestión de Salidas',
 

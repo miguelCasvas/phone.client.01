@@ -4,7 +4,7 @@
         <h1>Genera Marcados <small>#Extension</small></h1>
         <ol class="breadcrumb">
             <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i> {{trans('generales.inicio')}}</a></li>
-            <li class="active">Marcados</li>
+            <li class="active">Mi plan de marcado</li>
         </ol>
     @endslot
 
@@ -25,11 +25,12 @@
                             <h4 class="box-title">Marcados disponibles</h4>
                         </div>
                         <div class="box-body">
+                            {{-- CONJUNTOS --}}
+                            {{Form::bsSelect('Conjunto', 'idConjunto', $conjuntos, $idConjunto, [], true)}}
+
                             {{-- EXTENSIONES --}}
                             {{Form::bsSelect('Extensiones', 'selectExtension', $extensiones, $extensionGet, [], true)}}
 
-                            {{-- CONJUNTOS --}}
-                            {{Form::bsSelect('Conjunto', 'idConjunto', $conjuntos, $idConjunto, [], true)}}
 
                             <!-- the events -->
                             @php $contador = 0; @endphp

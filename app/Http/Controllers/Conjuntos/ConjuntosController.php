@@ -8,6 +8,7 @@ use App\Http\Requests\Conjunto\StoreRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Mockery\Exception;
 
 class ConjuntosController extends Controller
@@ -21,7 +22,21 @@ class ConjuntosController extends Controller
     {
         $url = 'v1/conjuntos/datosgenerales_1';
         $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url));
+
         $conjuntos = $request->formatoRespuesta()->data;
+
+        # Filtrado de conjuntos a retornar
+        if (\Auth::user()->id_rol != 1){
+
+            $conjuntosAux = array();
+
+            foreach ($conjuntos as $key => $conjunto){
+                if ($conjunto->id_conjunto == \Auth::user()->id_conjunto)
+                    $conjuntosAux[] = $conjunto;
+            }
+
+            $conjuntos = $conjuntosAux;
+        }
 
         $data = compact('conjuntos');
         return view('5_conjuntos.inicioConjuntos', $data);
@@ -107,10 +122,17 @@ class ConjuntosController extends Controller
      */
     public function listadoConjuntos(Request $request)
     {
-        $url = 'conjunto';
+        if (Auth::user()->id_rol == 1)
+            $url = 'conjunto';
+        else
+            $url = 'conjunto/' . Auth::user()->id_conjunto;
+
         $params = $request->all();
         $request = $this->verificarErrorAPI($this->clienteApi->peticionGET($url, $params));
         $conjuntos = $request->formatoRespuesta();
+
+        if(is_array($conjuntos->data) == false)
+            $conjuntos->data = [$conjuntos->data];
 
         return $conjuntos;
     }

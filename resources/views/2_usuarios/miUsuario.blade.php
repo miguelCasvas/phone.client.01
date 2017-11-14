@@ -1,5 +1,5 @@
 @component('0_layouts.blank')
-
+    @slot('activeMiPerfil', 'active')
     @slot('menuPagina')
         <h1>{{trans('usuario.transversales.perfil')}} <small>{{$datosUsuario->nombres}}</small></h1>
         <ol class="breadcrumb">
@@ -216,7 +216,7 @@
                 });
 
                 // Inicializar vlrs si viene por defecto el conjunto
-                objFormUsuario.selectConjunto($(selectConjunto).val());
+                objFormUsuario.selectConjunto($(selectConjunto).find('option:selected').val());
                 objFormExten.busquedaExten({{$datosUsuario->id_conjunto}});
 
                 //Money Euro

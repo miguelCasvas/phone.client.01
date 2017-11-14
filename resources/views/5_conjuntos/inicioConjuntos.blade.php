@@ -2,10 +2,7 @@
     @slot('activeConjuntos', 'active')
 
     @slot('menuPagina')
-        <h1>
-            CONJUNTOS
-            <small>.</small>
-        </h1>
+        <h1>CONJUNTO<small>(S)</small></h1>
         <ol class="breadcrumb">
             <li><a href="{{route('inicioUsuario')}}"><i class="fa fa-dashboard"></i>{{trans('generales.inicio')}}</a></li>
             <li class="active">Conjuntos</li>
@@ -18,7 +15,9 @@
             <div class="nav-tabs-custom" style="">
                 <!-- Tabs within a box -->
                 <ul class="nav nav-tabs pull-right ui-sortable-handle">
+                    @if(\Auth::user()->id_rol == 1)
                     <li class="{{$formCreacion}}"><a href="#crearConjunto" data-toggle="tab"><i class="fa fa-building-o" aria-hidden="true"></i> Crear Conjunto</a></li>
+                    @endif
                     <li class="{{$listaConjutos}}"><a href="#listadoConjunto" data-toggle="tab"><i class="fa fa-list" aria-hidden="true"></i> Conjuntos</a></li>
                     <li class="pull-left header"><i class="fa fa-building-o" aria-hidden="true"></i></li>
                 </ul>
@@ -42,10 +41,12 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="row">
-                                @php $contador = 0;
+                                @php
+                                    $contador = 0;
+                                    $columns = (count($conjuntos) < 2) ? 'col-lg-12' : 'col-lg-6';
                                 @endphp
                                 @foreach($conjuntos as $conjunto)
-                                <div class="col-lg-6">
+                                <div class="{{$columns}}">
                                     <div class="box box-widget widget-user-2">
                                         <!-- Add the bg color to the header using any of the bg-* classes -->
                                         <div class="widget-user-header bg-yellow">
@@ -87,6 +88,7 @@
 
 
                     </div>
+                    @if(\Auth::user()->id_rol == 1)
                     <!-- (LISTADO CONJUNTOS) -->
                     <div class="chart tab-pane box {{$formCreacion}}" id="crearConjunto">
                         <div class="box-header">
@@ -98,7 +100,9 @@
                             @endcomponent
                         </div>
                     </div>
-                    <!-- (CREACION DE CONJUNTO) -->
+                    @endif
+
+                <!-- (CREACION DE CONJUNTO) -->
                 </div>
             </div>
         </section>

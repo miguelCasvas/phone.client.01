@@ -68,13 +68,7 @@
     </div>
     <div class="box-body row">
         <div class="col-xs-12 col-md-6">
-            @if($campos->conjunto->select)
-                {{Form::bsSelect('Conjunto Residencial', 'idConjunto', $campos->conjunto->opc, $datosUsuario->id_conjunto, [], true)}}
-            @else
-                {{-- NOMBRE CONJUNTO --}}
-                {{ Form::bsText('Conjunto Residencial', 'nombreConjunto', $datosUsuario->nombre_conjunto, ['disabled' => 'disabled'], false) }}
-                <input type="hidden" value="{{$datosUsuario->id_conjunto}}" name="idConjunto">
-            @endif
+            {{Form::bsSelect('Conjunto Residencial', 'idConjunto', $campos->conjunto->opc, $datosUsuario->id_conjunto, [], true)}}
         </div>
         <div class="col-xs-12 col-md-6">
             {{-- DIRECCION CONJUNTO --}}
