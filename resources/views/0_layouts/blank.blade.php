@@ -28,6 +28,9 @@
     @elseif(\Auth::user()->id_rol == 2)
         {{-- MENU LATERAL IZQ. --}}
         @include('0_includes.menuLateral_Izq_admin')
+    @else
+        {{-- MENU LATERAL IZQ. --}}
+        @include('0_includes.menuLateral_Izq_estandar')
     @endif
 
     <!-- Content Wrapper. Contains page content -->

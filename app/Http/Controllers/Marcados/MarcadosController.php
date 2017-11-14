@@ -29,7 +29,8 @@ class MarcadosController extends Controller
         $formulario['context'] = 'phoneup-iax';
         $formulario['exten'] = $request->get('extension');
         $formulario['app'] = $request->get('metodo');
-        $formulario['appdata'] = $metodoParams;
+        $formulario['appdata'] = $metodoParams . ',' . (int) $request->get('segundosMarcado');
+        $formulario['dataVisual'] = $request->get('nuevoMarcado');
 
         $_request = $this->clienteApi->peticionPOST($url, $formulario);
         $response = $this->verificarErrorAPI($_request);
@@ -63,5 +64,20 @@ class MarcadosController extends Controller
         }
         
         return response()->json($request->all());
+    }
+
+    public function eliminarMarcado(Request $request, $idMarcado)
+    {
+        $url = 'v1/extensiones/planDeMarcado/' . $idMarcado;
+        $_request = $this->clienteApi->peticionDELETE($url);
+
+        $response = $this->verificarErrorAPI($_request);
+
+        if ($response instanceof RedirectResponse)
+            \Alert::error('Error al generar la eliminación del plan de marcado!');
+        else
+            \Alert::success('Plan de marcado eliminado con exito!');
+
+        return back();
     }
 }

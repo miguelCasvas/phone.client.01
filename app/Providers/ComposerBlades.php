@@ -62,7 +62,6 @@ class ComposerBlades extends ServiceProvider
             $campos->correo->readOnly = true;
 
             $campos->conjunto = new \stdClass();
-            $campos->conjunto->select = false;
 
             $campos->rol = new \stdClass();
             $campos->rol->select = false;
@@ -70,7 +69,6 @@ class ComposerBlades extends ServiceProvider
             # Asignación de atributos y vlrs para usuario super Administrador
             if(in_array(\Auth::user()->datos->id_rol, [1, 2])){
                 $campos->correo->readOnly = false;
-                $campos->conjunto->select = true;
                 $campos->conjunto->opc = (new ConjuntosController())->listadoConjuntosSelect();
                 $campos->rol->select = true;
                 $campos->rol->opc = (new RolesController())->listadoRolesSelect();
@@ -79,6 +77,9 @@ class ComposerBlades extends ServiceProvider
                     unset($campos->rol->opc[1]);
                     unset($campos->rol->opc[2]);
                 }
+            }
+            else{
+                $campos->conjunto->opc = [\Auth::user()->id_conjunto => \Auth::user()->nombre_conjunto];
             }
 
             $view->with('campos', $campos);

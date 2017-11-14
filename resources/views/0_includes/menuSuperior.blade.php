@@ -19,7 +19,7 @@
                         <img src="{{asset('img/user_default.jpg')}}" class="img-circle" alt="User Image">
 
                         <p>
-                            {{\Auth::user()->nombres}} - {{trans('menus.superior.administrador')}}
+                            {{\Auth::user()->nombres}}  <small>({{\Auth::user()->nombre_rol}})</small>
                             <small class="divider"></small>
                         </p>
                     </li>
@@ -51,7 +51,7 @@
             </li>
             <!-- Control Sidebar Toggle Button -->
             <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                <!--<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>-->
             </li>
         </ul>
     </div>

@@ -132,6 +132,7 @@ Route::group(['prefix' => 'marcados'],function(){
     Route::get('', 'Marcados\MarcadosController@index')->name('getInicioMarcados');
     Route::post('', 'Marcados\MarcadosController@crearMarcado')->name('postMarcado');
     Route::get('genera/orden', 'Marcados\MarcadosController@generarOrden')->name('generarOrden');
+    Route::delete('{idMarcado}', 'Marcados\MarcadosController@eliminarMarcado')->name('eliminarMarcado');
 
 }
 );

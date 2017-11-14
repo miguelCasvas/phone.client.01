@@ -69,10 +69,17 @@
                             <ul class="list-group" id="marcadosUsuario">
                                 <!--ITEMS MARCADO-->
                                 @foreach($planMarcado as $plan)
-                                    <li class="list-group-item" style="cursor: n-resize;" id="marcado_{{$plan->id}}">
-                                        <span><span class="text-muted">Extensión:</span> {{$plan->exten}}</span>
-                                        <span style="margin-left: 20px">{{$plan->appdata}}</span>
-                                    </li>
+                                        <li class="list-group-item" style="cursor: n-resize;" id="marcado_{{$plan->id}}">
+                                            <form action="{{route('eliminarMarcado', [$plan->id])}}" method="post">
+                                                {{method_field('DELETE')}}
+                                                {{csrf_field()}}
+                                                <div class="row">
+                                                <div class="col-lg-4"><span class="text-muted">Extensión:</span> {{$plan->exten}}</div>
+                                                <div class="col-lg-4"><span class="text-muted">Destino:</span> {{$plan->data_visual}}</div>
+                                                <div class="col-lg-4"><button class="btn btn-danger btn-xs pull-right" type="submit">Borrar</button></div>
+                                                </div>
+                                            </form>
+                                        </li>
                                 @endforeach
                             </ul>
                         </div>
