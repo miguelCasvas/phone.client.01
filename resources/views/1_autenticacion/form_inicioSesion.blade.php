@@ -7,7 +7,7 @@
 <body class="hold-transition login-page">
     <div class="container">
         <div class="login-box">
-            <div class="login-logo" style="background: white; margin-bottom: 0px;">
+            <div class="login-logo" style="background: white; margin-bottom: 0px; padding-top: 20px;">
                 <a href="#"><img src="{{asset('img/logotipo_phoneUp.png')}}" class="img-responsive center-block" alt="" width="250px"></a>
             </div>
             <!-- /.login-logo -->
