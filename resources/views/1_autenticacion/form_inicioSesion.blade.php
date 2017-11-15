@@ -7,8 +7,8 @@
 <body class="hold-transition login-page">
     <div class="container">
         <div class="login-box">
-            <div class="login-logo text-center">
-                <a href="#"><img src="{{asset('img/login_phoneUp.png')}}" class="img-responsive" alt=""></a>
+            <div class="login-logo">
+                <a href="#"><img src="{{asset('img/logotipo_phoneUp.png')}}" class="img-responsive center-block" alt="" width="250px"></a>
             </div>
             <!-- /.login-logo -->
             <div class="login-box-body">
@@ -51,9 +51,9 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="#">
-                    <img alt="PH::Up" src="{{asset('img/logo_phoneUp.png')}}" width="100px">
-                </a>
+                <a class="navbar-brand" href="#"><img alt="PH::Up" src="{{asset('img/icono_facebook_white.png')}}" width="30px"></a>
+                <a class="navbar-brand" href="#"><img alt="PH::Up" src="{{asset('img/icono_youtube_white.png')}}" width="30px"></a>
+                <a class="navbar-brand" href="#"><img alt="PH::Up" src="{{asset('img/icono_linkedin_white.png')}}" width="30px"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
