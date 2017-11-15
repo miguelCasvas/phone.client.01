@@ -7,12 +7,12 @@
 <body class="hold-transition login-page">
     <div class="container">
         <div class="login-box">
-            <div class="login-logo">
+            <div class="login-logo" style="background: white; margin-bottom: 0px;">
                 <a href="#"><img src="{{asset('img/logotipo_phoneUp.png')}}" class="img-responsive center-block" alt="" width="250px"></a>
             </div>
             <!-- /.login-logo -->
-            <div class="login-box-body">
-                <p class="login-box-msg">Inicie sesión</p>
+            <div class="login-box-body" style="padding-top: 0px">
+                <p class="login-box-msg" style="font-size: 1.5em;">Inicie sesión</p>
 
                 <form action="{{route('postFormularioInicioSesion')}}" method="post">
                     <div class="form-group has-feedback">
