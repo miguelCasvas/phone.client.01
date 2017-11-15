@@ -14,7 +14,7 @@ return [
     'pais' => 'País',
     'depto' => 'Departamento',
     'ciudad' => 'Ciudad',
-    'paises' => 'Países',
+    'paises' => 'País',
     'deptos' => 'Departamentos',
     'ciudades' => 'Ciudades',
     'limpiarform' => 'Limpiar Formulario',
